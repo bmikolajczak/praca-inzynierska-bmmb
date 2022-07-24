@@ -1,21 +1,22 @@
 import React from "react";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 export const HeaderNavigation = () => {
   return (
     <nav className="header-nav">
-      <a href="#">
+      <Link to="/">
         <h3>Cosmic</h3>
-      </a>
+      </Link>
       <ul className="links">
         <li>
-          <a href="#">About</a>
+          <Link to="/about">About</Link>
         </li>
         <li>
           <a href="#">Settings</a>
         </li>
         <li>
-          <a href="#">Account</a>
+          <Link to="/account">Account</Link>
         </li>
       </ul>
     </nav>
