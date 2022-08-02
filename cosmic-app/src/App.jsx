@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { HeaderNavigation } from "./components/header";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -10,6 +11,8 @@ function App() {
   return (
     <div className="App">
       <HeaderNavigation />
+      <h1>NAVIGATION COMPONENTS</h1>
+      <Outlet />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
