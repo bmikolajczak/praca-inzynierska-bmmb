@@ -1,3 +1,34 @@
+h1 {
+  font-size: 72px;
+}
+h2 {
+  font-size: 48px;
+}
+h3 {
+  font-size: 32px;
+}
+h4 {
+  font-size: 24px;
+}
+h5 {
+  font-size: 18px;
+}
+p {
+  font-size: 16px;
+}
+
 #canvas-container {
-  background-color: brown;
+  height: 100vh;
+  background-color: rgb(70, 70, 70);
+}
+#overview-container {
+  position: relative;
+}
+
+#overview-info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 50%;
 }
