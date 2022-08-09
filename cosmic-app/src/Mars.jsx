@@ -1,7 +1,7 @@
 import './Mars.css'
-import React, {Suspense, useRef} from 'react'
+import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 // Example mesh
 function Planet() {
@@ -10,22 +10,22 @@ function Planet() {
   return (
     <mesh ref={ref} scale={4} position={[-3, 0, -3]}>
       <sphereGeometry />
-      <meshStandardMaterial color="red"/>
+      <meshStandardMaterial color="red" />
     </mesh>
   )
 }
 
 // Imported 3D Globe model
 function MarsGlobe() {
-  const gltf = useLoader(GLTFLoader, '../resources/MarsGlobe.glb')
+  const gltf = useLoader(GLTFLoader, '../assets/MarsGlobe.glb')
   const ref = useRef()
-  useFrame(()=> (
+  useFrame(() => (
     ref.current.rotation.y += 0.0001,
     ref.current.rotation.z += 0.00002
-    ))
+  ))
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]}/>
+      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]} />
     </Suspense>
   )
 }
@@ -35,11 +35,11 @@ function Mars() {
   return (
     <div id="overview-container">
       <div id="canvas-container">
-        <Canvas camera={{fov: 90}}>
+        <Canvas camera={{ fov: 90 }}>
           <ambientLight intensity={0.2} />
           <pointLight color="white" position={[0, 0, 5]} />
           {/* <Planet/> */}
-          <MarsGlobe/>
+          <MarsGlobe />
         </Canvas>
       </div>
       <div id="overview-info">
