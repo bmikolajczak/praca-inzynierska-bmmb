@@ -1,4 +1,8 @@
+* {
+  color: white;
+}
 h1 {
+  margin: 4px 0;
   font-size: 72px;
 }
 h2 {
@@ -31,4 +35,5 @@ p {
   transform: translateY(-50%);
   right: 0;
   width: 50%;
+  padding: 1em;
 }

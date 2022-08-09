@@ -1,7 +1,9 @@
 import './Mars.css'
-import React, {useState, useRef} from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import React, {Suspense, useRef} from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 
+// Example mesh
 function Planet() {
   const ref = useRef()
   useFrame(() => (ref.current.rotation.y += 0.005))
@@ -13,6 +15,19 @@ function Planet() {
   )
 }
 
+// Imported 3D Globe model
+function MarsGlobe() {
+  const gltf = useLoader(GLTFLoader, '../resources/MarsGlobe.glb')
+  const ref = useRef()
+  useFrame(()=> (ref.current.rotation.y += 0.0004))
+  return (
+    <Suspense fallback={null}>
+      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2.5, 0, -2]}/>
+    </Suspense>
+  )
+}
+
+// Canvas
 function Mars() {
   return (
     <div id="overview-container">
@@ -20,13 +35,14 @@ function Mars() {
         <Canvas >
           <ambientLight intensity={0.2} />
           <pointLight color="white" position={[0, 0, 5]} />
-          <Planet/>
+          {/* <Planet/> */}
+          <MarsGlobe/>
         </Canvas>
       </div>
       <div id="overview-info">
-        <h1>Title Mars</h1>
+        <h1>Title Mars </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat ab totam incidunt nam dicta deleniti sapiente cupiditate, illum iure voluptatibus beatae aperiam. Dignissimos, vero blanditiis similique eius deserunt eaque officia qui doloremque officiis suscipit.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque quasi aspernatur nihil eos nemo esse officia, mollitia ipsum quam ex quae dolorem quos amet? Tempora sunt modi soluta reiciendis dolores voluptatibus, distinctio ad magnam quaerat necessitatibus fugit odit corporis reprehenderit!
         </p>
       </div>
     </div>
