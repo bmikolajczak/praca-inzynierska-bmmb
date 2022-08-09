@@ -23,7 +23,9 @@ p {
 
 #canvas-container {
   height: 100vh;
-  background-color: rgb(70, 70, 70);
+  background-image: url('../resources/stars-in-night-sky.jpg');
+  background-color: black; /* Backup */
+  
 }
 #overview-container {
   position: relative;
