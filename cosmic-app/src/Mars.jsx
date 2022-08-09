@@ -19,10 +19,13 @@ function Planet() {
 function MarsGlobe() {
   const gltf = useLoader(GLTFLoader, '../resources/MarsGlobe.glb')
   const ref = useRef()
-  useFrame(()=> (ref.current.rotation.y += 0.0004))
+  useFrame(()=> (
+    ref.current.rotation.y += 0.0001,
+    ref.current.rotation.z += 0.00002
+    ))
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2.5, 0, -2]}/>
+      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]}/>
     </Suspense>
   )
 }
@@ -32,7 +35,7 @@ function Mars() {
   return (
     <div id="overview-container">
       <div id="canvas-container">
-        <Canvas >
+        <Canvas camera={{fov: 90}}>
           <ambientLight intensity={0.2} />
           <pointLight color="white" position={[0, 0, 5]} />
           {/* <Planet/> */}
