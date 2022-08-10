@@ -1,4 +1,4 @@
-import './Mars.css'
+import '../styles/Mars.css'
 import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -17,7 +17,7 @@ function Planet() {
 
 // Imported 3D Globe model
 function MarsGlobe() {
-  const gltf = useLoader(GLTFLoader, '../assets/MarsGlobe.glb')
+  const gltf = useLoader(GLTFLoader, '/src/assets/MarsGlobe.glb')
   const ref = useRef()
   useFrame(() => (
     ref.current.rotation.y += 0.0001,

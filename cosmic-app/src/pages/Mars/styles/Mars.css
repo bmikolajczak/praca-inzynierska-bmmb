@@ -29,7 +29,7 @@ p {
 
 #canvas-container {
   height: 100vh;
-  background-image: url('../assets/stars-in-night-sky.jpg');
+  background-image: url('/src/assets/stars-in-night-sky.jpg');
   background-color: black;
 }
 
