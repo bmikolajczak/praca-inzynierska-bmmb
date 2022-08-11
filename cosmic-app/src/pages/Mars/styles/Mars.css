@@ -33,7 +33,7 @@ p {
 
 #canvas-container {
   height: 100vh;
-  background-image: url('/src/assets/stars-in-night-sky.jpg');
+  background-image: url('/src/assets/2k_stars.jpg');
   /* Backup background */
   background-color: black;
 }
