@@ -1,0 +1,12 @@
+.header-nav {
+  display: flex;
+  padding: 0 5rem;
+}
+.links {
+  display: flex;
+  margin-left: auto;
+  gap: 2rem;
+}
+.links li {
+  list-style: none;
+}
