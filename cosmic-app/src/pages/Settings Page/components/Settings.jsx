@@ -1,3 +1,4 @@
+import "../styles/Settings.css";
 export function Settings() {
   return (
     <div>

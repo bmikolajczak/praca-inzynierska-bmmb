@@ -1,3 +1,4 @@
+import "../styles/Account.css";
 export function Account() {
   return (
     <div>

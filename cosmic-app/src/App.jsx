@@ -1,9 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+
+import { HeaderNavigation } from "./infrastructure/navigation/headerNavigation";
+
 export function App() {
   return (
     <div>
-      <h1>Hello There!</h1>
+      <HeaderNavigation />
       <Outlet />
     </div>
   );

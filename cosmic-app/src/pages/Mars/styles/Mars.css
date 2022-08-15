@@ -1,10 +1,12 @@
-* {
+/* * {
   color: white;
-}
+} */
 
 h1 {
   margin: 4px 0;
   font-size: 72px;
+  color: white;
+  font-family: "Playfair Display SemiBoldItalic", sans-serif;
 }
 
 h2 {
@@ -25,11 +27,13 @@ h5 {
 
 p {
   font-size: 16px;
+  color: white;
+  font-family: "Poppins Light", serif;
 }
 
 #canvas-container {
   height: 100vh;
-  background-image: url('/src/assets/stars-in-night-sky.jpg');
+  background-image: url("/src/assets/stars-in-night-sky.jpg");
   background-color: black;
 }
 

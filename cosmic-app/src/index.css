@@ -1,6 +1,14 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: Playfair Display SemiBoldItalic;
+  src: url("./assets/fonts/PlayfairDisplay/PlayfairDisplay-SemiBoldItalic.ttf");
+}
+@font-face {
+  font-family: Poppins Light;
+  src: url("./assets/fonts/Poppins/Poppins-Light.ttf");
 }

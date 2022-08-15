@@ -1,12 +1,21 @@
 .header-nav {
   display: flex;
   padding: 0 5rem;
+  background-image: url("../../assets//stars-in-night-sky.jpg");
+  align-items: center;
+  z-index: 30;
 }
 .links {
   display: flex;
-  margin-left: auto;
   gap: 2rem;
 }
 .links li {
   list-style: none;
+}
+.links h3 {
+  color: aquamarine;
+}
+a:visited {
+  color: aquamarine;
+  text-decoration: none;
 }

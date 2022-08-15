@@ -5,9 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import Mars from "./pages/Mars/components/Mars";
 import { App } from "./App";
-import { Settings } from "./pages/Settings Page/Settings";
-import { Account } from "./pages/Account/Account";
-import { About } from "./pages/About Page/About";
+import { Settings } from "./pages/Settings Page/components/Settings";
+import { Account } from "./pages/Account/components/Account";
+import { About } from "./pages/About Page/components/About";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
