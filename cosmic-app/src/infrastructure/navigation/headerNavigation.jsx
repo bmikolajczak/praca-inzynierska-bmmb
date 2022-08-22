@@ -6,7 +6,7 @@ export const HeaderNavigation = () => {
   return (
     <nav className="header-nav">
       <Link to="/mars">
-        <h3>Cosmic</h3>
+        Cosmic
       </Link>
       <ul className="links">
         <li>

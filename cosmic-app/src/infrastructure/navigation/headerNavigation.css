@@ -1,9 +1,11 @@
 .header-nav {
   display: flex;
-  padding: 0 5rem;
-  background-image: url("../../assets//stars-in-night-sky.jpg");
+  background-color: black;
+  justify-content: space-between;
   align-items: center;
-  z-index: 30;
+  padding: 0 4rem;
+  border-bottom: 2px solid rgb(0, 136, 255);
+  border-radius: 0 0 1.5rem 1.5rem;
 }
 .links {
   display: flex;
