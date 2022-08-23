@@ -17,7 +17,7 @@ function Planet() {
 
 // Imported 3D Globe model
 function MarsGlobe() {
-  const gltf = useLoader(GLTFLoader, '/src/assets/MarsGlobe.glb')
+  const gltf = useLoader(GLTFLoader, '/src/assets/MarsGlobe2.glb')
   const ref = useRef()
   useFrame(() => (
     ref.current.rotation.y += 0.0001
