@@ -24,7 +24,7 @@ function MarsGlobe() {
   ))
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2.2, 0, -0.3]} />
+      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]} />
     </Suspense>
   )
 }
