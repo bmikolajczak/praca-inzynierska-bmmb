@@ -1,11 +1,32 @@
-.apod-image-container {
+body {
+  color: white;
+  background-color: black;
+}
+
+.apod-container {
+  background-color: blue;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
+
+.apod-image-container {
+  background-color: red;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 20%;
+
+  padding: 1rem;
+}
 .apod-image {
   max-width: 100%;
   height: auto;
+  border-radius: 1rem;
 }
