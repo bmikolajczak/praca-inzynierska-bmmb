@@ -4,11 +4,14 @@
 
 h1 {
   margin: 4px 0;
-  font: 72px 'Playfair Display', serif;
+  font: 72px "Playfair Display", serif;
 }
 
-h2, h3, h4, h5 {
-  font-family: 'Poppins', sans-serif;
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins", sans-serif;
 }
 
 h2 {
@@ -28,12 +31,16 @@ h5 {
 }
 
 p {
-  font: 300 16px/2 'Poppins', sans-serif;
+  font: 300 16px/2 "Poppins", sans-serif;
+}
+
+.paragraph {
+  color: cyan;
 }
 
 #canvas-container {
   height: 100vh;
-  background-image: url('/src/assets/2k_stars.jpg');
+  background-image: url("/src/assets/2k_stars.jpg");
   /* Backup background */
   background-color: black;
 }
