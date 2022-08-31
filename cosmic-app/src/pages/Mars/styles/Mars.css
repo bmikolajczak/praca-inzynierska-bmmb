@@ -7,7 +7,10 @@ h1 {
   font: 72px 'Playfair Display', serif;
 }
 
-h2, h3, h4, h5 {
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -29,6 +32,10 @@ h5 {
 
 p {
   font: 300 16px/2 'Poppins', sans-serif;
+}
+
+.paragraph {
+  color: cyan;
 }
 
 #canvas-container {
