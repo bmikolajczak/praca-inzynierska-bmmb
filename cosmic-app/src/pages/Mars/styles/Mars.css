@@ -4,7 +4,14 @@
 
 h1 {
   margin: 4px 0;
-  font-size: 72px;
+  font: 72px 'Playfair Display', serif;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Poppins', sans-serif;
 }
 
 h2 {
@@ -24,12 +31,17 @@ h5 {
 }
 
 p {
-  font-size: 16px;
+  font: 300 16px/2 'Poppins', sans-serif;
+}
+
+.paragraph {
+  color: cyan;
 }
 
 #canvas-container {
   height: 100vh;
-  background-image: url('/src/assets/stars-in-night-sky.jpg');
+  background-image: url('/src/assets/2k_stars.jpg');
+  /* Backup background */
   background-color: black;
 }
 
@@ -42,6 +54,10 @@ p {
   top: 50%;
   transform: translateY(-50%);
   right: 0;
-  width: 50%;
-  padding: 1em;
+  width: 45%;
+  padding-right: 2em;
+}
+#overview-info p {
+  font-size: 24px;
+  line-height: 36px;
 }
