@@ -6,7 +6,7 @@ export const HeaderNavigation = () => {
   return (
     <nav className="header-nav">
       <Link to="/mars">
-        Cosmic
+        <img src="src/assets/cosmic-logo.svg" id="logo" />
       </Link>
       <ul className="links">
         <li>
