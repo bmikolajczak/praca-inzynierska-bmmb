@@ -22,7 +22,12 @@ function MarsGlobe() {
   useFrame(() => (ref.current.rotation.y += 0.0001));
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]} />
+      <primitive
+        object={gltf.scene}
+        ref={ref}
+        scale={4}
+        position={[-2, 0, -1]}
+      />
     </Suspense>
   );
 }
@@ -30,16 +35,15 @@ function MarsGlobe() {
 // Canvas
 function Mars() {
   return (
-    <div id="overview-container">
-      <div id="canvas-container">
+    <div className={style.overviewContainer}>
+      <div className={style.canvasContainer}>
         <Canvas camera={{ fov: 90 }}>
           <ambientLight intensity={0.2} />
           <pointLight color="white" position={[0, 0, 5]} />
-          {/* <Planet/> */}
           <MarsGlobe />
         </Canvas>
       </div>
-      <div id="overview-info">
+      <div className={style.overviewInfo}>
         <h1>Mars - the Red Planet</h1>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque quasi aspernatu.
