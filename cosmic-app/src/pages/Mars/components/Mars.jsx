@@ -17,9 +17,9 @@ function Planet() {
 
 // Imported 3D Globe model
 function MarsGlobe() {
-  const gltf = useLoader(GLTFLoader, "/src/assets/MarsGlobe.glb");
+  const gltf = useLoader(GLTFLoader, "/src/assets/MarsGlobe2.glb");
   const ref = useRef();
-  useFrame(() => ((ref.current.rotation.y += 0.0001), (ref.current.rotation.z += 0.00002)));
+  useFrame(() => (ref.current.rotation.y += 0.0001));
   return (
     <Suspense fallback={null}>
       <primitive object={gltf.scene} ref={ref} scale={4} position={[-2, 0, -1]} />
@@ -40,11 +40,13 @@ function Mars() {
         </Canvas>
       </div>
       <div id="overview-info">
-        <h1>Mars - the Red Planet </h1>
+        <h1>Mars - the Red Planet</h1>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque quasi aspernatur nihil eos nemo esse officia,
-          mollitia ipsum quam ex quae dolorem quos amet? Tempora sunt modi soluta reiciendis dolores voluptatibus,
-          distinctio ad magnam quaerat necessitatibus fugit odit corporis reprehenderit!
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque quasi aspernatu.
+          <br />
+          <br /> Nihil eos nemo esse officia, mollitia ipsum quam ex quae dolorem quos amet? Tempora sunt modi soluta
+          reiciendis dolores voluptatibus, distinctio ad magnam quaerat necessitatibus fugit odit corporis
+          reprehenderit!
         </p>
       </div>
     </div>
