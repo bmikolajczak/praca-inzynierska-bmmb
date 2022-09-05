@@ -14,8 +14,8 @@ function MarsGlobe() {
       <primitive
         object={gltf.scene}
         ref={ref}
-        scale={4}
-        position={[-2, 0, -1]}
+        scale={2.4}
+        position={[-1, 0, -1]}
       />
     </Suspense>
   )
@@ -26,22 +26,26 @@ function Mars() {
   return (
     <div className={style.overviewContainer}>
       <div className={style.canvasContainer}>
-        <Canvas camera={{ fov: 90 }}>
+        <Canvas camera={{ fov: 45 }}>
           <ambientLight intensity={0.2} />
           <pointLight color="white" position={[0, 0, 5]} />
           <MarsGlobe />
         </Canvas>
       </div>
       <div className={style.overviewInfo}>
-        <h1>Mars - the Red Planet</h1>
+        <h1 className={style.heading}>Mars - the Red Planet</h1>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque quasi
-          aspernatu.
+          The fourth planet from the Sun, Mars is one of Earth's two closest
+          planetary neighbors.
           <br />
-          <br /> Nihil eos nemo esse officia, mollitia ipsum quam ex quae
-          dolorem quos amet? Tempora sunt modi soluta reiciendis dolores
-          voluptatibus, distinctio ad magnam quaerat necessitatibus fugit odit
-          corporis reprehenderit!
+          <br /> A dusty, cold, desert world with a very thin atmosphere. Mars
+          is also a dynamic planet with seasons, polar ice caps, canyons,
+          extinct volcanoes, and evidence that it was even more active in the
+          past.
+          <br />
+          <br /> Mars is one of the most explored bodies in our solar system,
+          and it's the only planet where we've sent rovers to roam the alien
+          landscape.
         </p>
       </div>
     </div>

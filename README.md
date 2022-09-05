@@ -59,3 +59,4 @@ npm run dev
 
 - https://www.solarsystemscope.com/textures/ - solar system planets textures and background images
 - https://www.svgrepo.com/svg/53673/planet - saturn svg icon
+- https://solarsystem.nasa.gov/planets/mars/overview/ - mars info

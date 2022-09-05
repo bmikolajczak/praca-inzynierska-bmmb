@@ -12,13 +12,16 @@
 
 .overviewInfo {
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   right: 0;
-  width: 45%;
+  width: 40%;
   padding-right: 2em;
   p {
     font-size: 24px;
     line-height: 36px;
   }
+}
+.heading {
+  color: white;
 }
