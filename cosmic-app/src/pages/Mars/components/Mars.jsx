@@ -14,7 +14,7 @@ function MarsGlobe() {
       <primitive
         object={gltf.scene}
         ref={ref}
-        scale={2.4}
+        scale={2.2}
         position={[-1, 0, -1]}
       />
     </Suspense>
