@@ -1,14 +1,14 @@
-import React from "react";
-import "./headerNavigation.css";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import style from './headerNavigation.module.scss'
 
 export const HeaderNavigation = () => {
   return (
-    <nav className="header-nav">
+    <nav className={style.headerNav}>
       <Link to="/mars">
-        <img src="src/assets/cosmic-logo.svg" id="logo" />
+        <img src="src/assets/cosmic-logo.svg" className={style.logo} />
       </Link>
-      <ul className="links">
+      <ul className={style.links}>
         <li>
           <Link to="/about">About</Link>
         </li>
@@ -20,5 +20,5 @@ export const HeaderNavigation = () => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
