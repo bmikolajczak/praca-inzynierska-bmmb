@@ -25,11 +25,14 @@ p {
   padding: 0.8rem;
   gap: 1rem;
 }
-
 .apod-image {
-  max-width: 50%;
+  object-fit: cover; // or maybe object-fit: contain;
   height: auto;
   border-radius: 1rem;
+}
+.apod-image-col {
+  flex: 50%;
+  max-width: 50%;
 }
 .apod-info {
   display: flex;

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 const API_URL = 'https://api.nasa.gov/planetary/apod?api_key='
 const API_KEY = '0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND' // Not secure
+// Note: concept_tags functionality is turned off in API
 
 function CallApodApi() {
   const [error, setError] = useState(null)
@@ -38,10 +39,17 @@ function CallApodApi() {
           <b>{image.title}</b>
         </p>
         <div className="apod-image-container">
-          <img className="apod-image" src={image.url} alt={image.title} />
-          <div className="apod-info">
+          <img
+            className="apod-image-col apod-image"
+            src={image.url}
+            alt={image.title}
+          />
+          <div className="apod-info apod-image-col">
             <p>{image.explanation}</p>
-            <i>@{image.copyright}</i>
+            <p>{image.date}</p>
+            <p>
+              <i>@{image.copyright}</i>
+            </p>
           </div>
         </div>
       </div>
