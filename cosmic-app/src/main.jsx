@@ -1,10 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import Apod from './pages/APOD/components/Apod'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import "./index.css";
+import Mars from "./pages/Mars/components/Mars";
+import { App } from "./App";
+import { Settings } from "./pages/Settings Page/components/Settings";
+import { Account } from "./pages/Account/components/Account";
+import { About } from "./pages/About Page/components/About";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Apod />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/mars" element={<Mars />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/account" element={<Account />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
-)
+);

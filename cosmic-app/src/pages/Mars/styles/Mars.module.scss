@@ -1,5 +1,34 @@
-@import '../../../assets//variables.scss';
+@import 'src/assets/variables.scss';
 
-.paragraph {
-  color: $primary-color;
+.canvasContainer {
+  height: 100vh;
+  background-image: url('/src/assets/2k_stars.jpg');
+  background-color: black; /* Backup background */
+}
+
+.overviewContainer {
+  position: relative;
+}
+
+.overviewInfo {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 40%;
+  padding-right: 2em;
+  p {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}
+.heading {
+  color: white;
+}
+.loading {
+  font-size: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }

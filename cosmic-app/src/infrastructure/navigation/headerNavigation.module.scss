@@ -1,0 +1,30 @@
+@import 'src/assets/variables.scss';
+
+.headerNav {
+  display: flex;
+  background-color: black;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+  border-bottom: 2px solid $primary-blue;
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+.links {
+  display: flex;
+  gap: 2rem;
+}
+.links li {
+  list-style: none;
+}
+.links h3 {
+  color: aquamarine;
+}
+a:visited {
+  color: aquamarine;
+  text-decoration: none;
+}
+
+.logo {
+  max-width: 80%;
+  margin: 4px 0;
+}
