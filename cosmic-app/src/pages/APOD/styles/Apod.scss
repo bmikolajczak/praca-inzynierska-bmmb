@@ -1,0 +1,38 @@
+@import 'src/assets/variables.scss';
+h2 {
+  margin: 4px 0;
+}
+p {
+  margin: 4px 0;
+}
+.apod-container {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.apod-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.apod-image-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0.8rem;
+  gap: 1rem;
+}
+
+.apod-image {
+  max-width: 50%;
+  height: auto;
+  border-radius: 1rem;
+}
+.apod-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
