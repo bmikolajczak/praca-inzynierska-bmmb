@@ -1,0 +1,36 @@
+main{
+  padding-top: 5rem;
+}
+h1 {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  width: 40ch;
+  text-align: center;
+}
+
+.logo {
+  margin: 0 auto;
+  width: 30rem;
+}
+
+.introduction{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.authors{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authorsContainer{
+  display: flex;
+  justify-content: space-around;
+}
+.author{
+  flex-basis: 30rem;
+}
