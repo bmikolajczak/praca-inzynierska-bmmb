@@ -43,10 +43,6 @@ function Mars() {
             is also a dynamic planet with seasons, polar ice caps, canyons,
             extinct volcanoes, and evidence that it was even more active in the
             past.
-            <br />
-            <br /> Mars is one of the most explored bodies in our solar system,
-            and it's the only planet where we've sent rovers to roam the alien
-            landscape.
           </p>
         </div>
       </div>
