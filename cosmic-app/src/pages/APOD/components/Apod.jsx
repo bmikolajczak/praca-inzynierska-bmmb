@@ -1,5 +1,5 @@
 // APOD - Astronomy Picture of the Day
-import '../styles/Apod.scss'
+import style from '../styles/Apod.module.scss'
 import React from 'react'
 import { useEffect, useState } from 'react'
 
@@ -12,6 +12,15 @@ function CallApodApi() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [image, setImage] = useState('')
 
+  function downloadImage() {
+    window.open(image.hdurl)
+  }
+  // TODO Save image url, for a logged user, to his profile
+  function saveImage() {
+    console.log('low-res image url: ', image.url)
+    alert('You saved an image.')
+  }
+
   useEffect(() => {
     fetch(API_URL + API_KEY)
       .then((res) => res.json())
@@ -19,7 +28,6 @@ function CallApodApi() {
         (result) => {
           setIsLoaded(true)
           setImage(result)
-          console.log(result)
         },
         (error) => {
           setIsLoaded(true)
@@ -34,23 +42,27 @@ function CallApodApi() {
     return <div>Loading...</div>
   } else {
     return (
-      <div className="apod-content-container">
+      <div className={style.apodContentContainer}>
         <p>
           <b>{image.title}</b>
         </p>
-        <div className="apod-image-container">
+        <div className={style.apodImageContainer}>
           <img
-            className="apod-image-col apod-image"
+            className={style.apodImageCol + ' ' + style.apodImage}
             src={image.url}
             alt={image.title}
           />
-          <div className="apod-info apod-image-col">
+          <div className={style.apodInfo + ' ' + style.apodImageCol}>
             <p>{image.explanation}</p>
             <p>{image.date}</p>
             <p>
               <i>@{image.copyright}</i>
             </p>
           </div>
+        </div>
+        <div className={style.apodButtons}>
+          <button onClick={downloadImage}>Download</button>
+          <button onClick={saveImage}>Save</button>
         </div>
       </div>
     )
@@ -59,7 +71,7 @@ function CallApodApi() {
 
 export function Apod() {
   return (
-    <div className="apod-container">
+    <div className={style.apodContainer}>
       <h2>Astronomy Picture of the Day</h2>
       <CallApodApi />
     </div>
