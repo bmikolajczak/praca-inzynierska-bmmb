@@ -13,7 +13,7 @@ export const HeaderNavigation = () => {
           <Link to="/about">About</Link>
         </li>
         <li>
-          <a href="/settings">Settings</a>
+          <Link to="/settings">Settings</Link>
         </li>
         <li>
           <Link to="/account">Account</Link>

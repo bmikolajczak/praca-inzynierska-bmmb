@@ -2,6 +2,10 @@
 
 ## Development
 
+Drive - Inżynierka
+
+- https://drive.google.com/drive/folders/107sc-pr7ainwoeZOKcoEDJQyGRuWuCTp?usp=sharing
+
 Figma designs
 
 - https://www.figma.com/files/team/1048369725744733499
@@ -60,3 +64,4 @@ npm run dev
 - https://www.solarsystemscope.com/textures/ - solar system planets textures and background images
 - https://www.svgrepo.com/svg/53673/planet - saturn svg icon
 - https://solarsystem.nasa.gov/planets/mars/overview/ - mars info
+- https://solarsystem.nasa.gov/resources - 3D Models, images
