@@ -3,19 +3,22 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-// Imported 3D Globe model
-function MarsGlobe() {
-  const gltf = useLoader(GLTFLoader, '/src/assets/mars/MarsGlobe.glb')
+// Generalize component, use props
+// angle rotation on camera
+// Orbit controls
+function VallesMarineris() {
+  const gltf = useLoader(GLTFLoader, '/src/assets/mars/VMarineris2.glb')
   const ref = useRef()
-  useFrame(() => (ref.current.rotation.y += 0.0002))
+  useFrame(
+    () => (
+      (ref.current.rotation.z += 0.005), (ref.current.rotation.y += 0.0001)
+    )
+  )
   return (
-    <Suspense fallback={null}>
-      <primitive
-        object={gltf.scene}
-        ref={ref}
-        scale={2.2}
-        position={[-1, 0, -1]}
-      />
+    <Suspense fallback={<span className={style.loading}>Loading...</span>}>
+      <ambientLight intensity={0.2} />
+      <pointLight color="white" position={[4, 5, 1]} />
+      <primitive object={gltf.scene} ref={ref} scale={1} />
     </Suspense>
   )
 }
@@ -25,6 +28,7 @@ function Landscapes() {
     <section className={style.landscapes}>
       <h2>Landscapes</h2>
       <ul className={style.landscapeList}>
+        {/* Generalize list items, use components, data in json */}
         <li>
           <h3>Olympus Mons</h3>
           <div className={style.landscapeElem}>
@@ -42,7 +46,7 @@ function Landscapes() {
               some 53 miles (85 km) wide, formed by magma chambers that lost
               lava (likely during an eruption) and collapsed.
             </p>
-            <div>3D Model HERE</div>
+            <div className={style.landscapeCanvas}></div>
           </div>
         </li>
         <li>
@@ -77,6 +81,11 @@ function Landscapes() {
               fractures in other regions. Over time, these fractures grew into
               Valles Marineris.
             </p>
+            <div className={style.landscapeCanvas}>
+              <Canvas>
+                <VallesMarineris />
+              </Canvas>
+            </div>
           </div>
         </li>
         <li>
@@ -161,8 +170,24 @@ function Landscapes() {
     </section>
   )
 }
+// Imported 3D Globe model
+function MarsGlobe() {
+  const gltf = useLoader(GLTFLoader, '/src/assets/mars/MarsGlobe.glb')
+  const ref = useRef()
+  useFrame(() => (ref.current.rotation.y += 0.0002))
+  return (
+    <Suspense fallback={null}>
+      <primitive
+        object={gltf.scene}
+        ref={ref}
+        scale={2.2}
+        position={[-1, 0, -1]}
+      />
+    </Suspense>
+  )
+}
 
-// Canvas
+// Mars Page
 function Mars() {
   return (
     <main className={style.main}>
@@ -188,8 +213,8 @@ function Mars() {
             </p>
           </div>
         </section>
-        <Landscapes />
       </Suspense>
+      <Landscapes />
     </main>
   )
 }

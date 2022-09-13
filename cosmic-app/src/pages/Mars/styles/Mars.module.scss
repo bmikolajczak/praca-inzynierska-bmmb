@@ -78,11 +78,16 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 1rem;
   .landscapeElem {
     display: flex;
+    gap: 1rem;
     p {
       flex-basis: 40%;
+    }
+    .landscapeCanvas {
+      min-height: 50vh;
+      width: 100%;
     }
   }
 }
