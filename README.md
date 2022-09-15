@@ -65,3 +65,4 @@ npm run dev
 - https://www.svgrepo.com/svg/53673/planet - saturn svg icon
 - https://solarsystem.nasa.gov/planets/mars/overview/ - mars info
 - https://solarsystem.nasa.gov/resources - 3D Models, images
+- https://www.space.com/41254-touring-mars-red-planet-road-trip.html - Mars landscapes text content
