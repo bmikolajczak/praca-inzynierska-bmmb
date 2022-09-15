@@ -83,6 +83,7 @@
     display: flex;
     gap: 1rem;
     p {
+      white-space: pre-wrap;
       flex-basis: 40%;
     }
     .landscapeCanvas {
