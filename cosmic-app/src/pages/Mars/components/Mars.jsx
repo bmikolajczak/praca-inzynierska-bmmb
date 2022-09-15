@@ -4,9 +4,11 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import landscapes from './Landscapes.json'
 
-// Generalize component, use props
-// angle rotation on camera
-// Orbit controls
+// Angle rotation on camera
+// Add orbit controls
+// Fix lighting and model position
+// Unify models size
+// Isolate component to another file - Land and Landscapes
 function LandModel(props) {
   const modelURL = `/src/assets/mars/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
