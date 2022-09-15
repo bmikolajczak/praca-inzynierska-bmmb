@@ -7,18 +7,21 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // angle rotation on camera
 // Orbit controls
 function VallesMarineris() {
-  const gltf = useLoader(GLTFLoader, '/src/assets/mars/VMarineris2.glb')
+  const gltf = useLoader(GLTFLoader, '/src/assets/mars/OlympusMons.glb')
   const ref = useRef()
   useFrame(
-    () => (
-      (ref.current.rotation.z += 0.005), (ref.current.rotation.y += 0.0001)
-    )
+    () => ((ref.current.rotation.x += 0.0), (ref.current.rotation.y += 0.0005))
   )
   return (
     <Suspense fallback={<span className={style.loading}>Loading...</span>}>
       <ambientLight intensity={0.2} />
       <pointLight color="white" position={[4, 5, 1]} />
-      <primitive object={gltf.scene} ref={ref} scale={1} />
+      <primitive
+        object={gltf.scene}
+        ref={ref}
+        scale={1}
+        position={[0, -5, -15]}
+      />
     </Suspense>
   )
 }
