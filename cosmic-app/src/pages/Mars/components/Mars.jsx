@@ -27,7 +27,7 @@ function LandModel(props) {
 }
 function Landscapes() {
   const landItems = landscapes.map((land) => (
-    <li>
+    <li key={land.title}>
       <h3>{land.title}</h3>
       <div className={style.landscapeElem}>
         <p>{land.description}</p>
