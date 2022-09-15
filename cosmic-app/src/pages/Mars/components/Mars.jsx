@@ -32,10 +32,9 @@ function Landscapes() {
       <div className={style.landscapeElem}>
         <p>{land.description}</p>
         <div className={style.landscapeCanvas}>
-          {/* // I need to export all the models to glb, with names as in the json file
-           <Canvas>
+          <Canvas>
             <LandModel model={land.model} />
-          </Canvas> */}
+          </Canvas>
         </div>
       </div>
     </li>
