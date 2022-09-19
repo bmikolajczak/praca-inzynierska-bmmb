@@ -9,21 +9,20 @@ import landscapes from './Landscapes.json'
 // Add orbit controls
 // Fix lighting and model position
 // Unify models size
-// Isolate component to another file - Land and Landscapes
 function LandModel(props) {
-  const modelURL = `/src/assets/mars/${props.model}`
+  const modelURL = `/src/assets/mars/marsLandscapes/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const ref = useRef()
   useFrame(() => (ref.current.rotation.y += 0.0005))
   return (
     <Suspense fallback={null}>
       <ambientLight intensity={0.2} />
-      <pointLight color="white" position={[4, 5, 1]} />
+      <pointLight color="white" position={[0, 4, 0]} />
       <primitive
         object={gltf.scene}
         ref={ref}
         scale={1}
-        position={[0, -5, -12]}
+        position={[0, -3, -13]}
       />
     </Suspense>
   )

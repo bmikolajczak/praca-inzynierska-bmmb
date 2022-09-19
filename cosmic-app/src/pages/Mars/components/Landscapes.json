@@ -20,11 +20,6 @@
     "model": "GaleCrater.glb"
   },
   {
-    "title": "Medusae Fossae",
-    "description": "Medusae Fossae is one of the weirdest locations on Mars. Possible explanation for its interesting shape is that it is a huge volcanic deposit, some one-fifth of the size of the United States. Over time, winds sculpted the rocks into some beautiful formations.But researchers will need more study to learn how these volcanoes formed Medusae Fossae. A 2018 study suggested that the formation may have formed from immensely huge volcanic eruptions taking place hundreds of times over 500 million years. These eruptions would have warmed the Red Planet's climate as greenhouse gases from the volcanoes drifted into the atmosphere.",
-    "model": "MedusaeFossae.glb"
-  },
-  {
     "title": "Hale Crater",
     "description": "Mars is host to strange features called recurring slope lineae (RSL), which tend to form on the sides of steep craters during warm weather. It's hard to figure out what these RSL are, though. Pictures from Hale Crater and some other locations show spots where spectroscopy picked up signs of hydration. The RSL could be also formed from atmospheric water or dry flows of sand. It may also host alien microbes so future explorers will need to be very cautious in case of contamination.",
     "model": "HaleCrater.glb"
