@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore, collection } from 'firebase/firestore'
-import { initializeApp } from '@firebase/app'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBP2FFXmpveyEL-HxqF5X4MVaSRcDrPO7k',
@@ -16,10 +15,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 
 //referencing services in obejcts
-const auth = getAuth(app)
+export const auth = getAuth(app)
 const db = getFirestore(app)
-
-//creating collection where users will be stored
-const userCollection = db.collection('users')
-
-export { auth, db, userCollection }

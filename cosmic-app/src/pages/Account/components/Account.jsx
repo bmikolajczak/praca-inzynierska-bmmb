@@ -1,9 +1,69 @@
 import { useState } from 'react'
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth'
 
+import { auth } from '../../../infrastructure/firebase/firebase'
 import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
+import { useEffect } from 'react'
+
 export function Account() {
-  const [activeTab, setActiveTab] = useState('signin')
+  // const [activeTab, setActiveTab] = useState('signin')
+
+  const [userEmail, setUserEmail] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+
+  //LOGIN
+  const [loginEmail, setLoginEmial] = useState('')
+  const [loginPassword, setloginPassword] = useState('')
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('Current User: ', user)
+    } else {
+      console.log('user signed out')
+    }
+  })
+
+  async function registerUser() {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      )
+      console.log(user)
+    } catch (error) {
+      console.log('OOh no,', error.message)
+    }
+  }
+
+  async function loginUser() {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      )
+      console.log('user: ', user.user)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  async function signoutUser() {
+    try {
+      signOut(auth)
+      console.log('user signed out')
+    } catch (error) {
+      console.log('error', error.message)
+    }
+  }
+
   return (
     <div>
       <h1>Welcome to user account page!</h1>
@@ -14,34 +74,44 @@ export function Account() {
         <li onClick={() => setActiveTab('register')}>register</li>
       </ul>
 
-      {activeTab === 'register' && (
-        <form className={styles.registerForm}>
-          <label for="name">Name</label>
-          <input placeholder="Enter your name" id="name" />
+      <div className={styles.registerForm}>
+        {/* <label for="name">Name</label>
+          <input placeholder="Enter your name" id="name" /> */}
 
-          <label for="email">Email</label>
-          <input placeholder="email" id="email" />
+        <label for="email">Email</label>
+        <input
+          placeholder="email"
+          id="email"
+          onChange={(event) => {
+            setUserEmail(event.target.value)
+            console.log(userEmail)
+          }}
+        />
 
-          <label for="password">Password</label>
-          <input placeholder="Enter your password" id="password" />
+        <label for="password">Password</label>
+        <input
+          placeholder="Enter your password"
+          id="password"
+          onChange={(event) => {
+            setUserPassword(event.target.value)
+          }}
+        />
 
-          <label for="confirm">Confirm Password</label>
-          <input placeholder="Re-enter your password" id="confirm" />
-          <button type="submit">Register</button>
-        </form>
-      )}
+        {/* <label for="confirm">Confirm Password</label>
+          <input placeholder="Re-enter your password" id="confirm" /> */}
+        <button onClick={registerUser}>Register</button>
+      </div>
 
-      {activeTab === 'signin' && (
-        <form className={styles.loginForm}>
-          <label for="email">Email</label>
-          <input placeholder="email" id="login-email" />
+      <div className={styles.loginForm}>
+        <label for="email">Email</label>
+        <input placeholder="email" id="login-email" />
 
-          <label for="password">Password</label>
-          <input placeholder="Enter your password" id="login-password" />
+        <label for="password">Password</label>
+        <input placeholder="Enter your password" id="login-password" />
 
-          <button type="submit">Sign In</button>
-        </form>
-      )}
+        <button onClick={loginUser}>Sign In</button>
+        <button onClick={signoutUser}>Sign Out</button>
+      </div>
     </div>
   )
 }
