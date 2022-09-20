@@ -11,16 +11,16 @@ function LandModel(props) {
   const deg2rad = (degrees) => degrees * (Math.PI / 180)
   useThree(({ camera }) => {
     camera.rotation.set(deg2rad(-45), 0, 0)
-    camera.position.set(0, 16, 25)
+    camera.position.set(0, 16, 40)
   })
 
-  // Load GLTF model
+  // Loading GLTF model
   const modelURL = `/src/assets/mars/marsLandscapes/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const ref = useRef()
   useFrame(() => (ref.current.rotation.y += 0.0005))
 
-  // Change gltf mesh color
+  // Changing gltf mesh color
   gltf.scene.traverse((object) => {
     if (object.isMesh) {
       object.material.color.set(0xbd8d6d)
@@ -37,18 +37,20 @@ function LandModel(props) {
 export default function Landscapes() {
   const landItems = landscapes.map((land) => (
     <li key={land.title}>
-      <h3>{land.title}</h3>
       <div className={style.landscapeElem}>
-        <p>{land.description}</p>
+        <div className={style.landscapeInfo}>
+          <h3>{land.title}</h3>
+          <p>{land.description}</p>
+        </div>
         <div className={style.landscapeCanvas}>
-          {/* fov change on the Canvas element */}
+          {/* changing fov on the Canvas element */}
           <Canvas camera={{ fov: 50 }}>
             <LandModel model={land.model} />
-            <ambientLight intensity={0.5} />
+            <ambientLight intensity={0.2} />
             <directionalLight
               color="white"
               position={[5, 5, 5]}
-              intensity={0.8}
+              intensity={1}
             />
             <OrbitControls
               makeDefault
