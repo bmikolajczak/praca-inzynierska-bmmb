@@ -5,11 +5,11 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth'
+import { addDoc, collection, getDoc } from 'firebase/firestore'
 
-import { auth } from '../../../infrastructure/firebase/firebase'
+import { auth, db } from '../../../infrastructure/firebase/firebase'
 import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
-import { useEffect } from 'react'
 
 export function Account() {
   // const [activeTab, setActiveTab] = useState('signin')
@@ -36,7 +36,16 @@ export function Account() {
         userEmail,
         userPassword
       )
-      console.log(user)
+      console.log(user.user.uid)
+      try {
+        const newUserRef = await addDoc(collection(db, 'users'), {
+          id: user.user.uid,
+          email: user.user.email,
+        })
+        console.log('New document with user info: ', newUserRef)
+      } catch (error) {
+        console.log('Problem when creating user:', error)
+      }
     } catch (error) {
       console.log('OOh no,', error.message)
     }

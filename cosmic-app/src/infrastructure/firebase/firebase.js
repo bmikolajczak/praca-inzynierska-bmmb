@@ -16,4 +16,4 @@ const app = initializeApp(firebaseConfig)
 
 //referencing services in obejcts
 export const auth = getAuth(app)
-const db = getFirestore(app)
+export const db = getFirestore(app)
