@@ -66,4 +66,6 @@ npm run dev
 - https://solarsystem.nasa.gov/planets/mars/overview/ - mars info
 - https://solarsystem.nasa.gov/resources - 3D Models, images
 - https://www.space.com/41254-touring-mars-red-planet-road-trip.html - Mars landscapes text content
+- https://www.space.com/16080-solar-system-planets.html - solar system planets info
+- https://solarsystem.nasa.gov/resources/686/solar-system-sizes/ - planets sizes
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
