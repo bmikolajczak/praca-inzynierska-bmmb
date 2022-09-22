@@ -8,7 +8,7 @@ import Landscapes from './Landscapes'
 function MarsGlobe() {
   const gltf = useLoader(GLTFLoader, '/src/assets/mars/MarsGlobe.glb')
   const ref = useRef()
-  useFrame(() => (ref.current.rotation.y += 0.0002))
+  useFrame(() => (ref.current.rotation.y += 0.0006))
   return (
     <Suspense fallback={null}>
       <primitive
