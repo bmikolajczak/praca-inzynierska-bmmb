@@ -1,0 +1,34 @@
+@import 'src/assets/variables.scss';
+
+// Landscapes
+.landscapes {
+  margin: 2rem;
+}
+.landscapeList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .landscapeElem {
+    display: flex;
+    gap: 1.5rem;
+
+    background-color: rgba($color: #282828, $alpha: 0.75);
+    border-radius: 1rem;
+
+    .landscapeInfo {
+      flex-basis: 40%;
+      padding: 2rem;
+      p {
+        white-space: pre-wrap;
+      }
+    }
+    .landscapeCanvas {
+      min-height: 80vh;
+      width: 100%;
+    }
+  }
+}
