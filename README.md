@@ -69,3 +69,4 @@ npm run dev
 - https://www.space.com/16080-solar-system-planets.html - solar system planets info
 - https://solarsystem.nasa.gov/resources/686/solar-system-sizes/ - planets sizes
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
+- https://www.nasa.gov/sites/default/files/files/YOSS_Act1.pdf - solar system: planets distance, calculations
