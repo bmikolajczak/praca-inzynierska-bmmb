@@ -10,7 +10,12 @@ function CelestialModel(props) {
   useFrame(() => (ref.current.rotation.y += 0.0005))
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={1} position={[0, 0, 0]} />
+      <primitive
+        object={gltf.scene}
+        ref={ref}
+        scale={1}
+        position={[0, 5, -20]}
+      />
     </Suspense>
   )
 }
@@ -19,7 +24,7 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas>
-        <CelestialModel model="earth.glb" />
+        <CelestialModel model="saturn.glb" />
         <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
       </Canvas>
     </main>
