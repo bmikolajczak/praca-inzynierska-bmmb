@@ -4,8 +4,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
-import { addDoc, collection, getDoc } from 'firebase/firestore'
+import { collection, setDoc, doc } from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 import '../styles/Account.scss'
@@ -20,6 +22,12 @@ export function Account() {
   //LOGIN
   const [loginEmail, setLoginEmial] = useState('')
   const [loginPassword, setloginPassword] = useState('')
+
+  //user colelction ref
+  const usersRef = collection(db, 'users')
+
+  //const Google provider
+  const googleProvider = new GoogleAuthProvider()
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -38,9 +46,10 @@ export function Account() {
       )
       console.log(user.user.uid)
       try {
-        const newUserRef = await addDoc(collection(db, 'users'), {
-          id: user.user.uid,
-          email: user.user.email,
+        const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
+          name: 'Testy',
+          surname: 'Smith',
+          email: userEmail,
         })
         console.log('New document with user info: ', newUserRef)
       } catch (error) {
@@ -64,10 +73,38 @@ export function Account() {
     }
   }
 
+  async function signInGoogle() {
+    try {
+      const result = await signInWithPopup(auth, googleProvider)
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = credential.accessToken
+      //info about signd in user
+      const user = result.user
+      console.log(user)
+    } catch (error) {
+      const errorCode = error.code
+      const errorMessage = error.message
+      // The email of the user's account used.
+      const email = error.customData.email
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error)
+      console.log(
+        'code: ',
+        errorCode,
+        'message: ',
+        errorMessage,
+        'email: ',
+        email,
+        'credential used: ',
+        credential
+      )
+    }
+  }
+
   async function signoutUser() {
     try {
       signOut(auth)
-      console.log('user signed out')
+      console.log('user is signed out')
     } catch (error) {
       console.log('error', error.message)
     }
@@ -93,7 +130,6 @@ export function Account() {
           id="email"
           onChange={(event) => {
             setUserEmail(event.target.value)
-            console.log(userEmail)
           }}
         />
 
@@ -119,6 +155,7 @@ export function Account() {
         <input placeholder="Enter your password" id="login-password" />
 
         <button onClick={loginUser}>Sign In</button>
+        <button onClick={signInGoogle}>Sign In with GOOGLE</button>
         <button onClick={signoutUser}>Sign Out</button>
       </div>
     </div>
