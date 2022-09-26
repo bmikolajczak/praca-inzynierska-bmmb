@@ -10,20 +10,20 @@ function LandModel(props) {
   // Camera rotation and position
   const deg2rad = (degrees) => degrees * (Math.PI / 180)
   useThree(({ camera }) => {
-    camera.rotation.set(deg2rad(-45), 0, 0)
-    camera.position.set(0, 16, 40)
+    // camera.rotation.set(deg2rad(-45), 0, 0) // it doesnt work
+    camera.position.set(0, 20, 30)
   })
 
   // Loading GLTF model
   const modelURL = `/src/assets/mars/marsLandscapes/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const ref = useRef()
-  useFrame(() => (ref.current.rotation.y += 0.0005))
+  useFrame(() => (ref.current.rotation.y += 0.0008))
 
   // Changing gltf mesh color
   gltf.scene.traverse((object) => {
     if (object.isMesh) {
-      object.material.color.set(0xbd8d6d)
+      object.material.color.set(0xffaa80)
       object.material.metalness = 0 // needs to be 0 in order for ambient lighting to work
     }
   })
@@ -38,10 +38,6 @@ export default function Landscapes() {
   const landItems = landscapes.map((land) => (
     <li key={land.title}>
       <div className={style.landscapeElem}>
-        <div className={style.landscapeInfo}>
-          <h3>{land.title}</h3>
-          <p>{land.description}</p>
-        </div>
         <div className={style.landscapeCanvas}>
           {/* changing fov on the Canvas element */}
           <Canvas camera={{ fov: 50 }}>
@@ -59,6 +55,10 @@ export default function Landscapes() {
               zoomSpeed={0.7}
             />
           </Canvas>
+        </div>
+        <div className={style.landscapeInfo}>
+          <h3>{land.title}</h3>
+          <p>{land.description}</p>
         </div>
       </div>
     </li>

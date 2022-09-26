@@ -3,6 +3,9 @@
 // Landscapes
 .landscapes {
   margin: 2rem;
+  h2 {
+    text-align: center;
+  }
 }
 .landscapeList {
   list-style-type: none;
@@ -16,19 +19,23 @@
     display: flex;
     gap: 1.5rem;
 
-    background-color: rgba($color: #282828, $alpha: 0.75);
+    background-color: #0d0d0d;
     border-radius: 1rem;
 
     .landscapeInfo {
-      flex-basis: 40%;
+      flex-basis: 30%;
       padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       p {
         white-space: pre-wrap;
       }
     }
     .landscapeCanvas {
-      min-height: 80vh;
-      width: 100%;
+      min-height: 82vh;
+      flex-basis: 70%;
     }
   }
 }
