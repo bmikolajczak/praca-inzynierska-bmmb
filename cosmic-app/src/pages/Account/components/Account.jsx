@@ -80,7 +80,11 @@ export function Account() {
       const token = credential.accessToken
       //info about signd in user
       const user = result.user
-      console.log(user)
+      const newUserRef = await setDoc(doc(usersRef, user.uid), {
+        name: user.displayName,
+        email: user.email,
+      })
+      console.log(newUserRef)
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
