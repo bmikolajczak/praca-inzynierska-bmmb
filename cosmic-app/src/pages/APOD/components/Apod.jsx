@@ -55,9 +55,12 @@ function CallApodApi() {
           <div className={style.apodInfo + ' ' + style.apodImageCol}>
             <p>{image.explanation}</p>
             <p>{image.date}</p>
-            <p>
-              <i>@{image.copyright}</i>
-            </p>
+            {/* Conditionally render copyright if exists */}
+            {image.copyright && (
+              <p>
+                <i>@{image.copyright}</i>
+              </p>
+            )}
           </div>
         </div>
         <div className={style.apodButtons}>
