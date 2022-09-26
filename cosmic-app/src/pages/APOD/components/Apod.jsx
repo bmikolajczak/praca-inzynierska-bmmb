@@ -61,7 +61,7 @@ function CallApodApi() {
           </div>
         </div>
         <div className={style.apodButtons}>
-          <button onClick={downloadImage}>Download</button>
+          <button onClick={downloadImage}>Open</button>
           <button onClick={saveImage}>Save</button>
         </div>
       </div>
