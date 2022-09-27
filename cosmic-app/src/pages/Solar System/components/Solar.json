@@ -1,0 +1,42 @@
+[
+  {
+    "model": "sun.glb",
+    "position": [0, 0, 0]
+  },
+  {
+    "model": "mercury.glb",
+    "position": [134.17, 0, 0]
+  },
+  {
+    "model": "venus.glb",
+    "position": [156.68, 0, 0]
+  },
+  {
+    "model": "earth.glb",
+    "position": [175.23, 0, 0]
+  },
+  {
+    "model": "moon.glb",
+    "position": [176.68, 0, 0]
+  },
+  {
+    "model": "mars.glb",
+    "position": [209.66, 0, 0]
+  },
+  {
+    "model": "jupiter.glb",
+    "position": [453.37, 0, 0]
+  },
+  {
+    "model": "saturn.glb",
+    "position": [743.44, 0, 0]
+  },
+  {
+    "model": "uranus.glb",
+    "position": [1376.55, 0, 0]
+  },
+  {
+    "model": "neptune.glb",
+    "position": [2000, 0, 0]
+  }
+]

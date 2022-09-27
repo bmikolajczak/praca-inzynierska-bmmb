@@ -9,6 +9,7 @@ import { Settings } from './pages/Settings Page/components/Settings'
 import { Account } from './pages/Account/components/Account'
 import { About } from './pages/About Page/components/About'
 import { Apod } from './pages/APOD/components/Apod'
+import Solar from './pages/Solar System/components/Solar'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/settings" element={<Settings />} />
           <Route path="/account" element={<Account />} />
           <Route path="/apod" element={<Apod />} />
+          <Route path="/solar" element={<Solar />} />
         </Route>
       </Routes>
     </BrowserRouter>
