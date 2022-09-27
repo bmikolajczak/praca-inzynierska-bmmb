@@ -4,6 +4,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
 import { OrbitControls } from '@react-three/drei'
+import Loader from '../../../infrastructure/loader/Loader'
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -36,14 +37,16 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2500 }}>
-        {celestialBodies}
-        <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
-        <OrbitControls
-          makeDefault
-          enableZoom={true}
-          enablePan={true}
-          zoomSpeed={1}
-        />
+        <Suspense fallback={<Loader />}>
+          {celestialBodies}
+          <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
+          <OrbitControls
+            makeDefault
+            enableZoom={true}
+            enablePan={true}
+            zoomSpeed={1}
+          />
+        </Suspense>
       </Canvas>
     </main>
   )
