@@ -14,7 +14,8 @@ import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
 
 export function Account() {
-  // const [activeTab, setActiveTab] = useState('signin')
+  const [activeTab, setActiveTab] = useState('signin')
+  const [isformActive, setFormActive] = useState(false)
 
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -116,52 +117,83 @@ export function Account() {
 
   return (
     <div>
-      <h1>Welcome to user account page!</h1>
-      <p className="welcome">welcome to account page</p>
+      {/* <h1>Welcome to user account page!</h1> */}
+      {/* <p className="welcome">welcome to account page</p> */}
+      {auth.currentUser && <h3>{auth.currentUser.displayName}</h3>}
+      <button onClick={signoutUser}>Sign Out</button>
+      <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button>
 
-      <ul className={styles.tabs}>
-        <li onClick={() => setActiveTab('signin')}>sign in</li>
-        <li onClick={() => setActiveTab('register')}>register</li>
-      </ul>
+      {isformActive && (
+        <div className={styles['account-form']}>
+          <ul className={styles.tabs}>
+            <li
+              className={
+                activeTab === 'signin'
+                  ? styles['active-tab']
+                  : styles['inactive-tab']
+              }
+              onClick={() => setActiveTab('signin')}
+            >
+              sign in
+            </li>
+            <li
+              className={
+                activeTab === 'register'
+                  ? styles['active-tab']
+                  : styles['inactive-tab']
+              }
+              onClick={() => setActiveTab('register')}
+            >
+              register
+            </li>
+          </ul>
 
-      <div className={styles.registerForm}>
-        {/* <label for="name">Name</label>
-          <input placeholder="Enter your name" id="name" /> */}
-
-        <label for="email">Email</label>
-        <input
-          placeholder="email"
-          id="email"
-          onChange={(event) => {
-            setUserEmail(event.target.value)
-          }}
-        />
-
-        <label for="password">Password</label>
-        <input
-          placeholder="Enter your password"
-          id="password"
-          onChange={(event) => {
-            setUserPassword(event.target.value)
-          }}
-        />
-
-        {/* <label for="confirm">Confirm Password</label>
-          <input placeholder="Re-enter your password" id="confirm" /> */}
-        <button onClick={registerUser}>Register</button>
-      </div>
-
-      <div className={styles.loginForm}>
-        <label for="email">Email</label>
-        <input placeholder="email" id="login-email" />
-
-        <label for="password">Password</label>
-        <input placeholder="Enter your password" id="login-password" />
-
-        <button onClick={loginUser}>Sign In</button>
-        <button onClick={signInGoogle}>Sign In with GOOGLE</button>
-        <button onClick={signoutUser}>Sign Out</button>
-      </div>
+          {activeTab === 'register' && (
+            <div className={styles.registerForm}>
+              <label for="name">Name</label>
+              <input placeholder="Enter your name" id="name" />
+              <label for="email">Email</label>
+              <input
+                placeholder="email"
+                id="email"
+                onChange={(event) => {
+                  setUserEmail(event.target.value)
+                }}
+              />
+              <label for="password">Password</label>
+              <input
+                placeholder="Enter your password"
+                id="password"
+                onChange={(event) => {
+                  setUserPassword(event.target.value)
+                }}
+              />
+              <label for="confirm">Confirm Password</label>
+              <input placeholder="Re-enter your password" id="confirm" />
+              <button onClick={registerUser}>Register</button>
+            </div>
+          )}
+          {activeTab === 'signin' && (
+            <div className={styles.loginForm}>
+              <label for="email">Email</label>
+              <input placeholder="email" id="login-email" />
+              <label for="password">Password</label>
+              <input placeholder="Enter your password" id="login-password" />
+              <button className={styles.button} onClick={loginUser}>
+                Sign In
+              </button>
+            </div>
+          )}
+          <button
+            className={styles.button}
+            id={styles['google-button']}
+            onClick={signInGoogle}
+          >
+            <img height={16} src="src/assets/google-logo.png" />
+            Sign In with Google
+          </button>
+        </div>
+      )}
     </div>
   )
 }
