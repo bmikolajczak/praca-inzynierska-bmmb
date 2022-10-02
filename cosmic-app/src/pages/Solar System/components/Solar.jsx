@@ -3,7 +3,7 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Stars } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 
 function CelestialModel(props) {
@@ -46,6 +46,8 @@ export default function Solar() {
             enablePan={true}
             zoomSpeed={.5}
           />
+          {/* https://github.com/pmndrs/drei#stars */}
+          <Stars radius={500} depth={50} count={10000} factor={18} saturation={0} fade speed={2} />
         </Suspense>
       </Canvas>
     </main>
