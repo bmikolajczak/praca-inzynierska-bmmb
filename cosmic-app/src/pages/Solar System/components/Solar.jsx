@@ -31,7 +31,7 @@ export default function Solar() {
     <CelestialModel
       model={celes.model}
       position={celes.position}
-      key={celes.model}
+      key={celes.name}
     />
   ))
   return (
@@ -44,7 +44,7 @@ export default function Solar() {
             makeDefault
             enableZoom={true}
             enablePan={true}
-            zoomSpeed={1}
+            zoomSpeed={.5}
           />
         </Suspense>
       </Canvas>
