@@ -70,3 +70,4 @@ npm run dev
 - https://solarsystem.nasa.gov/resources/686/solar-system-sizes/ - planets sizes
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
 - https://www.nasa.gov/sites/default/files/files/YOSS_Act1.pdf - solar system: planets distance, calculations
+- https://svs.gsfc.nasa.gov/4851 - star map hdri
