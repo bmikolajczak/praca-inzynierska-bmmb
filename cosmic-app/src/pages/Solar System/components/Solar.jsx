@@ -37,7 +37,7 @@ export default function Solar() {
   ))
   return (
     <main className={style.solar}>
-      <Canvas camera={{ far: 2500 }}>
+      <Canvas camera={{ far: 2000 }}>
         <Suspense fallback={<Loader />}>
           {celestialBodies}
           <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
@@ -45,7 +45,8 @@ export default function Solar() {
             makeDefault
             enableZoom={true}
             enablePan={false}
-            zoomSpeed={.5}
+            zoomSpeed={.6}
+            maxDistance={1000}
           />
           <Environment background="only" files="src/assets/solar_system/starmap2020dark_6k.hdr" />
           {/* https://github.com/pmndrs/drei#stars */}
