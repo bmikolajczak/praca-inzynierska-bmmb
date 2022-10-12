@@ -13,7 +13,7 @@ function CelestialModel(props) {
   useThree(({ camera }) => {
     camera.position.set(0, 60, 125)
   })
-  useFrame(() => (ref.current.rotation.y += 0.0005))
+  useFrame(() => (ref.current.rotation.y += props.spinSpeed))
   return (
     <Suspense fallback={null}>
       <primitive
@@ -32,6 +32,7 @@ export default function Solar() {
       model={celes.model}
       position={celes.position}
       key={celes.name}
+      spinSpeed={celes.spinSpeed}
     />
   ))
   return (

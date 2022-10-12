@@ -68,6 +68,7 @@ npm run dev
 - https://www.space.com/41254-touring-mars-red-planet-road-trip.html - Mars landscapes text content
 - https://www.space.com/16080-solar-system-planets.html - solar system planets info
 - https://solarsystem.nasa.gov/resources/686/solar-system-sizes/ - planets sizes
+- https://www.jpl.nasa.gov/edu/pdfs/scaless_reference.pdf - another planets scale reference
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
 - https://www.nasa.gov/sites/default/files/files/YOSS_Act1.pdf - solar system: planets distance, calculations
 - https://svs.gsfc.nasa.gov/4851 - star map hdri

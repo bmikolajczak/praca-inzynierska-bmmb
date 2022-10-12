@@ -14,41 +14,41 @@
     "name": "Mercury",
     "model": "mercury.glb",
     "position": [
-      134.17,
+      64.57,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Venus",
     "model": "venus.glb",
     "position": [
-      156.68,
+      73.57,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Earth",
     "model": "earth.glb",
     "position": [
-      175.23,
+      80.99,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Moon",
     "model": "moon.glb",
     "position": [
-      176.68,
-      0.4,
+      81.46,
+      0.1,
       0
     ],
     "orbitalSpeed": 0.1,
@@ -58,55 +58,55 @@
     "name": "Mars",
     "model": "mars.glb",
     "position": [
-      209.66,
+      94.76,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Jupiter",
     "model": "jupiter.glb",
     "position": [
-      453.37,
+      192.25,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Saturn",
     "model": "saturn.glb",
     "position": [
-      743.44,
+      308.27,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Uranus",
     "model": "uranus.glb",
     "position": [
-      1376.55,
+      561.52,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   },
   {
     "name": "Neptune",
     "model": "neptune.glb",
     "position": [
-      2000,
+      800,
       0,
       0
     ],
     "orbitalSpeed": 0.1,
-    "spinSpeed": 0.1
+    "spinSpeed": 0.01
   }
 ]
