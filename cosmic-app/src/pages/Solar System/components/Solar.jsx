@@ -11,20 +11,30 @@ import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
-  const ref = useRef()
+  const mesh = useRef()
+  const group = useRef()
+
+  // Weird, maybe separate component for camera?
+  // If used outside canvas component: Error: R3F hooks can only be used within the Canvas Component
   useThree(({ camera }) => {
     camera.position.set(0, 60, 125)
   })
-  useFrame(() => (ref.current.rotation.y += props.spinSpeed))
+  
+  useFrame(() => (
+    mesh.current.rotation.y += props.spinSpeed,
+    group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+  ))
   return (
-    <Suspense fallback={null}>
-      <primitive
-        object={gltf.scene}
-        ref={ref}
-        scale={0.5}
-        position={props.position}
-      />
-    </Suspense>
+    <group ref={group}>
+      <Suspense fallback={null}>
+        <primitive
+          object={gltf.scene}
+          ref={mesh}
+          scale={0.5}
+          position={props.position}
+        />
+      </Suspense>
+    </group>
   )
 }
 
@@ -35,6 +45,8 @@ export default function Solar() {
       position={celes.position}
       key={celes.name}
       spinSpeed={celes.spinSpeed}
+      orbitalSpeed={celes.orbitalSpeed}
+      orbitalFactor={0.5}
     />
   ))
   return (
