@@ -3,9 +3,14 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
-import { OrbitControls, Stars, Environment } from '@react-three/drei'
+import { OrbitControls, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
+import {
+  EffectComposer,
+  Noise,
+  Vignette,
+} from '@react-three/postprocessing'
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -39,7 +44,7 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader />}>
           <Sun />
           {celestialBodies}
           <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
@@ -47,11 +52,18 @@ export default function Solar() {
             makeDefault
             enableZoom={true}
             enablePan={false}
-            zoomSpeed={.6}
+            zoomSpeed={0.6}
             maxDistance={1000}
           />
-          <Environment background="only" files="src/assets/solar_system/starmap2020dark_6k.hdr" />
+          <Environment
+            background="only"
+            files="src/assets/solar_system/starmap2020dark_6k.hdr"
+          />
         </Suspense>
+        <EffectComposer>
+          <Noise opacity={0.03} />
+          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        </EffectComposer>
       </Canvas>
     </main>
   )
