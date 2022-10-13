@@ -6,11 +6,7 @@ import celestials from './Solar.json'
 import { OrbitControls, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
-import {
-  EffectComposer,
-  Noise,
-  Vignette,
-} from '@react-three/postprocessing'
+import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -48,14 +44,15 @@ export default function Solar() {
           <Sun />
           {celestialBodies}
           {/* <directionalLight color="white" position={[5, 5, 5]} intensity={1} /> */}
-          <pointLight intensity={8} position={[0,0,0]} decay={2}/>
-          <pointLight intensity={4} position={[0,30,0]} decay={3}/>
-          <pointLight intensity={4} position={[0,-30,0]} decay={3}/>
+          <pointLight intensity={1} position={[0, 0, 0]} decay={2} />
+          <pointLight intensity={0.5} position={[0, 25, 0]} decay={2} />
+          <pointLight intensity={0.5} position={[0, -25, 0]} decay={2} />
           <OrbitControls
             makeDefault
             enableZoom={true}
+            // enablePan on for dev, off for prod
             enablePan={true}
-            zoomSpeed={0.6}
+            zoomSpeed={1}
             maxDistance={1000}
             minDistance={50}
           />
