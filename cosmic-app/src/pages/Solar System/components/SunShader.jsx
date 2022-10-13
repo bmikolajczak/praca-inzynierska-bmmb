@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber'
-import { useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import * as THREE  from 'three'
 
 const fragmentShader = `
@@ -15,8 +15,8 @@ void main( void ) {
   vec2 position = - 1.0 + 2.0 * vUv;
 
   vec4 noise = texture2D( texture1, vUv );
-  vec2 T1 = vUv + vec2( - 2.0, -0.5 ) * time * 0.01;
-  vec2 T2 = vUv + vec2( 2.0, 0.2 ) * time * 0.01;
+  vec2 T1 = vUv + vec2( 1.2, - 1.0 ) * time * 0.02;
+  vec2 T2 = vUv + vec2( - 1.2 , 0 ) * time * 0.01;
 
   T1.x += noise.x * 2.0;
   T1.y += noise.y * 2.0;
@@ -55,7 +55,6 @@ void main()
 `
 
 export default function Sun() {
-  // This reference will give us direct access to the mesh
   const mesh = useRef()
   const textureLoader = new THREE.TextureLoader();
   const clock = new THREE.Clock()
