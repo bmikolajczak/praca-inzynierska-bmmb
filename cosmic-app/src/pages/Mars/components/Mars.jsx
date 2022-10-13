@@ -47,8 +47,8 @@ export default function Mars() {
             </p>
           </div>
         </section>
+        <Landscapes />
       </Suspense>
-      <Landscapes />
     </main>
   )
 }
