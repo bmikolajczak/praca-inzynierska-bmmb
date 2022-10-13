@@ -1,16 +1,5 @@
 [
   {
-    "name": "Sun",
-    "model": "sun.glb",
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "orbitalSpeed": 0,
-    "spinSpeed": 0
-  },
-  {
     "name": "Mercury",
     "model": "mercury.glb",
     "position": [

@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
 import { OrbitControls, Stars, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
-import Blob from './SunShader'
+import Sun from './SunShader'
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -39,12 +39,9 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
-        <Suspense fallback={<Loader />}>
-          {/* uncomment after shader testing */}
-          {/* {celestialBodies} */}
-          {/* TESTING SHADERS */}
-          <Blob />
-          {/*  */}
+        <Suspense fallback={<Loader/>}>
+          {celestialBodies}
+          <Sun />
           <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
           <OrbitControls
             makeDefault
