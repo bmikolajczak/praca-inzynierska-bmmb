@@ -43,10 +43,9 @@ export default function Solar() {
         <Suspense fallback={<Loader />}>
           <Sun />
           {celestialBodies}
-          {/* <directionalLight color="white" position={[5, 5, 5]} intensity={1} /> */}
-          <pointLight intensity={1} position={[0, 0, 0]} decay={2} />
-          <pointLight intensity={0.5} position={[0, 25, 0]} decay={2} />
-          <pointLight intensity={0.5} position={[0, -25, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.8} position={[0, 0, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, 25, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, -25, 0]} decay={2} />
           <OrbitControls
             makeDefault
             enableZoom={true}
