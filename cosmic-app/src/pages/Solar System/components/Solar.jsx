@@ -40,8 +40,8 @@ export default function Solar() {
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
         <Suspense fallback={<Loader/>}>
-          {celestialBodies}
           <Sun />
+          {celestialBodies}
           <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
           <OrbitControls
             makeDefault
@@ -51,8 +51,6 @@ export default function Solar() {
             maxDistance={1000}
           />
           <Environment background="only" files="src/assets/solar_system/starmap2020dark_6k.hdr" />
-          {/* https://github.com/pmndrs/drei#stars */}
-          <Stars radius={1000} depth={200} count={4000} factor={20} saturation={0} fade speed={1.8} />
         </Suspense>
       </Canvas>
     </main>
