@@ -33,17 +33,6 @@
     "spinSpeed": 0.01
   },
   {
-    "name": "Moon",
-    "model": "moon.glb",
-    "position": [
-      81.46,
-      0.1,
-      0
-    ],
-    "orbitalSpeed": 0.001,
-    "spinSpeed": 0
-  },
-  {
     "name": "Mars",
     "model": "mars.glb",
     "position": [
