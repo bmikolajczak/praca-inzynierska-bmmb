@@ -1,6 +1,7 @@
 import { Html } from '@react-three/drei'
 import style from './Loader.module.scss'
 
+// Loading element inside the canvas
 export default function Loader(props) {
   return (
     <Html center wrapperClass={style.loading}>
