@@ -25,6 +25,7 @@ function MarsGlobe() {
 export default function Mars() {
   return (
     <main className={style.main}>
+      {/* Loading outside canvas, can't use Loader component */}
       <Suspense fallback={<span className={style.loading}>Loading...</span>}>
         <section className={style.overviewContainer}>
           <div className={style.canvasContainer}>
