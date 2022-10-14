@@ -40,6 +40,7 @@ function CelestialModel(props) {
           ref={mesh}
           scale={0.5}
           position={props.position}
+          onClick={() => console.log('hi')}
         />
       </Suspense>
     </group>
