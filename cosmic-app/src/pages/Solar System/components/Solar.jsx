@@ -73,7 +73,7 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader title="Simplified Solar System"/>}>
           <Sun />
           {celestialBodies}
           <pointLight
