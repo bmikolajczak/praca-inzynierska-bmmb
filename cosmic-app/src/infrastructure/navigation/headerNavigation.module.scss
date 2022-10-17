@@ -5,26 +5,29 @@
   background-color: black;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4rem;
+  padding: 0 3rem;
   border-bottom: 2px solid $primary-blue;
   border-radius: 0 0 1.5rem 1.5rem;
-}
-.links {
-  display: flex;
-  gap: 2rem;
-}
-.links li {
-  list-style: none;
-}
-.links h3 {
-  color: aquamarine;
-}
-a:visited {
-  color: aquamarine;
-  text-decoration: none;
-}
-
-.logo {
-  max-width: 80%;
-  margin: 4px 0;
+  .links {
+    display: flex;
+    gap: 2rem;
+    li {
+      list-style: none;
+      a {
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px solid white;
+        &:hover {
+          border-color: $primary-color;
+          transition: 0.3s ease border-color;
+        }
+      }
+    }
+  }
+  .logoLink {
+    .logo {
+      max-width: 65%;
+      padding: 7px 0 0 0;
+    }
+  }
 }

@@ -1,0 +1,8 @@
+.solar {
+  canvas {
+    // height of navbar
+    // maybe global variable for navbar height?
+    height: calc(100vh - 55.6px);
+    background-color: black;
+  }
+}

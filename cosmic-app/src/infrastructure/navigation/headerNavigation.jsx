@@ -5,8 +5,8 @@ import style from './headerNavigation.module.scss'
 export const HeaderNavigation = () => {
   return (
     <nav className={style.headerNav}>
-      <Link to="/mars">
-        <img src="src/assets/cosmic-logo.svg" className={style.logo} />
+      <Link to="/mars" className={style.logoLink}>
+        <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
       <ul className={style.links}>
         <li>

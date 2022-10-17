@@ -1,0 +1,54 @@
+@import 'src/assets/variables.scss';
+h2 {
+  margin: 4px 0;
+}
+p {
+  margin: 4px 0;
+}
+.apodContainer {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.apodContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.apodImageContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 0.8rem;
+  gap: 1rem;
+}
+.apodImage {
+  object-fit: cover; // or maybe object-fit: contain;
+  height: auto;
+  border-radius: 1rem;
+}
+.apodImageCol {
+  flex: 50%;
+  max-width: 50%;
+}
+.apodInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.apodButtons {
+  button {
+    background-color: $primary-grey;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 13px 24px;
+    margin: 0.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}

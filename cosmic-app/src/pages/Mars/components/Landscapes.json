@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Olympus Mons",
+    "description": "Olympus Mons is the most extreme volcano in the solar system. Located in the Tharsis volcanic region. Its height of 16 miles (25 kilometers) makes it nearly three times the height of Earth's Mount Everest, which is about 5.5 miles (8.9 km) high.\n\nOlympus Mons is a gigantic shield volcano, which was formed after lava slowly crawled down its slopes. This means that the mountain is probably easy for future explorers to climb, as its average slope is only 5 percent. At its summit is a spectacular depression some 53 miles (85 km) wide, formed by magma chambers that lost lava (likely during an eruption) and collapsed.",
+    "model": "OlympusMons.glb"
+  },
+  {
+    "title": "Tharsis volcanoes",
+    "description": "With Olympus Mons as its' most impressive feature there are also more volcanoes in the area. Tharsis hosts 12 gigantic volcanoes in a zone roughly 2500 miles (4000 km) wide. Like Olympus Mons, these volcanoes tend to be much larger than those on Earth, presumably because Mars has a weaker gravitational pull that allows the volcanoes to grow taller. These volcanoes may have erupted for as long as two billion years, or half of the history of Mars.",
+    "model": "TharsisVolcanoes.glb"
+  },
+  {
+    "title": "Valles Marineris",
+    "description": "Mars not only hosts the largest volcano of the solar system, but also the largest canyon. Valles Marineris is roughly 1850 miles (3000 km) long. That's about four times longer than the Grand Canyon, which has a length of about 500 miles (800 km).\n\nResearchers aren't sure how Valles Marineris came to be, but there are several theories about its formation. Many scientists suggest that when the Tharsis region was formed, it contributed to the growth of Valles Marineris. Lava moving through the volcanic region pushed the crust upward, which broke the crust into fractures in other regions. Over time, these fractures grew into Valles Marineris.",
+    "model": "VallesMarineris.glb"
+  },
+  {
+    "title": "Gale Crater and Mount Sharp (Aeolis Mons)",
+    "description": "Made famous by the landing of the Curiosity rover in 2012, Gale Crater is host to extensive evidence of past water. Curiosity stumbled upon a streambed within weeks of landing, and found more extensive evidence of water throughout its journey along the crater floor. Curiosity is now summiting a nearby volcano called Mount Sharp (Aeolis Mons) and looking at the geological features in each of its strata.\n\nOne of Curiosity's more exciting finds was discovering complex organic molecules in the region, on multiple occasions. Results from 2018 announced these organics were discovered inside of 3.5-billion-year-old rocks. Simultaneous to the organics results, researchers announced the rover also found methane concentrations in the atmosphere change over the seasons. Methane is an element that can be produced by microbes, as well as geological phenomena, so it's unclear if that's a sign of life.",
+    "model": "GaleCrater.glb"
+  },
+  {
+    "title": "Hale Crater",
+    "description": "Mars is host to strange features called recurring slope lineae (RSL), which tend to form on the sides of steep craters during warm weather. It's hard to figure out what these RSL are, though. Pictures from Hale Crater and some other locations show spots where spectroscopy picked up signs of hydration. The RSL could be also formed from atmospheric water or dry flows of sand. It may also host alien microbes so future explorers will need to be very cautious in case of contamination.",
+    "model": "HaleCrater.glb"
+  },
+  {
+    "title": "Noctis Labyrinthus and Hellas basin",
+    "description": "Mars is a planet mostly shaped by wind these days, since the water evaporated as its atmosphere thinned. But we can see extensive evidence of past water, such as regions of 'ghost dunes' found in Noctis Labyrinthus and Hellas basin. Researchers say these regions used to hold dunes that were tens of meters tall. Later, the dunes were flooded by lava or water, which preserved their bases while the tops eroded away.\n\nOld dunes such as these show how winds used to flow on ancient Mars, which in turn gives climatologists some hints as to the ancient environment of the Red Planet. In an even more exciting twist, there could be microbes hiding in the sheltered areas of these dunes, safe from the radiation and wind that would otherwise sweep them away.",
+    "model": "NoctisLabyrinthus.glb"
+  }
+]
