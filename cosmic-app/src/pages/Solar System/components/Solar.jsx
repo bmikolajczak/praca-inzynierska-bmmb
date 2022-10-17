@@ -14,22 +14,22 @@ import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 
+function Camera() {
+  useThree(({ camera }) => {
+    camera.position.set(0, 30, 125)
+  })
+}
+
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const mesh = useRef()
   const group = useRef()
-  const worldPosition = new Vector3();
+  const worldPosition = new Vector3()
 
-  // Weird, maybe separate component for camera?
-  // If used outside canvas component: Error: R3F hooks can only be used within the Canvas Component
-  useThree(({ camera }) => {
-    camera.position.set(0, 30, 125)
-  })
+  const controls = useThree((state) => state.controls)
 
-  const controls = useThree(state => state.controls)
-
-  useFrame(()=> {
+  useFrame(() => {
     mesh.current.rotation.y += props.spinSpeed
     group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
   })
@@ -55,7 +55,12 @@ function OrbitRing(props) {
   return (
     <mesh rotation={[MathUtils.degToRad(90), 0, 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 180]} />
-      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={0.2} />
+      <meshBasicMaterial
+        color="white"
+        side={DoubleSide}
+        transparent={true}
+        opacity={0.2}
+      />
     </mesh>
   )
 }
@@ -80,7 +85,8 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
-        <Suspense fallback={<Loader title="Simplified Solar System"/>}>
+        <Camera />
+        <Suspense fallback={<Loader title="Simplified Solar System" />}>
           <Sun />
           {celestialBodies}
           <pointLight
