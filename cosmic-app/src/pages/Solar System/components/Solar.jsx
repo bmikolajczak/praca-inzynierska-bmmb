@@ -12,13 +12,14 @@ import {
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
-import { DoubleSide, MathUtils } from 'three'
+import { DoubleSide, MathUtils, Vector3 } from 'three'
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const mesh = useRef()
   const group = useRef()
+  const worldPosition = new Vector3();
 
   // Weird, maybe separate component for camera?
   // If used outside canvas component: Error: R3F hooks can only be used within the Canvas Component
@@ -26,12 +27,15 @@ function CelestialModel(props) {
     camera.position.set(0, 30, 125)
   })
 
+  const controls = useThree(state => state.controls)
+
   useFrame(
     () => (
       (mesh.current.rotation.y += props.spinSpeed),
       (group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor)
     )
   )
+
   return (
     <group ref={group}>
       <Suspense fallback={null}>
@@ -40,7 +44,10 @@ function CelestialModel(props) {
           ref={mesh}
           scale={0.5}
           position={props.position}
-          onClick={() => console.log('hi')}
+          onClick={() => {
+            controls.target = mesh.current.getWorldPosition(worldPosition)
+            controls.update()
+          }}
         />
       </Suspense>
     </group>
@@ -65,6 +72,7 @@ export default function Solar() {
     <CelestialModel
       model={celes.model}
       position={celes.position}
+      name={celes.name}
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
@@ -99,7 +107,7 @@ export default function Solar() {
             makeDefault
             enableZoom={true}
             // enablePan on for dev, off for prod
-            enablePan={true}
+            enablePan={false}
             zoomSpeed={1}
             maxDistance={1000}
             minDistance={50}
