@@ -59,7 +59,7 @@
     "model": "saturn.glb",
     "position": [
       308.27,
-      0,
+      0.001,
       0
     ],
     "orbitalSpeed": 0.00033,
