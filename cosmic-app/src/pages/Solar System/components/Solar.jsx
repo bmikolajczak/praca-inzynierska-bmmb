@@ -29,12 +29,10 @@ function CelestialModel(props) {
 
   const controls = useThree(state => state.controls)
 
-  useFrame(
-    () => (
-      (mesh.current.rotation.y += props.spinSpeed),
-      (group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor)
-    )
-  )
+  useFrame(()=> {
+    mesh.current.rotation.y += props.spinSpeed
+    group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+  })
 
   return (
     <group ref={group}>
