@@ -3,16 +3,16 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
-import {
-  OrbitControls,
-  Environment,
-  GizmoHelper,
-  GizmoViewport,
-} from '@react-three/drei'
+import { OrbitControls, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
-import { DoubleSide, MathUtils, Vector3 } from 'three'
+import { DoubleSide, MathUtils } from 'three'
+
+let currentObject = ''
+function setCurrentObject(name) {
+  currentObject = name
+}
 
 function Camera() {
   useThree(({ camera }) => {
@@ -25,13 +25,15 @@ function CelestialModel(props) {
   const gltf = useLoader(GLTFLoader, modelURL)
   const mesh = useRef()
   const group = useRef()
-  const worldPosition = new Vector3()
-
   const controls = useThree((state) => state.controls)
 
   useFrame(() => {
     mesh.current.rotation.y += props.spinSpeed
     group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+    if (currentObject === props.name) {
+      mesh.current.getWorldPosition(controls.target)
+      controls.update()
+    }
   })
 
   return (
@@ -43,8 +45,7 @@ function CelestialModel(props) {
           scale={0.5}
           position={props.position}
           onClick={() => {
-            controls.target = mesh.current.getWorldPosition(worldPosition)
-            controls.update()
+            setCurrentObject(props.name)
           }}
         />
       </Suspense>
@@ -112,9 +113,8 @@ export default function Solar() {
             enableZoom={true}
             // enablePan on for dev, off for prod
             enablePan={false}
-            zoomSpeed={1}
+            zoomSpeed={1.2}
             maxDistance={1000}
-            minDistance={50}
           />
           <Environment
             background="only"
@@ -125,17 +125,6 @@ export default function Solar() {
           <Noise opacity={0.03} />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
-        {/* For dev, axis snap and reference */}
-        {/* <GizmoHelper
-            alignment="bottom-right" // widget alignment within scene
-            margin={[80, 80]} // widget margins (X, Y)
-            renderPriority={1}
-          >
-            <GizmoViewport
-              axisColors={['red', 'green', 'blue']}
-              labelColor="black"
-            />
-          </GizmoHelper> */}
       </Canvas>
     </main>
   )
