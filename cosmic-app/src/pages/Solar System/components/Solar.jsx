@@ -122,7 +122,7 @@ export default function Solar() {
           />
         </Suspense>
         <EffectComposer>
-          <Noise opacity={0.03} />
+          <Noise opacity={0.026} />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
       </Canvas>
