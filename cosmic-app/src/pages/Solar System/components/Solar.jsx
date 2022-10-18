@@ -9,7 +9,7 @@ import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 
-const factorVector = new Vector3(0.95,1,1.02)
+const addendVector = new Vector3()
 
 let currentObject = ''
 function setCurrentObject(name) {
@@ -47,12 +47,16 @@ function CelestialModel(props) {
           scale={0.5}
           position={props.position}
           onClick={() => {
+            // Snap Camera to the mesh
+            //
             // copy mesh current absolute position into orbitControls position
-            mesh.current.getWorldPosition(controls.object.position) 
-            controls.object.position.multiply(factorVector)
-            controls.object.position.setY(2)
-            console.log(controls.object.position);
-            // controls.update()
+            mesh.current.getWorldPosition(controls.object.position)
+            addendVector.set(props.radius * 3, props.radius, props.radius * 3)
+            controls.object.position.add(addendVector)
+            console.log(addendVector)
+            console.log(controls.object.position)
+            // update called after on click
+            // controls.update() // no need
             setCurrentObject(props.name)
           }}
         />
@@ -89,6 +93,7 @@ export default function Solar() {
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
       orbitalFactor={0.5}
+      radius={celes.radius}
     />,
   ])
   return (
