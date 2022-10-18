@@ -48,7 +48,6 @@ function CelestialModel(props) {
           position={props.position}
           onClick={() => {
             // Snap Camera to the mesh
-            //
             // copy mesh current absolute position into orbitControls position
             mesh.current.getWorldPosition(controls.object.position)
             addendVector.set(props.radius * 3, props.radius, props.radius * 3)
