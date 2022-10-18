@@ -8,7 +8,7 @@
       0
     ],
     "orbitalSpeed": 0.00159,
-    "spinSpeed": 0.000005,
+    "spinSpeed": 0.0005,
     "radius": 0.095
   },
   {
@@ -20,7 +20,7 @@
       0
     ],
     "orbitalSpeed": 0.00117,
-    "spinSpeed": -0.000003,
+    "spinSpeed": -0.00006,
     "radius": 0.2375
   },
   {
@@ -32,7 +32,7 @@
       0
     ],
     "orbitalSpeed": 0.001,
-    "spinSpeed": 0.001,
+    "spinSpeed": 0.006,
     "radius": 0.25
   },
   {
@@ -44,7 +44,7 @@
       0
     ],
     "orbitalSpeed": 0.00081,
-    "spinSpeed": 0.0004,
+    "spinSpeed": 0.003,
     "radius": 0.1325
   },
   {
@@ -56,7 +56,7 @@
       0
     ],
     "orbitalSpeed": 0.00044,
-    "spinSpeed": 0.02,
+    "spinSpeed": 0.018,
     "radius": 2.745
   },
   {
@@ -80,7 +80,7 @@
       0
     ],
     "orbitalSpeed": 0.00023,
-    "spinSpeed": -0.0065,
+    "spinSpeed": -0.008,
     "radius": 0.995
   },
   {
@@ -92,7 +92,7 @@
       0
     ],
     "orbitalSpeed": 0.00018,
-    "spinSpeed": 0.0043,
+    "spinSpeed": 0.011,
     "radius": 0.965
   }
 ]
