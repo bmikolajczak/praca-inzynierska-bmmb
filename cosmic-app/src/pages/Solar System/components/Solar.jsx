@@ -7,14 +7,16 @@ import { OrbitControls, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
-import { DoubleSide, MathUtils } from 'three'
+import { DoubleSide, MathUtils, Vector3 } from 'three'
+
+const factorVector = new Vector3(0.95,1,1.02)
 
 let currentObject = ''
 function setCurrentObject(name) {
   currentObject = name
 }
 
-function Camera() {
+function Camera(props) {
   useThree(({ camera }) => {
     camera.position.set(0, 30, 125)
   })
@@ -45,6 +47,12 @@ function CelestialModel(props) {
           scale={0.5}
           position={props.position}
           onClick={() => {
+            // copy mesh current absolute position into orbitControls position
+            mesh.current.getWorldPosition(controls.object.position) 
+            controls.object.position.multiply(factorVector)
+            controls.object.position.setY(2)
+            console.log(controls.object.position);
+            // controls.update()
             setCurrentObject(props.name)
           }}
         />
