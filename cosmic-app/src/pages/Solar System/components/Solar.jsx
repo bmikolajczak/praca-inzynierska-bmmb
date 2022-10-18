@@ -3,35 +3,39 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
-import {
-  OrbitControls,
-  Environment,
-  GizmoHelper,
-  GizmoViewport,
-} from '@react-three/drei'
+import { OrbitControls, Environment } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils } from 'three'
+
+let currentObject = ''
+function setCurrentObject(name) {
+  currentObject = name
+}
+
+function Camera() {
+  useThree(({ camera }) => {
+    camera.position.set(0, 30, 125)
+  })
+}
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
   const mesh = useRef()
   const group = useRef()
+  const controls = useThree((state) => state.controls)
 
-  // Weird, maybe separate component for camera?
-  // If used outside canvas component: Error: R3F hooks can only be used within the Canvas Component
-  useThree(({ camera }) => {
-    camera.position.set(0, 30, 125)
+  useFrame(() => {
+    mesh.current.rotation.y += props.spinSpeed
+    group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+    if (currentObject === props.name) {
+      mesh.current.getWorldPosition(controls.target)
+      controls.update()
+    }
   })
 
-  useFrame(
-    () => (
-      (mesh.current.rotation.y += props.spinSpeed),
-      (group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor)
-    )
-  )
   return (
     <group ref={group}>
       <Suspense fallback={null}>
@@ -40,6 +44,9 @@ function CelestialModel(props) {
           ref={mesh}
           scale={0.5}
           position={props.position}
+          onClick={() => {
+            setCurrentObject(props.name)
+          }}
         />
       </Suspense>
     </group>
@@ -49,7 +56,12 @@ function OrbitRing(props) {
   return (
     <mesh rotation={[MathUtils.degToRad(90), 0, 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 180]} />
-      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={0.2} />
+      <meshBasicMaterial
+        color="white"
+        side={DoubleSide}
+        transparent={true}
+        opacity={0.2}
+      />
     </mesh>
   )
 }
@@ -64,6 +76,7 @@ export default function Solar() {
     <CelestialModel
       model={celes.model}
       position={celes.position}
+      name={celes.name}
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
@@ -73,7 +86,8 @@ export default function Solar() {
   return (
     <main className={style.solar}>
       <Canvas camera={{ far: 2000 }}>
-        <Suspense fallback={<Loader title="Simplified Solar System"/>}>
+        <Camera />
+        <Suspense fallback={<Loader title="Simplified Solar System" />}>
           <Sun />
           {celestialBodies}
           <pointLight
@@ -98,10 +112,9 @@ export default function Solar() {
             makeDefault
             enableZoom={true}
             // enablePan on for dev, off for prod
-            enablePan={true}
-            zoomSpeed={1}
+            enablePan={false}
+            zoomSpeed={1.2}
             maxDistance={1000}
-            minDistance={50}
           />
           <Environment
             background="only"
@@ -112,17 +125,6 @@ export default function Solar() {
           <Noise opacity={0.03} />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
-        {/* For dev, axis snap and reference */}
-        {/* <GizmoHelper
-            alignment="bottom-right" // widget alignment within scene
-            margin={[80, 80]} // widget margins (X, Y)
-            renderPriority={1}
-          >
-            <GizmoViewport
-              axisColors={['red', 'green', 'blue']}
-              labelColor="black"
-            />
-          </GizmoHelper> */}
       </Canvas>
     </main>
   )
