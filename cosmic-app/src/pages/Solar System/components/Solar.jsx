@@ -30,8 +30,11 @@ function CelestialModel(props) {
   const controls = useThree((state) => state.controls)
 
   useFrame(() => {
-    mesh.current.rotation.y += props.spinSpeed
+    // rotate around local Y axis
+    mesh.current.rotateY(props.spinSpeed)
+    // orbit group
     group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+    // onClick currentObject switching
     if (currentObject === props.name) {
       mesh.current.getWorldPosition(controls.target)
       controls.update()
@@ -46,16 +49,16 @@ function CelestialModel(props) {
           ref={mesh}
           scale={0.5}
           position={props.position}
+          rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
           onClick={() => {
             // Snap Camera to the mesh
             // copy mesh current absolute position into orbitControls position
             mesh.current.getWorldPosition(controls.object.position)
             addendVector.set(props.radius * 3, props.radius, props.radius * 3)
             controls.object.position.add(addendVector)
-            console.log(addendVector)
-            console.log(controls.object.position)
-            // update called after on click
-            // controls.update() // no need
+            // console.log(addendVector)
+            // console.log(controls.object.position)
+            // controls.update() // update called after on click - no need
             setCurrentObject(props.name)
           }}
         />
@@ -93,6 +96,7 @@ export default function Solar() {
       orbitalSpeed={celes.orbitalSpeed}
       orbitalFactor={0.4}
       radius={celes.radius}
+      tilt={celes.tilt}
     />,
   ])
   return (

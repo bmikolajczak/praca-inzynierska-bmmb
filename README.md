@@ -73,4 +73,5 @@ npm run dev
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
 - https://www.nasa.gov/sites/default/files/files/YOSS_Act1.pdf - solar system: planets distance, calculations
 - https://sos.noaa.gov/catalog/datasets/planet-rotations/ - planets spin speed reference
+- https://wasp-planets.net/2018/12/30/solar-system-planet-tilts/ - planets tilt reference
 - https://svs.gsfc.nasa.gov/4851 - star map hdri
