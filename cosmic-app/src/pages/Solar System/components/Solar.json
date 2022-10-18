@@ -8,7 +8,8 @@
       0
     ],
     "orbitalSpeed": 0.00159,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.095
   },
   {
     "name": "Venus",
@@ -19,7 +20,8 @@
       0
     ],
     "orbitalSpeed": 0.00117,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.2375
   },
   {
     "name": "Earth",
@@ -30,7 +32,8 @@
       0
     ],
     "orbitalSpeed": 0.001,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.25
   },
   {
     "name": "Mars",
@@ -41,7 +44,8 @@
       0
     ],
     "orbitalSpeed": 0.00081,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.1325
   },
   {
     "name": "Jupiter",
@@ -52,7 +56,8 @@
       0
     ],
     "orbitalSpeed": 0.00044,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 2.745
   },
   {
     "name": "Saturn",
@@ -63,7 +68,8 @@
       0
     ],
     "orbitalSpeed": 0.00033,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 2.25
   },
   {
     "name": "Uranus",
@@ -74,7 +80,8 @@
       0
     ],
     "orbitalSpeed": 0.00023,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.995
   },
   {
     "name": "Neptune",
@@ -85,6 +92,7 @@
       0
     ],
     "orbitalSpeed": 0.00018,
-    "spinSpeed": 0.01
+    "spinSpeed": 0.01,
+    "radius": 0.965
   }
 ]
