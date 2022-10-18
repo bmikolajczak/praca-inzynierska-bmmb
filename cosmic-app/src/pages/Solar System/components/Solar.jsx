@@ -91,7 +91,7 @@ export default function Solar() {
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
-      orbitalFactor={0.5}
+      orbitalFactor={0.4}
       radius={celes.radius}
     />,
   ])
