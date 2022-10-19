@@ -3,7 +3,7 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls, Environment, Html } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
@@ -16,6 +16,7 @@ function setCurrentObject(name) {
   currentObject = name
 }
 
+// Default camera position
 function Camera(props) {
   useThree(({ camera }) => {
     camera.position.set(0, 30, 125)
@@ -41,6 +42,18 @@ function CelestialModel(props) {
     }
   })
 
+  function snapCamera() {
+    // Snap Camera to the mesh
+    // copy mesh current absolute position into orbitControls position
+    mesh.current.getWorldPosition(controls.object.position)
+    addendVector.set(props.radius * 3, props.radius, props.radius * 3)
+    controls.object.position.add(addendVector)
+    // console.log(addendVector)
+    // console.log(controls.object.position)
+    // controls.update() // update called after on click - no need
+    setCurrentObject(props.name)
+  }
+
   return (
     <group ref={group}>
       <Suspense fallback={null}>
@@ -50,18 +63,12 @@ function CelestialModel(props) {
           scale={0.5}
           position={props.position}
           rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
-          onClick={() => {
-            // Snap Camera to the mesh
-            // copy mesh current absolute position into orbitControls position
-            mesh.current.getWorldPosition(controls.object.position)
-            addendVector.set(props.radius * 3, props.radius, props.radius * 3)
-            controls.object.position.add(addendVector)
-            // console.log(addendVector)
-            // console.log(controls.object.position)
-            // controls.update() // update called after on click - no need
-            setCurrentObject(props.name)
-          }}
-        />
+          onClick={() => snapCamera()}
+        >
+          <Html wrapperClass={style.planetName} position={[0, props.radius*2.6, 0]}>
+            <button onClick={() => snapCamera()}>{props.name}</button>
+          </Html>
+        </primitive>
       </Suspense>
     </group>
   )

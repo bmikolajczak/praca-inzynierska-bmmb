@@ -5,4 +5,19 @@
     height: calc(100vh - 55.6px);
     background-color: black;
   }
+  .planetName {
+    font-family: Poppins;
+    font-size: 6px;
+    text-align: center;
+    // no text highlight
+    user-select: none;
+    button {
+      color: rgba($color: #ffffff, $alpha: 0.5);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+  }
+
 }
