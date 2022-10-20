@@ -34,7 +34,7 @@ function CelestialModel(props) {
     // rotate around local Y axis
     mesh.current.rotateY(props.spinSpeed)
     // orbit group
-    group.current.rotation.y += props.orbitalSpeed * props.orbitalFactor
+    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
     // onClick currentObject switching
     if (currentObject === props.name) {
       mesh.current.getWorldPosition(controls.target)
@@ -55,7 +55,7 @@ function CelestialModel(props) {
   }
 
   return (
-    <group ref={group}>
+    <group ref={group} rotation={[0, 0, MathUtils.degToRad(props.orbitTilt)]}>
       <Suspense fallback={null}>
         <primitive
           object={gltf.scene}
@@ -65,7 +65,10 @@ function CelestialModel(props) {
           rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
           onClick={() => snapCamera()}
         >
-          <Html wrapperClass={style.planetName} position={[0, props.radius*2.6, 0]}>
+          <Html
+            wrapperClass={style.planetName}
+            position={[0, props.radius * 2.6, 0]}
+          >
             <button onClick={() => snapCamera()}>{props.name}</button>
           </Html>
         </primitive>
@@ -75,7 +78,14 @@ function CelestialModel(props) {
 }
 function OrbitRing(props) {
   return (
-    <mesh rotation={[MathUtils.degToRad(90), 0, 0]} position={[0, 0, 0]}>
+    <mesh
+      rotation={[
+        MathUtils.degToRad(90),
+        MathUtils.degToRad(props.orbitTilt),
+        0,
+      ]}
+      position={[0, 0, 0]}
+    >
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 180]} />
       <meshBasicMaterial
         color="white"
@@ -91,8 +101,9 @@ export default function Solar() {
   const celestialBodies = celestials.map((celes) => [
     <OrbitRing
       key={'Orbit' + celes.name}
-      innerRadius={celes.position[0] - 0.05}
-      outerRadius={celes.position[0] + 0.05}
+      innerRadius={celes.position[0] - 0.04}
+      outerRadius={celes.position[0] + 0.04}
+      orbitTilt={celes.orbitTilt}
     />,
     <CelestialModel
       model={celes.model}
@@ -101,9 +112,10 @@ export default function Solar() {
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
-      orbitalFactor={0.4}
+      orbitalFactor={0.1}
       radius={celes.radius}
       tilt={celes.tilt}
+      orbitTilt={celes.orbitTilt}
     />,
   ])
   return (
@@ -134,7 +146,6 @@ export default function Solar() {
           <OrbitControls
             makeDefault
             enableZoom={true}
-            // enablePan on for dev, off for prod
             enablePan={false}
             zoomSpeed={1.2}
             maxDistance={1500}
