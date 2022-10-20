@@ -3,7 +3,7 @@
     "name": "Mercury",
     "model": "mercury.glb",
     "position": [
-      64.57,
+      85.96,
       0,
       0
     ],
@@ -16,7 +16,7 @@
     "name": "Venus",
     "model": "venus.glb",
     "position": [
-      73.57,
+      114.10,
       0,
       0
     ],
@@ -29,7 +29,7 @@
     "name": "Earth",
     "model": "earth.glb",
     "position": [
-      80.99,
+      137.28,
       0,
       0
     ],
@@ -42,7 +42,7 @@
     "name": "Mars",
     "model": "mars.glb",
     "position": [
-      94.76,
+      180.33,
       0,
       0
     ],
@@ -55,7 +55,7 @@
     "name": "Jupiter",
     "model": "jupiter.glb",
     "position": [
-      192.25,
+      484.96,
       0,
       0
     ],
@@ -68,8 +68,8 @@
     "name": "Saturn",
     "model": "saturn.glb",
     "position": [
-      308.27,
-      0.001,
+      847.55,
+      0,
       0
     ],
     "orbitalSpeed": 0.00033,
@@ -81,7 +81,7 @@
     "name": "Uranus",
     "model": "uranus.glb",
     "position": [
-      561.52,
+      1638.94,
       0,
       0
     ],
@@ -94,7 +94,7 @@
     "name": "Neptune",
     "model": "neptune.glb",
     "position": [
-      800,
+      2500,
       0,
       0
     ],

@@ -108,7 +108,7 @@ export default function Solar() {
   ])
   return (
     <main className={style.solar}>
-      <Canvas camera={{ far: 2000 }}>
+      <Canvas camera={{ far: 4000 }}>
         <Camera />
         <Suspense fallback={<Loader title="Simplified Solar System" />}>
           <Sun />
@@ -137,7 +137,7 @@ export default function Solar() {
             // enablePan on for dev, off for prod
             enablePan={false}
             zoomSpeed={1.2}
-            maxDistance={1000}
+            maxDistance={1500}
           />
           <Environment
             background="only"
