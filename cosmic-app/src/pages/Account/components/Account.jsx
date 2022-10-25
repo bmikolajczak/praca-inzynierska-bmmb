@@ -125,73 +125,110 @@ export function Account() {
 
       {isformActive && (
         <div className={styles['account-form']}>
-          <ul className={styles.tabs}>
-            <li
-              className={
-                activeTab === 'signin'
-                  ? styles['active-tab']
-                  : styles['inactive-tab']
-              }
-              onClick={() => setActiveTab('signin')}
-            >
-              sign in
-            </li>
-            <li
-              className={
-                activeTab === 'register'
-                  ? styles['active-tab']
-                  : styles['inactive-tab']
-              }
-              onClick={() => setActiveTab('register')}
-            >
-              register
-            </li>
-          </ul>
-
-          {activeTab === 'register' && (
-            <div className={styles.registerForm}>
-              <label for="name">Name</label>
-              <input placeholder="Enter your name" id="name" />
-              <label for="email">Email</label>
-              <input
-                placeholder="email"
-                id="email"
-                onChange={(event) => {
-                  setUserEmail(event.target.value)
-                }}
-              />
-              <label for="password">Password</label>
-              <input
-                placeholder="Enter your password"
-                id="password"
-                onChange={(event) => {
-                  setUserPassword(event.target.value)
-                }}
-              />
-              <label for="confirm">Confirm Password</label>
-              <input placeholder="Re-enter your password" id="confirm" />
-              <button onClick={registerUser}>Register</button>
-            </div>
-          )}
-          {activeTab === 'signin' && (
-            <div className={styles.loginForm}>
-              <label for="email">Email</label>
-              <input placeholder="email" id="login-email" />
-              <label for="password">Password</label>
-              <input placeholder="Enter your password" id="login-password" />
-              <button className={styles.button} onClick={loginUser}>
+          <div className={styles['welcome-part']}>
+            <h3>Welcome</h3>
+            <h3>to</h3>
+            <h3>Cosmic</h3>
+            <img src="src/assets/account/images/Logo.svg" />
+            {/* <img
+              id={styles['wave-1']}
+              src="src/assets/account/images/Wave1.svg"
+            />
+            <img
+              id={styles['wave-2']}
+              src="src/assets/account/images/Wave2.svg"
+            /> */}
+          </div>
+          <div className={styles['input-part']}>
+            <ul className={styles.tabs}>
+              <li
+                className={
+                  activeTab === 'signin'
+                    ? styles['active-tab']
+                    : styles['inactive-tab']
+                }
+                onClick={() => setActiveTab('signin')}
+              >
                 Sign In
-              </button>
-            </div>
-          )}
-          <button
-            className={styles.button}
-            id={styles['google-button']}
-            onClick={signInGoogle}
-          >
-            <img height={16} src="src/assets/google-logo.png" />
-            Sign In with Google
-          </button>
+              </li>
+              <li
+                className={
+                  activeTab === 'register'
+                    ? styles['active-tab']
+                    : styles['inactive-tab']
+                }
+                onClick={() => setActiveTab('register')}
+              >
+                Sign Up
+              </li>
+            </ul>
+            {activeTab === 'register' && (
+              <div className={styles.registerForm}>
+                <label for="name">Name</label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="Enter your name"
+                  id="name"
+                />
+                <label for="email">Email</label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="email"
+                  id="email"
+                  onChange={(event) => {
+                    setUserEmail(event.target.value)
+                  }}
+                />
+                <label for="password">Password</label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="Enter your password"
+                  id="password"
+                  onChange={(event) => {
+                    setUserPassword(event.target.value)
+                  }}
+                />
+                <label className={styles['input-field']} for="confirm">
+                  Confirm Password
+                </label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="Re-enter your password"
+                  id="confirm"
+                />
+                <button className={styles['button']} onClick={registerUser}>
+                  Register
+                </button>
+              </div>
+            )}
+            {activeTab === 'signin' && (
+              <div className={styles.loginForm}>
+                <label for="email">Email</label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="email"
+                  id="login-email"
+                />
+                <label for="password">Password</label>
+                <input
+                  className={styles['input-field']}
+                  placeholder="Enter your password"
+                  id="login-password"
+                />
+                <button className={styles.button} onClick={loginUser}>
+                  Sign In
+                </button>
+              </div>
+            )}
+            <button
+              className={styles.button}
+              id={styles['google-button']}
+              onClick={signInGoogle}
+            >
+              <img height={16} src="src/assets/google-logo.png" />
+              Sign In with Google
+            </button>
+          </div>
         </div>
       )}
     </div>
