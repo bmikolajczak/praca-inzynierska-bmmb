@@ -72,4 +72,5 @@ npm run dev
 - https://nssdc.gsfc.nasa.gov/planetary/factsheet/ - general planetary factsheet
 - https://trek.nasa.gov/mars/ - All Mars landscape 3D Models generated here
 - https://www.nasa.gov/sites/default/files/files/YOSS_Act1.pdf - solar system: planets distance, calculations
+- https://sos.noaa.gov/catalog/datasets/planet-rotations/ - planets spin speed reference
 - https://svs.gsfc.nasa.gov/4851 - star map hdri
