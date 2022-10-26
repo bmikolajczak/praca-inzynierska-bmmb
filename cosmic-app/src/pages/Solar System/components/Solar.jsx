@@ -46,10 +46,8 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    addendVector.set(props.radius * 3, props.radius, props.radius * 3)
+    addendVector.set(props.radius + 0.5, props.radius, props.radius + 1.2)
     controls.object.position.add(addendVector)
-    // console.log(addendVector)
-    // console.log(controls.object.position)
     // controls.update() // update called after on click - no need
     setCurrentObject(props.name)
   }
