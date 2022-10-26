@@ -8,13 +8,14 @@
   .planetName {
     font-family: Poppins;
     font-size: 6px;
-    text-align: center;
     // no text highlight
     user-select: none;
     button {
-      color: rgba($color: #ffffff, $alpha: 0.5);
-      background-color: transparent;
+      color: rgba($color: #ffffff, $alpha: 1);
+      background-color: rgba($color: #000000, $alpha: 0.5);
       border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
       cursor: pointer;
     }
 

@@ -65,11 +65,8 @@ function CelestialModel(props) {
           rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
           onClick={() => snapCamera()}
         >
-          <Html
-            wrapperClass={style.planetName}
-            position={[0, props.radius * 2.6, 0]}
-          >
-            <button onClick={() => snapCamera()}>{props.name}</button>
+          <Html wrapperClass={style.planetName} center>
+            <button type='button' onClick={() => snapCamera()}>{props.name}</button>
           </Html>
         </primitive>
       </Suspense>
