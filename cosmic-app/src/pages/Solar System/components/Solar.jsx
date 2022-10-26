@@ -65,7 +65,7 @@ function CelestialModel(props) {
           rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
           onClick={() => snapCamera()}
         >
-          <Html wrapperClass={style.planetName} center>
+          <Html wrapperClass={style.planetName}>
             <button type='button' onClick={() => snapCamera()}>{props.name}</button>
           </Html>
         </primitive>
@@ -83,7 +83,7 @@ function OrbitRing(props) {
       ]}
       position={[0, 0, 0]}
     >
-      <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 180]} />
+      <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 220]} />
       <meshBasicMaterial
         color="white"
         side={DoubleSide}
