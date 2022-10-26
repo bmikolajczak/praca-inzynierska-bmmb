@@ -1,8 +1,9 @@
 import style from '../styles/Solar.module.scss'
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
+import solarInfo from './SolarInfo.json'
 import { OrbitControls, Environment, Html } from '@react-three/drei'
 import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
@@ -10,11 +11,6 @@ import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 
 const addendVector = new Vector3()
-
-let currentObject = ''
-function setCurrentObject(name) {
-  currentObject = name
-}
 
 // Default camera position
 function Camera(props) {
@@ -36,7 +32,7 @@ function CelestialModel(props) {
     // orbit group
     group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
     // onClick currentObject switching
-    if (currentObject === props.name) {
+    if (props.currentTarget === props.name) {
       mesh.current.getWorldPosition(controls.target)
       controls.update()
     }
@@ -49,7 +45,6 @@ function CelestialModel(props) {
     addendVector.set(props.radius, props.radius, props.radius + (props.radius * 1.5))
     controls.object.position.add(addendVector)
     // controls.update() // update called after on click - no need
-    setCurrentObject(props.name)
   }
 
   return (
@@ -61,10 +56,16 @@ function CelestialModel(props) {
           scale={0.5}
           position={props.position}
           rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
-          onClick={() => snapCamera()}
         >
-          <Html wrapperClass={style.planetName}>
-            <button type='button' onClick={() => snapCamera()}>{props.name}</button>
+          <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
+            <button type='button'
+              onClick={() => {
+                props.handleClick(props.name)
+                // props call useState to parent and it causes weird glitching to camera but with setTimeout it works great idk 
+                setTimeout(() => snapCamera(), 1)
+              }}
+            >{props.name}
+            </button>
           </Html>
         </primitive>
       </Suspense>
@@ -93,6 +94,8 @@ function OrbitRing(props) {
 }
 
 export default function Solar() {
+  const [selectedPlanet, setPlanet] = useState('')
+  // preparing every planet with orbits 
   const celestialBodies = celestials.map((celes) => [
     <OrbitRing
       key={'Orbit' + celes.name}
@@ -111,10 +114,27 @@ export default function Solar() {
       radius={celes.radius}
       tilt={celes.tilt}
       orbitTilt={celes.orbitTilt}
+      handleClick={setPlanet}
+      currentTarget={selectedPlanet}
     />,
   ])
+
+  // planets on click info panel
+  const planetInfo = solarInfo.map((planet) =>
+  (selectedPlanet === planet.name &&
+    <div className={style.planetInfo} key={planet.name}>
+      <h2>{planet.name}</h2>
+      <p>{planet.description}</p>
+      <a href='#'>{planet.links[0]}</a>
+    </div>
+  )
+  )
+
   return (
     <main className={style.solar}>
+      <section>
+        {planetInfo}
+      </section>
       <Canvas camera={{ far: 4000 }}>
         <Camera />
         <Suspense fallback={<Loader title="Simplified Solar System" />}>

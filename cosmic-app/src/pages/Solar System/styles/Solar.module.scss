@@ -18,6 +18,21 @@
       padding: 4px 8px;
       cursor: pointer;
     }
+  }
+  .planetInfo {
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    right: 4px;
+    width: 30%;
+    color: white;
+    background-color: black;
+    padding: 8px 12px;
+    border-radius: 8px;
+    a {
+      text-decoration: none;
+      color: aqua;
+    }
 
   }
 

@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
-import * as THREE  from 'three'
+import * as THREE from 'three'
 
 const fragmentShader = `
 uniform float time;
@@ -60,17 +60,17 @@ export default function Sun() {
   const clock = new THREE.Clock()
 
   const uniforms = {
-      time: { value: 1.0 },
-      uvScale: { value: new THREE.Vector2(3.0, 1.5) },
-      texture1: {
-        value: textureLoader.load('src/assets/solar_system/textures/cloud.png'),
-      },
-      texture2: {
-        value: textureLoader.load(
-          'src/assets/solar_system/textures/lavatile.jpg'
-        ),
-      },
-    }
+    time: { value: 1.0 },
+    uvScale: { value: new THREE.Vector2(3.0, 1.5) },
+    texture1: {
+      value: textureLoader.load('src/assets/solar_system/textures/cloud.png'),
+    },
+    texture2: {
+      value: textureLoader.load(
+        'src/assets/solar_system/textures/lavatile.jpg'
+      ),
+    },
+  }
 
   uniforms['texture1'].value.wrapS = uniforms['texture1'].value.wrapT =
     THREE.RepeatWrapping
@@ -81,10 +81,10 @@ export default function Sun() {
     const delta = 5 * clock.getDelta()
     mesh.current.material.uniforms.time.value += 0.2 * delta
   })
-  
+
   return (
     <mesh ref={mesh} position={[0, 0, 0]} scale={1}>
-      <sphereGeometry args={[27.4, 64, 32]}/>
+      <sphereGeometry args={[27.4, 64, 32]} />
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
