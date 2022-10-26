@@ -46,7 +46,7 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    addendVector.set(props.radius + 0.5, props.radius, props.radius + 1.2)
+    addendVector.set(props.radius, props.radius, props.radius + (props.radius * 1.5))
     controls.object.position.add(addendVector)
     // controls.update() // update called after on click - no need
     setCurrentObject(props.name)
@@ -143,7 +143,7 @@ export default function Solar() {
             enableZoom={true}
             enablePan={false}
             zoomSpeed={1.2}
-            maxDistance={1500}
+            maxDistance={2000}
           />
           <Environment
             background="only"
