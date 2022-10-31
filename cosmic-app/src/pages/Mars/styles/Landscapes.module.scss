@@ -1,6 +1,5 @@
 @import 'src/assets/variables.scss';
 
-// Landscapes
 .landscapes {
   margin: 2rem;
   display: flex;
@@ -54,7 +53,9 @@
 }
 
 @media screen and (max-width: 1700px) {
-  .landElement {
-    flex-direction: column;
+  .landscapes {
+    .landElement {
+      flex-direction: column;
+    }
   }
 }
