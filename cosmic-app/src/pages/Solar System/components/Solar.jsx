@@ -125,7 +125,7 @@ export default function Solar() {
     <div className={style.planetInfo} key={planet.name}>
       <h2>{planet.name}</h2>
       <p>{planet.description}</p>
-      <a href={planet.links[0]} target='_blank'>In depth</a>
+      <div className={style.planetInfoLinks}><a href={planet.links[0]} target='_blank'>In depth</a></div>
     </div>
   )
   )

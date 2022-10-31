@@ -26,14 +26,23 @@
     right: 4px;
     width: 30%;
     color: white;
-    background-color: black;
+    background-color: rgba($color: #000000, $alpha: .8);
     padding: 8px 12px;
     border-radius: 8px;
-    a {
-      text-decoration: none;
-      color: aqua;
+    .planetInfoLinks {
+      display: flex;
+      justify-content: center;
+      padding: 6px;
+      a {
+        text-decoration: none;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 8px;
+        border: 2px solid darkviolet;
+        &:hover {
+          background-color: darkviolet;
+        }
+      }
     }
-
   }
-
 }
