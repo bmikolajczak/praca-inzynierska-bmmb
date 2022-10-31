@@ -5,12 +5,15 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from '@react-three/drei'
 // Data could be stored in the database
 import landscapes from './Landscapes.json'
+import { useState } from 'react'
 
 function LandModel(props) {
-  // Camera rotation and position
-  const deg2rad = (degrees) => degrees * (Math.PI / 180)
+  let visibility = false
+  if (props.activeIndex === props.objectIndex) {
+    visibility = true
+  }
+
   useThree(({ camera }) => {
-    // camera.rotation.set(deg2rad(-45), 0, 0) // it doesnt work
     camera.position.set(0, 20, 30)
   })
 
@@ -29,19 +32,58 @@ function LandModel(props) {
   })
   return (
     <Suspense fallback={null}>
-      <primitive object={gltf.scene} ref={ref} scale={1} />
+      <primitive visible={visibility} object={gltf.scene} ref={ref} scale={1} />
     </Suspense>
   )
 }
 
+function LandInfo(props) {
+  let visibility = false
+  if (props.activeIndex === props.objectIndex) {
+    visibility = true
+  }
+
+  return (
+    <div className={visibility ? style.show : style.hide}>
+      <h3>{props.land.title}</h3>
+      <p>{props.land.description}</p>
+      <p>{props.index}</p>
+    </div>
+  )
+}
+
 export default function Landscapes() {
-  const landItems = landscapes.map((land) => (
-    <li key={land.title}>
-      <div className={style.landscapeElem}>
-        <div className={style.landscapeCanvas}>
-          {/* changing fov on the Canvas element */}
-          <Canvas camera={{ fov: 50 }}>
-            <LandModel model={land.model} />
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  function nextLand() {
+    if (activeIndex < landscapes.length - 1) {
+      setActiveIndex(activeIndex + 1)
+    }
+  }
+  function prevLand() {
+    if (activeIndex > 0) {
+      setActiveIndex(activeIndex - 1)
+    }
+  }
+
+  const lands = landscapes.map((land, index) => (
+    <LandModel
+      model={land.model}
+      activeIndex={activeIndex}
+      objectIndex={index}
+      key={land.model}
+    />
+  ))
+  const landsInfo = landscapes.map((land, index) => (
+    <LandInfo land={land} activeIndex={activeIndex} objectIndex={index} key={'Info-'+land.model} />
+  ))
+  return (
+    <section className={style.landscapes}>
+      <h2>Landscapes</h2>
+      <div className={style.landElement}>
+        <div className={style.canvas}>
+          <Canvas camera={{ fov: 60 }}>
+            {lands}
             <ambientLight intensity={0.2} />
             <directionalLight
               color="white"
@@ -56,17 +98,50 @@ export default function Landscapes() {
             />
           </Canvas>
         </div>
-        <div className={style.landscapeInfo}>
-          <h3>{land.title}</h3>
-          <p>{land.description}</p>
-        </div>
+        <div className={style.landInfo}>{landsInfo}</div>
       </div>
-    </li>
-  ))
-  return (
-    <section className={style.landscapes}>
-      <h2>Landscapes</h2>
-      <ul className={style.landscapeList}>{landItems}</ul>
+        <div className={style.landButtons}>
+          <button onClick={prevLand}>&#9664;</button>
+          <button onClick={nextLand}>&#9654;</button>
+        </div>
     </section>
   )
 }
+
+// export default function Landscapes() {
+//   const landItems = landscapes.map((land, index) => (
+//     <li key={land.title}>
+//       <div className={style.landscapeElem}>
+//         <div className={style.landscapeCanvas}>
+//           {/* changing fov on the Canvas element */}
+//           <Canvas camera={{ fov: 50 }}>
+//             <LandModel model={land.model} />
+//             <ambientLight intensity={0.2} />
+//             <directionalLight
+//               color="white"
+//               position={[5, 5, 5]}
+//               intensity={1}
+//             />
+//             <OrbitControls
+//               makeDefault
+//               enableZoom={true}
+//               enablePan={false}
+//               zoomSpeed={0.7}
+//             />
+//           </Canvas>
+//         </div>
+//         <div className={style.landscapeInfo}>
+//           <h3>{land.title}</h3>
+//           <p>{land.description}</p>
+//           <p>{index}</p>
+//         </div>
+//       </div>
+//     </li>
+//   ))
+//   return (
+//     <section className={style.landscapes}>
+//       <h2>Landscapes</h2>
+//       <ul className={style.landscapeList}>{landItems}</ul>
+//     </section>
+//   )
+// }
