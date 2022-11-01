@@ -122,7 +122,78 @@ export function Account() {
       {auth.currentUser && <h3>{auth.currentUser.displayName}</h3>}
       <button onClick={signoutUser}>Sign Out</button>
       <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button>
-
+      <div className={styles['profile-tile']}>
+        <p className={styles['profile-header']}>Your Profile</p>
+        <img
+          src="src/assets/account/images/user_placeholder_image.svg"
+          alt="placeholder image"
+        />
+        <p>Alberto</p>
+        <p>alberto@gmail.com</p>
+      </div>
+      <div className={styles['saved-images']}>
+        <p className={styles['images-header']}>Saved Images</p>
+        <div className={styles['cards']}>
+          <div className={styles['image-card']}>
+            <div className={styles['card-visuals']}>
+              <img
+                src="src/assets/account/images/galaxy_photo.png"
+                alt="galaxy photo"
+              />
+              <p className={styles['image-title']}>
+                Clouds over andromeda galaxy
+              </p>
+              <button>Remove image</button>
+            </div>
+            <p className={styles['image-desc']}>
+              What are those red clouds surrounding the Andromeda galaxy? This
+              galaxy, M31, is often imaged by planet Earth-based astronomers. As
+              the nearest large spiral galaxy, it is a familiar sight with dark
+              dust lanes, bright yellowish core, and spiral arms traced by
+              clouds of bright blue stars. A mosaic of well-exposed broad and
+              narrow-band image data, this deep portrait of our neighboring
+              island universe offers strikingly unfamiliar features though,
+              faint reddish clouds of glowing ionized hydrogen gas in the same
+              wide field of view. Most of the ionized hydrogen clouds surely lie
+              in the foreground of the scene, well within our Milky Way Galaxy.
+              They are likely associated with the pervasive, dusty interstellar
+              cirrus clouds scattered hundreds of light-years above our own
+              galactic plane. Some of the clouds, however, occur right in the
+              Andromeda galaxy itself, and some in M110, the small galaxy just
+              below.
+            </p>
+          </div>
+          <div className={styles['image-card']}>
+            <div className={styles['card-visuals']}>
+              <img
+                src="src/assets/account/images/galaxy_photo.png"
+                alt="galaxy photo"
+              />
+              <p className={styles['image-title']}>
+                Clouds over andromeda galaxy
+              </p>
+              <button>Remove image</button>
+            </div>
+            <p className={styles['image-desc']}>
+              What are those red clouds surrounding the Andromeda galaxy? This
+              galaxy, M31, is often imaged by planet Earth-based astronomers. As
+              the nearest large spiral galaxy, it is a familiar sight with dark
+              dust lanes, bright yellowish core, and spiral arms traced by
+              clouds of bright blue stars. A mosaic of well-exposed broad and
+              narrow-band image data, this deep portrait of our neighboring
+              island universe offers strikingly unfamiliar features though,
+              faint reddish clouds of glowing ionized hydrogen gas in the same
+              wide field of view. Most of the ionized hydrogen clouds surely lie
+              in the foreground of the scene, well within our Milky Way Galaxy.
+              They are likely associated with the pervasive, dusty interstellar
+              cirrus clouds scattered hundreds of light-years above our own
+              galactic plane. Some of the clouds, however, occur right in the
+              Andromeda galaxy itself, and some in M110, the small galaxy just
+              below.
+            </p>
+          </div>
+        </div>
+      </div>
       {isformActive && (
         <div className={styles['account-form']}>
           <div className={styles['welcome-part']}>
