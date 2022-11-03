@@ -22,7 +22,7 @@ function Model(props) {
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     ref.current.rotation.y = Math.sin(t / 4) / 10
-    ref.current.rotation.z = (1 + Math.sin(t / 1.5)) / 20
+    ref.current.rotation.z = Math.sin(t / 4) / 40
     ref.current.position.y = Math.sin(t / 1.5) / 20
   })
   return (
@@ -54,7 +54,7 @@ export default function StageModels(props) {
         <ambientLight intensity={0.2} />
         <PresentationControls
           makeDefault
-          zoom={1.2}
+          zoom={.8}
           global
           config={{ mass: 1, tension: 170, friction: 20 }}
           rotation={[0, 0, 0]}
