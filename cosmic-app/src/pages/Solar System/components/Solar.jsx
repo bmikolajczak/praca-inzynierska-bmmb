@@ -15,7 +15,7 @@ const addendVector = new Vector3()
 // Default camera position
 function Camera(props) {
   useThree(({ camera }) => {
-    camera.position.set(0, 30, 125)
+    camera.position.set(-110, 30, 110)
   })
 }
 
