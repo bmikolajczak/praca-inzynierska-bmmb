@@ -3,56 +3,84 @@
     "name": "Mercury",
     "description": "The smallest and closest to the Sun planet in the solar system, it's also the fastest one. The temperatures and solar radiation that characterize this planet are most likely too extreme for organisms to adapt to with day temperatures reaching 430°C and night -180°C. Mercury spins nearly perfectly upright and so does not experience seasons as many other planets do.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/mercury/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/mercury/in-depth/"
+      }
     ]
   },
   {
     "name": "Venus",
     "description": "A cloud-swaddled planet with an atmosphere so thick that, from the surface, the Sun is just a smear of light. Our nearest planetary neighbor, hottest in the solar system and the only planet named after a female god. The planet spins backward, has a day longer than its year, and lacks any semblance of seasons. A runaway greenhouse effect turned all surface water into vapor, which then leaked slowly into space.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/venus/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/venus/in-depth/"
+      }
     ]
   },
   {
     "name": "Earth",
     "description": "Our home planet and the only place we know of so far that's inhabited by living things. The only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/earth/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/earth/in-depth/"
+      }
     ]
   },
   {
     "name": "Mars",
     "description": "Mars is about half the diameter of Earth, yet its surface has nearly the same area as Earth's dry land. Its volcanoes, impact craters, crustal movement, and atmospheric conditions such as dust storms have altered the landscape of Mars over many years, creating some of the solar system's most interesting topographical features. Mars has a thin atmosphere. To our eyes, the sky would be hazy and red because of suspended dust instead of the familiar blue tint we see on Earth.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/mars/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/mars/in-depth/"
+      },
+      {
+        "label":"Cosmic Mars",
+        "url": "/mars"
+      }
     ]
   },
   {
     "name": "Jupiter",
     "description": "The largest planet in the solar system - more than twice as massive as all the other planets combined. Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter is surrounded by dozens of moons. Jupiter also has several rings, but unlike the famous rings of Saturn, Jupiter's rings are very faint and made of dust, not ice.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/jupiter/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/jupiter/in-depth/"
+      }
     ]
   },
   {
     "name": "Saturn",
     "description": "Saturn is a massive ball made mostly of hydrogen and helium. Saturn is not the only planet to have rings, but none are as spectacular or as complex as Saturn’s. Saturn also has dozens of moons. Saturn's rings are thought to be pieces of comets, asteroids, or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity. The ring particles mostly range from tiny, dust-sized icy grains to chunks as big as a house. A few particles are as large as mountains.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/saturn/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/saturn/in-depth/"
+      }
     ]
   },
   {
     "name": "Uranus",
     "description": "Uranus is a very cold and windy planet. The ice giant is surrounded by 13 faint rings and 27 small moons as it rotates at a nearly 90-degree angle from the plane of its orbit. This unique tilt makes Uranus appear to spin sideways, orbiting the Sun like a rolling ball. The first planet found with the aid of a telescope (in 1781 by astronomer William Herschel).",
     "links": [
-      "https://solarsystem.nasa.gov/planets/uranus/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/uranus/in-depth/"
+      }
     ]
   },
   {
     "name": "Neptune",
     "description": "The most distant planet in our solar system and the only one not visible to the naked eye from the surface of Earth. Ice giant which is dark, cold and whipped by supersonic winds. So far from the Sun that high noon on the big blue planet would seem like dim twilight to us.",
     "links": [
-      "https://solarsystem.nasa.gov/planets/neptune/in-depth/"
+      {
+        "label": "In depth",
+        "url": "https://solarsystem.nasa.gov/planets/neptune/in-depth/"
+      }
     ]
   }
 ]
