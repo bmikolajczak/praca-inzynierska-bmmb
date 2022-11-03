@@ -4,6 +4,10 @@
     // maybe global variable for navbar height?
     height: calc(100vh - 55.6px);
     background-color: black;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }
   .planetName {
     font-family: Poppins;
@@ -31,6 +35,7 @@
     border-radius: 8px;
     .planetInfoLinks {
       display: flex;
+      gap: 8px;
       justify-content: center;
       padding: 6px;
       a {
