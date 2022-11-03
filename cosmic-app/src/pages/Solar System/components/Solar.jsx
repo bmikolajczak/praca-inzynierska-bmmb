@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
 import solarInfo from './SolarInfo.json'
 import { OrbitControls, Environment, Html } from '@react-three/drei'
-import Loader from '../../../infrastructure/loader/Loader'
+import Loading from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
@@ -42,33 +42,37 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    addendVector.set(props.radius, props.radius, props.radius + (props.radius * 1.5))
+    addendVector.set(
+      props.radius,
+      props.radius,
+      props.radius + props.radius * 1.5
+    )
     controls.object.position.add(addendVector)
     // controls.update() // update called after on click - no need
   }
 
   return (
     <group ref={group} rotation={[0, 0, MathUtils.degToRad(props.orbitTilt)]}>
-      <Suspense fallback={null}>
-        <primitive
-          object={gltf.scene}
-          ref={mesh}
-          scale={0.5}
-          position={props.position}
-          rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
-        >
-          <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
-            <button type='button'
-              onClick={() => {
-                props.handleClick(props.name)
-                // props call useState to parent and it causes weird glitching to camera but with setTimeout it works great idk 
-                setTimeout(() => snapCamera(), 1)
-              }}
-            >{props.name}
-            </button>
-          </Html>
-        </primitive>
-      </Suspense>
+      <primitive
+        object={gltf.scene}
+        ref={mesh}
+        scale={0.5}
+        position={props.position}
+        rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
+      >
+        <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
+          <button
+            type="button"
+            onClick={() => {
+              props.handleClick(props.name)
+              // props call useState to parent and it causes weird glitching to camera but with setTimeout it works great idk
+              setTimeout(() => snapCamera(), 1)
+            }}
+          >
+            {props.name}
+          </button>
+        </Html>
+      </primitive>
     </group>
   )
 }
@@ -95,7 +99,7 @@ function OrbitRing(props) {
 
 export default function Solar() {
   const [selectedPlanet, setPlanet] = useState('')
-  // preparing every planet with orbits 
+  // preparing every planet with orbits
   const celestialBodies = celestials.map((celes) => [
     <OrbitRing
       key={'Orbit' + celes.name}
@@ -120,24 +124,30 @@ export default function Solar() {
   ])
 
   // planets on click info panel
-  const planetInfo = solarInfo.map((planet) =>
-  (selectedPlanet === planet.name &&
-    <div className={style.planetInfo} key={planet.name}>
-      <h2>{planet.name}</h2>
-      <p>{planet.description}</p>
-      <div className={style.planetInfoLinks}><a href={planet.links[0]} target='_blank'>In depth</a></div>
-    </div>
-  )
+  const planetInfo = solarInfo.map(
+    (planet) =>
+      selectedPlanet === planet.name && (
+        <div className={style.planetInfo} key={planet.name}>
+          <h2>{planet.name}</h2>
+          <p>{planet.description}</p>
+          <div className={style.planetInfoLinks}>
+            <a href={planet.links[0].url} target="_blank">
+              {planet.links[0].label}
+            </a>
+            {planet.links.length > 1 && (
+              <a href={planet.links[1].url}>{planet.links[1].label}</a>
+            )}
+          </div>
+        </div>
+      )
   )
 
   return (
     <main className={style.solar}>
-      <section>
-        {planetInfo}
-      </section>
+      <section>{planetInfo}</section>
       <Canvas camera={{ far: 4000 }}>
         <Camera />
-        <Suspense fallback={<Loader title="Simplified Solar System" />}>
+        <Suspense fallback={<Loading title="Simplified Solar System" />}>
           <Sun />
           {celestialBodies}
           <pointLight
