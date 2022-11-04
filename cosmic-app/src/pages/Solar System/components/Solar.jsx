@@ -7,7 +7,7 @@ import solarInfo from './SolarInfo.json'
 import { OrbitControls, Environment, Html } from '@react-three/drei'
 import Loading from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
-import { EffectComposer, Noise, Vignette, Bloom } from '@react-three/postprocessing'
+import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 
 // Globally declared for use later
@@ -142,7 +142,7 @@ export default function Solar() {
 
   return (
     <main className={style.solar}>
-      <section className={style.overlay2d}>
+      <section>
         <div className={style.speedControl}>
           <button
             onClick={() => {
@@ -166,7 +166,7 @@ export default function Solar() {
               setSpinFactor(1)
             }}
           >
-            Default
+            1x
           </button>
           <button
             onClick={() => {
@@ -188,7 +188,7 @@ export default function Solar() {
       </section>
       <section>{planetInfo}</section>
       {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
-      <Canvas camera={{ far: 4000, position:[-110, 30, 110] }} dpr={[1, 2]}>
+      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
         <Suspense fallback={<Loading title="Simplified Solar System" />}>
           <Sun />
           {celestialBodies}
@@ -216,7 +216,7 @@ export default function Solar() {
             enablePan={false}
             zoomSpeed={1.2}
             maxDistance={4000}
-            minDistance={1}
+            minDistance={0.3}
           />
           <Environment
             background="only"
@@ -226,7 +226,6 @@ export default function Solar() {
         <EffectComposer>
           <Noise opacity={0.026} />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
-          <Bloom/>
         </EffectComposer>
       </Canvas>
     </main>
