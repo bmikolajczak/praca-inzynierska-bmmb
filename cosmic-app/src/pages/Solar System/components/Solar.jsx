@@ -10,14 +10,8 @@ import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 
+// Globally declared for use later
 const addendVector = new Vector3()
-
-// Default camera position
-function Camera(props) {
-  useThree(({ camera }) => {
-    camera.position.set(0, 30, 125)
-  })
-}
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -28,7 +22,7 @@ function CelestialModel(props) {
 
   useFrame(() => {
     // rotate around local Y axis
-    mesh.current.rotateY(props.spinSpeed)
+    mesh.current.rotateY(props.spinSpeed * props.spinFactor)
     // orbit group
     group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
     // onClick currentObject switching
@@ -42,13 +36,14 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
+    console.log('controls.object.position: ', controls.object.position)
     addendVector.set(
-      props.radius,
-      props.radius,
-      props.radius + props.radius * 1.5
+      props.radius + props.radius * 0.5,
+      props.radius * 0.5,
+      props.radius + props.radius * 0.5
     )
     controls.object.position.add(addendVector)
-    // controls.update() // update called after on click - no need
+    controls.update()
   }
 
   return (
@@ -64,9 +59,10 @@ function CelestialModel(props) {
           <button
             type="button"
             onClick={() => {
+              document.querySelector('canvas').classList.add(style.animateSnapCamera)
+              setTimeout(() => {document.querySelector('canvas').classList.remove(style.animateSnapCamera)}, 1500)
               props.handleClick(props.name)
-              // props call useState to parent and it causes weird glitching to camera but with setTimeout it works great idk
-              setTimeout(() => snapCamera(), 1)
+              snapCamera()
             }}
           >
             {props.name}
@@ -99,6 +95,9 @@ function OrbitRing(props) {
 
 export default function Solar() {
   const [selectedPlanet, setPlanet] = useState('')
+  const [selectedOrbitFactor, setOrbitFactor] = useState(0.2)
+  const [selectedSpinFactor, setSpinFactor] = useState(1)
+
   // preparing every planet with orbits
   const celestialBodies = celestials.map((celes) => [
     <OrbitRing
@@ -114,7 +113,8 @@ export default function Solar() {
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
-      orbitalFactor={0.1}
+      orbitalFactor={selectedOrbitFactor}
+      spinFactor={selectedSpinFactor}
       radius={celes.radius}
       tilt={celes.tilt}
       orbitTilt={celes.orbitTilt}
@@ -144,9 +144,53 @@ export default function Solar() {
 
   return (
     <main className={style.solar}>
+      <section>
+        <div className={style.speedControl}>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.01)
+              setSpinFactor(0.1)
+            }}
+          >
+            0.05x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.1)
+              setSpinFactor(0.5)
+            }}
+          >
+            0.5x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.2)
+              setSpinFactor(1)
+            }}
+          >
+            1x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.4)
+              setSpinFactor(2)
+            }}
+          >
+            2x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(1)
+              setSpinFactor(5)
+            }}
+          >
+            5x
+          </button>
+        </div>
+      </section>
       <section>{planetInfo}</section>
-      <Canvas camera={{ far: 4000 }}>
-        <Camera />
+      {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
+      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
         <Suspense fallback={<Loading title="Simplified Solar System" />}>
           <Sun />
           {celestialBodies}
@@ -173,7 +217,8 @@ export default function Solar() {
             enableZoom={true}
             enablePan={false}
             zoomSpeed={1.2}
-            maxDistance={2000}
+            maxDistance={4000}
+            minDistance={0.3}
           />
           <Environment
             background="only"
