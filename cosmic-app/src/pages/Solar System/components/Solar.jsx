@@ -59,6 +59,8 @@ function CelestialModel(props) {
           <button
             type="button"
             onClick={() => {
+              document.querySelector('canvas').classList.add(style.animateSnapCamera)
+              setTimeout(() => {document.querySelector('canvas').classList.remove(style.animateSnapCamera)}, 1500)
               props.handleClick(props.name)
               snapCamera()
             }}
