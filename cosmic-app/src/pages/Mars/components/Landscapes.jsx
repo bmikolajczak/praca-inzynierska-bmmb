@@ -1,21 +1,15 @@
 import style from '../styles/Landscapes.module.scss'
-import React, { Suspense, useRef } from 'react'
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import React, { Suspense, useRef, useState } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from '@react-three/drei'
-// Data could be stored in the database
 import landscapes from './Landscapes.json'
-import { useState } from 'react'
 
 function LandModel(props) {
   let visibility = false
   if (props.activeIndex === props.objectIndex) {
     visibility = true
   }
-
-  useThree(({ camera }) => {
-    camera.position.set(0, 20, 30)
-  })
 
   // Loading GLTF model
   const modelURL = `/src/assets/mars/marsLandscapes/${props.model}`
@@ -82,7 +76,7 @@ export default function Landscapes() {
       <h2>Landscapes</h2>
       <div className={style.landElement}>
         <div className={style.canvas}>
-          <Canvas camera={{ fov: 60 }}>
+          <Canvas camera={{ fov: 60, position: [0, 20, 30] }}>
             {lands}
             <ambientLight intensity={0.2} />
             <directionalLight
