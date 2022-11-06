@@ -13,6 +13,10 @@
   .canvas canvas {
     height: 80vh;
     width: 100%;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }
   .show {
     display: initial;
