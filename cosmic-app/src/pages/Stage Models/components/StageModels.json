@@ -80,5 +80,35 @@
         "url": "https://www.spitzer.caltech.edu/mission/fast-facts"
       }
     ]
+  },
+  {
+    "name": "JWST",
+    "model": "jwst.glb",
+    "description":"Testtesteest",
+    "links": [
+      {
+        "label":"",
+        "url": ""
+      },
+      {
+        "label":"",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "Voyager",
+    "model": "voyager.glb",
+    "description":"Testtesteest",
+    "links": [
+      {
+        "label":"",
+        "url": ""
+      },
+      {
+        "label":"",
+        "url": ""
+      }
+    ]
   }
 ]
