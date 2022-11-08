@@ -4,6 +4,9 @@
     height: calc(100vh - 55.6px);
     background-color: #d2d2d2;
     border-radius: 8px;
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   .infoPanel {
@@ -12,6 +15,28 @@
     font-size: 18px;
     padding: 4px 8px;
     border-radius: 8px;
-    background-color: rgba($color: #000000, $alpha: .6);
+    background-color: rgba($color: #000000, $alpha: 0.6);
+  }
+  .galleryButtons {
+    position: absolute;
+    z-index: 20;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    display: flex;
+    gap: 4px;
+    button {
+      display: flex;
+      border-radius: 8px;
+      border: none;
+      padding: 4px 6px;
+      font-size: 24px;
+      cursor: pointer;
+      background-color: rgba($color: #000000, $alpha: 0.6);
+      color: white;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.4);
+      }
+    }
   }
 }

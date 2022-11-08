@@ -1,15 +1,10 @@
 import React, { Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import {
-  Environment,
-  ContactShadows,
-  Html,
-  OrbitControls,
-  Loader
-} from '@react-three/drei'
+import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
+import { AiFillCaretLeft, AiFillCaretRight, AiOutlinePause } from 'react-icons/ai'
 
 function Model(props) {
   // HTML Occlude
@@ -21,17 +16,11 @@ function Model(props) {
   const ref = useRef()
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
-    ref.current.rotation.y = Math.sin(t / 2) / 10
     ref.current.rotation.z = Math.sin(t / 2) / 40
   })
   return (
     <group>
-      <primitive
-        object={gltf.scene}
-        ref={ref}
-        scale={0.8}
-        position={[0, -0.5, 0]}
-      />
+      <primitive object={gltf.scene} ref={ref} scale={0.8} position={[0, -0.5, 0]} />
       <Html
         scale={0.15}
         rotation={[0, 0, 0]}
@@ -47,9 +36,7 @@ function Model(props) {
       >
         <div className={style.infoPanel}>
           <h2>{props.name}</h2>
-          <p>
-            {props.description}
-          </p>
+          <p>{props.description}</p>
         </div>
       </Html>
     </group>
@@ -58,6 +45,7 @@ function Model(props) {
 
 export default function StageModels(props) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   function nextModel() {
     if (activeIndex < modelsJson.length - 1) {
@@ -82,28 +70,29 @@ export default function StageModels(props) {
           />
           <OrbitControls
             makeDefault
-            autoRotate
-            autoRotateSpeed={0.5}
+            autoRotate={paused ? false : true}
+            autoRotateSpeed={0.65}
             enableZoom={true}
             enablePan={false}
             zoomSpeed={1}
             maxDistance={8}
             minDistance={1}
           />
-          <ContactShadows
-            position={[0, -0.8, 0]}
-            opacity={0.75}
-            scale={10}
-            blur={2.5}
-            far={4}
-          />
+          <ContactShadows position={[0, -0.8, 0]} opacity={0.75} scale={10} blur={2} far={4} />
           <Environment preset="warehouse" />
         </Suspense>
       </Canvas>
       <Loader />
-      <div>
-        <button onClick={prevModel}>previous</button>
-        <button onClick={nextModel}>next</button>
+      <div className={style.galleryButtons}>
+        <button onClick={prevModel} style={{opacity: activeIndex === 0 ? 0.4 : 1}}>
+          <AiFillCaretLeft />
+        </button>
+        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.4 : 1 }}>
+          <AiOutlinePause />
+        </button>
+        <button onClick={nextModel} style={{opacity: activeIndex === modelsJson.length - 1 ? 0.4 : 1}}>
+          <AiFillCaretRight />
+        </button>
       </div>
     </main>
   )
