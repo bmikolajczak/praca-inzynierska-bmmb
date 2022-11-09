@@ -39,6 +39,7 @@ function Model(props) {
         <div className={style.infoPanel}>
           <h2>{props.name}</h2>
           <p>{props.description}</p>
+          {/* problem with clickables when set in transform and sprite */}
         </div>
       </Html>
     </group>
