@@ -4,7 +4,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
-import { AiFillCaretLeft, AiFillCaretRight, AiOutlinePause } from 'react-icons/ai'
+import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
+import { HiPlayPause} from 'react-icons/hi2'
 
 function Model(props) {
   // HTML Occlude
@@ -32,6 +33,7 @@ function Model(props) {
         style={{
           transition: 'all 0.5s',
           opacity: occluded ? 0.2 : 1,
+          display: props.infoVisibility ? 'initial' : 'none'
         }}
       >
         <div className={style.infoPanel}>
@@ -46,6 +48,7 @@ function Model(props) {
 export default function StageModels(props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [infoVisibility, setInfo] = useState(true)
 
   function nextModel() {
     if (activeIndex < modelsJson.length - 1) {
@@ -67,6 +70,7 @@ export default function StageModels(props) {
             model={modelsJson[activeIndex].model}
             name={modelsJson[activeIndex].name}
             description={modelsJson[activeIndex].description}
+            infoVisibility={infoVisibility}
           />
           <OrbitControls
             makeDefault
@@ -84,15 +88,16 @@ export default function StageModels(props) {
       </Canvas>
       <Loader />
       <div className={style.galleryButtons}>
-        <button onClick={prevModel} style={{opacity: activeIndex === 0 ? 0.4 : 1}}>
+        <button onClick={prevModel} style={{opacity: activeIndex === 0 ? 0.3 : 1}}>
           <AiFillCaretLeft />
         </button>
-        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.4 : 1 }}>
-          <AiOutlinePause />
+        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.65 : 1 }}>
+          <HiPlayPause />
         </button>
-        <button onClick={nextModel} style={{opacity: activeIndex === modelsJson.length - 1 ? 0.4 : 1}}>
+        <button onClick={nextModel} style={{opacity: activeIndex === modelsJson.length - 1 ? 0.3 : 1}}>
           <AiFillCaretRight />
         </button>
+        <button onClick={() => setInfo(!infoVisibility)}>{infoVisibility ?  <AiFillEye/> : <AiFillEyeInvisible/>}</button>
       </div>
     </main>
   )
