@@ -87,7 +87,11 @@ export default function StageModels(props) {
           <Environment preset="warehouse" />
         </Suspense>
       </Canvas>
-      <Loader />
+      <Loader
+        innerStyles={{'height': '10px', 'borderRadius': '4px'}}
+        barStyles={{'height': '10px', 'borderRadius': '4px'}} 
+        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
+      />
       <div className={style.galleryButtons}>
         <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
           <AiFillCaretLeft />
@@ -114,7 +118,7 @@ export default function StageModels(props) {
         <h3 className={style.linksTopBox}>Links</h3>
         <div className={style.linksCol}>
           {modelsJson[activeIndex].links.map((link) => (
-            <a key={link.url} href={link.url}>
+            <a key={link.url} href={link.url} target='_blank'>
               {link.label}
             </a>
           ))}

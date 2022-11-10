@@ -42,10 +42,11 @@
   .linksBar {
     position: absolute;
     left: 0;
-    top: 30%;
+    top: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 18px;
     h3 {
       margin: 0;
     }
@@ -61,8 +62,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 14px;
-      padding: 8px;
+      gap: 12px;
+      padding: 10px;
       min-width: 8vw;
 
       a {
