@@ -4,7 +4,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
-import { AiFillCaretLeft, AiFillCaretRight, AiOutlinePause } from 'react-icons/ai'
+import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause } from 'react-icons/ai'
+import { HiPlayPause } from 'react-icons/hi2'
 
 function Model(props) {
   // HTML Occlude
@@ -32,11 +33,13 @@ function Model(props) {
         style={{
           transition: 'all 0.5s',
           opacity: occluded ? 0.2 : 1,
+          display: props.infoVisibility ? 'initial' : 'none',
         }}
       >
         <div className={style.infoPanel}>
           <h2>{props.name}</h2>
           <p>{props.description}</p>
+          {/* problem with clickables when set in transform and sprite */}
         </div>
       </Html>
     </group>
@@ -46,6 +49,7 @@ function Model(props) {
 export default function StageModels(props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [infoVisibility, setInfo] = useState(true)
 
   function nextModel() {
     if (activeIndex < modelsJson.length - 1) {
@@ -67,6 +71,7 @@ export default function StageModels(props) {
             model={modelsJson[activeIndex].model}
             name={modelsJson[activeIndex].name}
             description={modelsJson[activeIndex].description}
+            infoVisibility={infoVisibility}
           />
           <OrbitControls
             makeDefault
@@ -82,17 +87,42 @@ export default function StageModels(props) {
           <Environment preset="warehouse" />
         </Suspense>
       </Canvas>
-      <Loader />
+      <Loader
+        innerStyles={{'height': '10px', 'borderRadius': '4px'}}
+        barStyles={{'height': '10px', 'borderRadius': '4px'}} 
+        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
+      />
       <div className={style.galleryButtons}>
-        <button onClick={prevModel} style={{opacity: activeIndex === 0 ? 0.4 : 1}}>
+        <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
           <AiFillCaretLeft />
         </button>
-        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.4 : 1 }}>
+        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.65 : 1 }}>
           <AiOutlinePause />
         </button>
-        <button onClick={nextModel} style={{opacity: activeIndex === modelsJson.length - 1 ? 0.4 : 1}}>
+        <button onClick={nextModel} style={{ opacity: activeIndex === modelsJson.length - 1 ? 0.3 : 1 }}>
           <AiFillCaretRight />
         </button>
+        <button onClick={() => setInfo(!infoVisibility)}>
+          {infoVisibility ? <AiFillEye /> : <AiFillEyeInvisible />}
+        </button>
+      </div>
+      <div
+        className={style.linksBar}
+        style={{
+          visibility: infoVisibility ? 'visible' : 'hidden',
+          opacity: infoVisibility ? 1 : 0,
+          left: infoVisibility ? 0 : -50,
+          transition: 'all 0.5s ease-out',
+        }}
+      >
+        <h3 className={style.linksTopBox}>Links</h3>
+        <div className={style.linksCol}>
+          {modelsJson[activeIndex].links.map((link) => (
+            <a key={link.url} href={link.url} target='_blank'>
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </main>
   )
