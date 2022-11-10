@@ -3,22 +3,15 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import Landscapes from './Landscapes'
+import { Clock } from 'three'
 
 // Imported 3D Globe model
 function MarsGlobe() {
   const gltf = useLoader(GLTFLoader, '/src/assets/mars/MarsGlobe.glb')
   const ref = useRef()
-  useFrame(() => (ref.current.rotation.y += 0.0006))
-  return (
-    <Suspense fallback={null}>
-      <primitive
-        object={gltf.scene}
-        ref={ref}
-        scale={2.2}
-        position={[-1, 0, -1]}
-      />
-    </Suspense>
-  )
+  const clock = new Clock()
+  useFrame(() => (ref.current.rotation.y += 0.05 * clock.getDelta()))
+  return <primitive object={gltf.scene} ref={ref} scale={2.2} position={[-1, 0, -1]} />
 }
 
 // Mars Page
@@ -38,13 +31,11 @@ export default function Mars() {
           <div className={style.overviewInfo}>
             <h1 className={style.heading}>Mars - the Red Planet</h1>
             <p>
-              The fourth planet from the Sun, Mars is one of Earth's two closest
-              planetary neighbors.
+              The fourth planet from the Sun, Mars is one of Earth's two closest planetary neighbors.
               <br />
-              <br /> A dusty, cold, desert world with a very thin atmosphere.
-              Mars is also a dynamic planet with seasons, polar ice caps,
-              canyons, extinct volcanoes, and evidence that it was even more
-              active in the past.
+              <br /> A dusty, cold, desert world with a very thin atmosphere. Mars is also a dynamic planet with
+              seasons, polar ice caps, canyons, extinct volcanoes, and evidence that it was even more active in the
+              past.
             </p>
           </div>
         </section>
