@@ -102,7 +102,15 @@ export default function StageModels(props) {
           {infoVisibility ? <AiFillEye /> : <AiFillEyeInvisible />}
         </button>
       </div>
-      <div className={style.linksBar} style={{display: infoVisibility ? 'flex' : 'none'}}>
+      <div
+        className={style.linksBar}
+        style={{
+          visibility: infoVisibility ? 'visible' : 'hidden',
+          opacity: infoVisibility ? 1 : 0,
+          left: infoVisibility ? 0 : -50,
+          transition: 'all 0.5s ease-out',
+        }}
+      >
         <h3 className={style.linksTopBox}>Links</h3>
         <div className={style.linksCol}>
           {modelsJson[activeIndex].links.map((link) => (
