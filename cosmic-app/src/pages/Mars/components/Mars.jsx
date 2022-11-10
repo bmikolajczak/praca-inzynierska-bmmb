@@ -10,7 +10,7 @@ function MarsGlobe() {
   const gltf = useLoader(GLTFLoader, '/src/assets/mars/MarsGlobe.glb')
   const ref = useRef()
   const clock = new Clock()
-  useFrame(() => (ref.current.rotation.y += 0.05 * clock.getDelta()))
+  useFrame(() => (ref.current.rotation.y += 0.03 * clock.getDelta()))
   return <primitive object={gltf.scene} ref={ref} scale={2.2} position={[-1, 0, -1]} />
 }
 

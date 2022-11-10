@@ -4,6 +4,7 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from '@react-three/drei'
 import landscapes from './Landscapes.json'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 function LandModel(props) {
   let visibility = false
@@ -95,9 +96,8 @@ export default function Landscapes() {
         <div className={style.landInfo}>{landsInfo}</div>
       </div>
         <div className={style.landButtons}>
-          {/* Left and right arrows UTF-8 Geometric Shapes*/}
-          <button onClick={prevLand}>&#9664;</button>
-          <button onClick={nextLand}>&#9654;</button>
+          <button onClick={prevLand}><AiFillCaretLeft/></button>
+          <button onClick={nextLand}><AiFillCaretRight/></button>
         </div>
     </section>
   )

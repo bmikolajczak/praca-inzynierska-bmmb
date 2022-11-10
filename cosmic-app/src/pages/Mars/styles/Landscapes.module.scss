@@ -32,8 +32,9 @@
     padding: 0.6rem;
     button {
       font-size: 32px;
-      border-radius: .8rem;
-      background-color: rgba($color: #ffffff, $alpha: 0.05);
+      border-radius: 4px;
+      background-color: transparent;
+      border: none;
       color: white;
       cursor: pointer;
     }
