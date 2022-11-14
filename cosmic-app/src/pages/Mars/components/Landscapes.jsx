@@ -4,6 +4,7 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from '@react-three/drei'
 import landscapes from './Landscapes.json'
+import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 function LandModel(props) {
@@ -25,11 +26,7 @@ function LandModel(props) {
       object.material.metalness = 0 // needs to be 0 in order for ambient lighting to work
     }
   })
-  return (
-    <Suspense fallback={null}>
-      <primitive visible={visibility} object={gltf.scene} ref={ref} scale={1} />
-    </Suspense>
-  )
+  return <primitive visible={visibility} object={gltf.scene} ref={ref} scale={1} />
 }
 
 function LandInfo(props) {
@@ -62,15 +59,10 @@ export default function Landscapes() {
   }
 
   const lands = landscapes.map((land, index) => (
-    <LandModel
-      model={land.model}
-      activeIndex={activeIndex}
-      objectIndex={index}
-      key={land.model}
-    />
+    <LandModel model={land.model} activeIndex={activeIndex} objectIndex={index} key={land.model} />
   ))
   const landsInfo = landscapes.map((land, index) => (
-    <LandInfo land={land} activeIndex={activeIndex} objectIndex={index} key={'Info-'+land.model} />
+    <LandInfo land={land} activeIndex={activeIndex} objectIndex={index} key={'Info-' + land.model} />
   ))
   return (
     <section className={style.landscapes}>
@@ -78,27 +70,25 @@ export default function Landscapes() {
       <div className={style.landElement}>
         <div className={style.canvas}>
           <Canvas camera={{ fov: 60, position: [0, 20, 30] }}>
-            {lands}
-            <ambientLight intensity={0.2} />
-            <directionalLight
-              color="white"
-              position={[5, 5, 5]}
-              intensity={1}
-            />
-            <OrbitControls
-              makeDefault
-              enableZoom={true}
-              enablePan={false}
-              zoomSpeed={0.7}
-            />
+            <Suspense fallback={null}>
+              {lands}
+              <ambientLight intensity={0.2} />
+              <directionalLight color="white" position={[5, 5, 5]} intensity={1} />
+              <OrbitControls makeDefault enableZoom={true} enablePan={false} zoomSpeed={0.7} />
+            </Suspense>
           </Canvas>
+          <LoaderCustom/>
         </div>
         <div className={style.landInfo}>{landsInfo}</div>
       </div>
-        <div className={style.landButtons}>
-          <button onClick={prevLand}><AiFillCaretLeft/></button>
-          <button onClick={nextLand}><AiFillCaretRight/></button>
-        </div>
+      <div className={style.landButtons}>
+        <button onClick={prevLand}>
+          <AiFillCaretLeft />
+        </button>
+        <button onClick={nextLand}>
+          <AiFillCaretRight />
+        </button>
+      </div>
     </section>
   )
 }

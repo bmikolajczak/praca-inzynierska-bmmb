@@ -6,6 +6,7 @@ import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
 import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause } from 'react-icons/ai'
 import { HiPlayPause } from 'react-icons/hi2'
+import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 function Model(props) {
   // HTML Occlude
@@ -87,11 +88,7 @@ export default function StageModels(props) {
           <Environment preset="warehouse" />
         </Suspense>
       </Canvas>
-      <Loader
-        innerStyles={{'height': '10px', 'borderRadius': '4px'}}
-        barStyles={{'height': '10px', 'borderRadius': '4px'}} 
-        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
-      />
+      <LoaderCustom />
       <div className={style.galleryButtons}>
         <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
           <AiFillCaretLeft />
