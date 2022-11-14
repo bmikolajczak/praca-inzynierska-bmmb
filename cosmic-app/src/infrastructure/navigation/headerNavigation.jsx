@@ -23,13 +23,19 @@ export const HeaderNavigation = () => {
       </Link>
       <ul className={style.links}>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/mars">Mars</Link>
         </li>
         <li>
-          <Link to="/account">Account</Link>
+          <Link to="/solar">Solar</Link>
+        </li>
+        <li>
+          <Link to="/stage">Stage</Link>
         </li>
         <li>
           <Link to="/apod">APOD</Link>
+        </li>
+        <li>
+          <Link to="/account">Account</Link>
         </li>
         {user === null ? (
           <li>
