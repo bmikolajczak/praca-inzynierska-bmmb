@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,7 +7,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
-import { collection, setDoc, doc } from 'firebase/firestore'
+import {
+  collection,
+  setDoc,
+  doc,
+  getDoc,
+  arrayRemove,
+  updateDoc,
+} from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 import '../styles/Account.scss'
@@ -24,20 +31,37 @@ export function Account() {
   const [loginEmail, setLoginEmial] = useState('')
   const [loginPassword, setloginPassword] = useState('')
 
+  //Saved images
+  const [savedImages, setSavedImages] = useState([])
+
+  //user object retrieved from auth
+  const user = auth.currentUser
+
   //user colelction ref
   const usersRef = collection(db, 'users')
-
   //const Google provider
   const googleProvider = new GoogleAuthProvider()
 
-  onAuthStateChanged(auth, (user) => {
+  //user's doc reference with saved images
+  const userDocRef = doc(db, 'users', auth.currentUser.uid)
+
+  async function GetSavedImages() {
+    const userDocSnapshot = await getDoc(userDocRef)
+    if (userDocSnapshot.exists()) {
+      setSavedImages(userDocSnapshot.data().savedImages)
+    }
+  }
+  //CHECKING WETHER USER IS LOGGED IN
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       console.log('Current User: ', user)
     } else {
       console.log('user signed out')
     }
   })
-
+  useEffect(() => {
+    GetSavedImages()
+  }, [user])
   async function registerUser() {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -115,193 +139,52 @@ export function Account() {
     }
   }
 
+  async function removeImage(image) {
+    const userDocRef = doc(db, 'users', user.uid)
+    await updateDoc(userDocRef, { savedImages: arrayRemove(image) })
+    //remove image from array
+    setSavedImages(
+      savedImages.filter((savedImg) => savedImg.title !== image.title)
+    )
+    console.log('new seved images:', savedImages)
+  }
   return (
     <div>
-      {/* <h1>Welcome to user account page!</h1> */}
-      {/* <p className="welcome">welcome to account page</p> */}
-      {auth.currentUser && <h3>{auth.currentUser.displayName}</h3>}
       <button onClick={signoutUser}>Sign Out</button>
-      <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button>
-      <div className={styles['profile-tile']}>
-        <p className={styles['profile-header']}>Your Profile</p>
-        <img
-          src="src/assets/account/images/user_placeholder_image.svg"
-          alt="placeholder image"
-        />
-        <p>Alberto</p>
-        <p>alberto@gmail.com</p>
-      </div>
-      <div className={styles['saved-images']}>
-        <p className={styles['images-header']}>Saved Images</p>
-        <div className={styles['cards']}>
-          <div className={styles['image-card']}>
-            <div className={styles['card-visuals']}>
-              <img
-                src="src/assets/account/images/galaxy_photo.png"
-                alt="galaxy photo"
-              />
-              <p className={styles['image-title']}>
-                Clouds over andromeda galaxy
-              </p>
-              <button>Remove image</button>
-            </div>
-            <p className={styles['image-desc']}>
-              What are those red clouds surrounding the Andromeda galaxy? This
-              galaxy, M31, is often imaged by planet Earth-based astronomers. As
-              the nearest large spiral galaxy, it is a familiar sight with dark
-              dust lanes, bright yellowish core, and spiral arms traced by
-              clouds of bright blue stars. A mosaic of well-exposed broad and
-              narrow-band image data, this deep portrait of our neighboring
-              island universe offers strikingly unfamiliar features though,
-              faint reddish clouds of glowing ionized hydrogen gas in the same
-              wide field of view. Most of the ionized hydrogen clouds surely lie
-              in the foreground of the scene, well within our Milky Way Galaxy.
-              They are likely associated with the pervasive, dusty interstellar
-              cirrus clouds scattered hundreds of light-years above our own
-              galactic plane. Some of the clouds, however, occur right in the
-              Andromeda galaxy itself, and some in M110, the small galaxy just
-              below.
-            </p>
-          </div>
-          <div className={styles['image-card']}>
-            <div className={styles['card-visuals']}>
-              <img
-                src="src/assets/account/images/galaxy_photo.png"
-                alt="galaxy photo"
-              />
-              <p className={styles['image-title']}>
-                Clouds over andromeda galaxy
-              </p>
-              <button>Remove image</button>
-            </div>
-            <p className={styles['image-desc']}>
-              What are those red clouds surrounding the Andromeda galaxy? This
-              galaxy, M31, is often imaged by planet Earth-based astronomers. As
-              the nearest large spiral galaxy, it is a familiar sight with dark
-              dust lanes, bright yellowish core, and spiral arms traced by
-              clouds of bright blue stars. A mosaic of well-exposed broad and
-              narrow-band image data, this deep portrait of our neighboring
-              island universe offers strikingly unfamiliar features though,
-              faint reddish clouds of glowing ionized hydrogen gas in the same
-              wide field of view. Most of the ionized hydrogen clouds surely lie
-              in the foreground of the scene, well within our Milky Way Galaxy.
-              They are likely associated with the pervasive, dusty interstellar
-              cirrus clouds scattered hundreds of light-years above our own
-              galactic plane. Some of the clouds, however, occur right in the
-              Andromeda galaxy itself, and some in M110, the small galaxy just
-              below.
-            </p>
-          </div>
+      {/* <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button> */}
+      {auth.currentUser !== null ? (
+        <div className={styles['profile-tile']}>
+          <p className={styles['profile-header']}>Your Profile</p>
+          <img src={auth.currentUser.photoURL} alt="placeholder image" />
+          <p>{auth.currentUser.displayName}</p>
+          <p>{auth.currentUser.email}</p>
         </div>
-      </div>
-      {isformActive && (
-        <div className={styles['account-form']}>
-          <div className={styles['welcome-part']}>
-            <h3>Welcome</h3>
-            <h3>to</h3>
-            <h3>Cosmic</h3>
-            <img src="src/assets/account/images/Logo.svg" />
-            {/* <img
-              id={styles['wave-1']}
-              src="src/assets/account/images/Wave1.svg"
-            />
-            <img
-              id={styles['wave-2']}
-              src="src/assets/account/images/Wave2.svg"
-            /> */}
-          </div>
-          <div className={styles['input-part']}>
-            <ul className={styles.tabs}>
-              <li
-                className={
-                  activeTab === 'signin'
-                    ? styles['active-tab']
-                    : styles['inactive-tab']
-                }
-                onClick={() => setActiveTab('signin')}
-              >
-                Sign In
-              </li>
-              <li
-                className={
-                  activeTab === 'register'
-                    ? styles['active-tab']
-                    : styles['inactive-tab']
-                }
-                onClick={() => setActiveTab('register')}
-              >
-                Sign Up
-              </li>
-            </ul>
-            {activeTab === 'register' && (
-              <div className={styles.registerForm}>
-                <label for="name">Name</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your name"
-                  id="name"
-                />
-                <label for="email">Email</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="email"
-                  id="email"
-                  onChange={(event) => {
-                    setUserEmail(event.target.value)
-                  }}
-                />
-                <label for="password">Password</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your password"
-                  id="password"
-                  onChange={(event) => {
-                    setUserPassword(event.target.value)
-                  }}
-                />
-                <label className={styles['input-field']} for="confirm">
-                  Confirm Password
-                </label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Re-enter your password"
-                  id="confirm"
-                />
-                <button className={styles['button']} onClick={registerUser}>
-                  Register
-                </button>
-              </div>
-            )}
-            {activeTab === 'signin' && (
-              <div className={styles.loginForm}>
-                <label for="email">Email</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="email"
-                  id="login-email"
-                />
-                <label for="password">Password</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your password"
-                  id="login-password"
-                />
-                <button className={styles.button} onClick={loginUser}>
-                  Sign In
-                </button>
-              </div>
-            )}
-            <button
-              className={styles.button}
-              id={styles['google-button']}
-              onClick={signInGoogle}
-            >
-              <img height={16} src="src/assets/google-logo.png" />
-              Sign In with Google
-            </button>
-          </div>
-        </div>
+      ) : (
+        <h1>Sign in to your exsisting account or create new one</h1>
       )}
+      {auth.currentUser !== null ? (
+        <div className={styles['saved-images']}>
+          <p className={styles['images-header']}>Saved Images</p>
+          <div className={styles['cards']}>
+            {savedImages.map((image, index) => (
+              <div className={styles['image-card']}>
+                <div className={styles['card-visuals']}>
+                  <img
+                    src={image.url}
+                    alt={image.title}
+                    className={styles['fetched-photo']}
+                  />
+                  <p className={styles['image-title']}>{image.title}</p>
+                  <button onClick={() => removeImage(image)}>
+                    Remove image
+                  </button>
+                </div>
+                <p className={styles['image-desc']}>{image.explanation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }

@@ -1,6 +1,9 @@
 @import 'src/assets/variables.scss';
 //MAIN FORM DIV
 .account-form {
+  position: absolute;
+  top: 30%;
+  left: 30%;
   width: 620px;
   margin: 0 auto;
   background-color: $black-100;
@@ -147,7 +150,7 @@
 
 //PROFILE
 .profile-tile {
-  margin: 0 auto;
+  margin: 2rem auto 0;
   width: max-content;
   padding: 1rem 4rem;
   background-color: $black-100;
@@ -186,6 +189,7 @@
 }
 .cards {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 .image-card {
@@ -229,6 +233,10 @@
   font-family: 'Poppins';
   font-weight: 600;
   font-size: 0.875rem;
+}
+.fetched-photo {
+  max-height: 200px;
+  width: auto;
 }
 .card-visuals {
   display: flex;
