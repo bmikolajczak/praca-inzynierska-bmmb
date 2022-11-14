@@ -1,14 +1,12 @@
 import React, { Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import {
-  Environment,
-  ContactShadows,
-  Html,
-  OrbitControls,
-} from '@react-three/drei'
+import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
-import { MathUtils } from 'three'
+import modelsJson from './StageModels.json'
+import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause } from 'react-icons/ai'
+import { HiPlayPause } from 'react-icons/hi2'
+import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 function Model(props) {
   // HTML Occlude
@@ -20,21 +18,13 @@ function Model(props) {
   const ref = useRef()
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
-    ref.current.rotation.y = Math.sin(t / 2) / 10
     ref.current.rotation.z = Math.sin(t / 2) / 40
   })
   return (
     <group>
-      <Suspense fallback={null}>
-        <primitive
-          object={gltf.scene}
-          ref={ref}
-          scale={1}
-          position={[0, -0.5, 0]}
-        />
-      </Suspense>
+      <primitive object={gltf.scene} ref={ref} scale={0.8} position={[0, -0.5, 0]} />
       <Html
-        scale={0.2}
+        scale={0.15}
         rotation={[0, 0, 0]}
         position={[1.8, 1.5, 0.3]}
         transform
@@ -44,18 +34,13 @@ function Model(props) {
         style={{
           transition: 'all 0.5s',
           opacity: occluded ? 0.2 : 1,
+          display: props.infoVisibility ? 'initial' : 'none',
         }}
       >
         <div className={style.infoPanel}>
-          <h2>Name</h2>
-          <p>
-            One of the twin rovers that landed on Mars in January 2004 - Spirit
-            and Opportunity. Both rovers lived well beyond their planned 90-day
-            missions. Opportunity worked nearly 15 years on Mars and broke the
-            driving record for putting the most miles on the odometer. They have
-            found geologic evidence that once Mars was wetter, and the
-            conditions could have sustained microbial life.
-          </p>
+          <h2>{props.name}</h2>
+          <p>{props.description}</p>
+          {/* problem with clickables when set in transform and sprite */}
         </div>
       </Html>
     </group>
@@ -63,30 +48,79 @@ function Model(props) {
 }
 
 export default function StageModels(props) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [infoVisibility, setInfo] = useState(true)
+
+  function nextModel() {
+    if (activeIndex < modelsJson.length - 1) {
+      setActiveIndex(activeIndex + 1)
+    }
+  }
+  function prevModel() {
+    if (activeIndex > 0) {
+      setActiveIndex(activeIndex - 1)
+    }
+  }
+
   return (
     <main className={style.main}>
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1.5, 4], fov: 60 }}>
-        <ambientLight intensity={0.2} />
-        <Model model="curiosity.glb" />
-        <OrbitControls
-          makeDefault
-          autoRotate
-          autoRotateSpeed={0.8}
-          enableZoom={true}
-          enablePan={false}
-          zoomSpeed={1}
-          maxDistance={8}
-          minDistance={1}
-        />
-        <ContactShadows
-          position={[0, -0.8, 0]}
-          opacity={0.75}
-          scale={10}
-          blur={2.5}
-          far={4}
-        />
-        <Environment preset="warehouse" />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.2} />
+          <Model
+            model={modelsJson[activeIndex].model}
+            name={modelsJson[activeIndex].name}
+            description={modelsJson[activeIndex].description}
+            infoVisibility={infoVisibility}
+          />
+          <OrbitControls
+            makeDefault
+            autoRotate={paused ? false : true}
+            autoRotateSpeed={0.65}
+            enableZoom={true}
+            enablePan={false}
+            zoomSpeed={1}
+            maxDistance={8}
+            minDistance={1}
+          />
+          <ContactShadows position={[0, -0.8, 0]} opacity={0.75} scale={10} blur={2} far={4} />
+          <Environment preset="warehouse" />
+        </Suspense>
       </Canvas>
+      <LoaderCustom />
+      <div className={style.galleryButtons}>
+        <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
+          <AiFillCaretLeft />
+        </button>
+        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.65 : 1 }}>
+          <AiOutlinePause />
+        </button>
+        <button onClick={nextModel} style={{ opacity: activeIndex === modelsJson.length - 1 ? 0.3 : 1 }}>
+          <AiFillCaretRight />
+        </button>
+        <button onClick={() => setInfo(!infoVisibility)}>
+          {infoVisibility ? <AiFillEye /> : <AiFillEyeInvisible />}
+        </button>
+      </div>
+      <div
+        className={style.linksBar}
+        style={{
+          visibility: infoVisibility ? 'visible' : 'hidden',
+          opacity: infoVisibility ? 1 : 0,
+          left: infoVisibility ? 0 : -50,
+          transition: 'all 0.5s ease-out',
+        }}
+      >
+        <h3 className={style.linksTopBox}>Links</h3>
+        <div className={style.linksCol}>
+          {modelsJson[activeIndex].links.map((link) => (
+            <a key={link.url} href={link.url} target='_blank'>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </main>
   )
 }

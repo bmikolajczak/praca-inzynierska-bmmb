@@ -5,10 +5,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
 import solarInfo from './SolarInfo.json'
 import { OrbitControls, Environment, Html } from '@react-three/drei'
-import Loading from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
+import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -191,7 +191,7 @@ export default function Solar() {
       <section>{planetInfo}</section>
       {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
       <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
-        <Suspense fallback={<Loading title="Simplified Solar System" />}>
+        <Suspense fallback={null}>
           <Sun />
           {celestialBodies}
           <pointLight
@@ -230,6 +230,7 @@ export default function Solar() {
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
       </Canvas>
+      <LoaderCustom/>
     </main>
   )
 }
