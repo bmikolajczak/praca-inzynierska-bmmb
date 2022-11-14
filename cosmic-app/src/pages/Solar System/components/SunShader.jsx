@@ -79,7 +79,7 @@ export default function Sun() {
 
   useFrame(() => {
     const delta = 5 * clock.getDelta()
-    mesh.current.material.uniforms.time.value += 0.2 * delta
+    mesh.current.material.uniforms.time.value += 0.1 * delta
   })
 
   return (

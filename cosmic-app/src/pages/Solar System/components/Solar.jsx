@@ -5,19 +5,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import celestials from './Solar.json'
 import solarInfo from './SolarInfo.json'
 import { OrbitControls, Environment, Html } from '@react-three/drei'
-import Loader from '../../../infrastructure/loader/Loader'
 import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
+import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
+// Globally declared for use later
 const addendVector = new Vector3()
-
-// Default camera position
-function Camera(props) {
-  useThree(({ camera }) => {
-    camera.position.set(0, 30, 125)
-  })
-}
 
 function CelestialModel(props) {
   const modelURL = `src/assets/solar_system/${props.model}`
@@ -28,7 +22,7 @@ function CelestialModel(props) {
 
   useFrame(() => {
     // rotate around local Y axis
-    mesh.current.rotateY(props.spinSpeed)
+    mesh.current.rotateY(props.spinSpeed * props.spinFactor)
     // orbit group
     group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
     // onClick currentObject switching
@@ -42,33 +36,39 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    addendVector.set(props.radius, props.radius, props.radius + (props.radius * 1.5))
+    console.log('controls.object.position: ', controls.object.position)
+    addendVector.set(
+      props.radius + props.radius * 0.5,
+      props.radius * 0.5,
+      props.radius + props.radius * 0.5
+    )
     controls.object.position.add(addendVector)
-    // controls.update() // update called after on click - no need
+    controls.update()
   }
 
   return (
     <group ref={group} rotation={[0, 0, MathUtils.degToRad(props.orbitTilt)]}>
-      <Suspense fallback={null}>
-        <primitive
-          object={gltf.scene}
-          ref={mesh}
-          scale={0.5}
-          position={props.position}
-          rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
-        >
-          <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
-            <button type='button'
-              onClick={() => {
-                props.handleClick(props.name)
-                // props call useState to parent and it causes weird glitching to camera but with setTimeout it works great idk 
-                setTimeout(() => snapCamera(), 1)
-              }}
-            >{props.name}
-            </button>
-          </Html>
-        </primitive>
-      </Suspense>
+      <primitive
+        object={gltf.scene}
+        ref={mesh}
+        scale={0.5}
+        position={props.position}
+        rotation={[0, 0, MathUtils.degToRad(props.tilt)]}
+      >
+        <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
+          <button
+            type="button"
+            onClick={() => {
+              document.querySelector('canvas').classList.add(style.animateSnapCamera)
+              setTimeout(() => {document.querySelector('canvas').classList.remove(style.animateSnapCamera)}, 1500)
+              props.handleClick(props.name)
+              snapCamera()
+            }}
+          >
+            {props.name}
+          </button>
+        </Html>
+      </primitive>
     </group>
   )
 }
@@ -95,7 +95,10 @@ function OrbitRing(props) {
 
 export default function Solar() {
   const [selectedPlanet, setPlanet] = useState('')
-  // preparing every planet with orbits 
+  const [selectedOrbitFactor, setOrbitFactor] = useState(0.2)
+  const [selectedSpinFactor, setSpinFactor] = useState(1)
+
+  // preparing every planet with orbits
   const celestialBodies = celestials.map((celes) => [
     <OrbitRing
       key={'Orbit' + celes.name}
@@ -110,7 +113,8 @@ export default function Solar() {
       key={celes.name}
       spinSpeed={celes.spinSpeed}
       orbitalSpeed={celes.orbitalSpeed}
-      orbitalFactor={0.1}
+      orbitalFactor={selectedOrbitFactor}
+      spinFactor={selectedSpinFactor}
       radius={celes.radius}
       tilt={celes.tilt}
       orbitTilt={celes.orbitTilt}
@@ -120,24 +124,74 @@ export default function Solar() {
   ])
 
   // planets on click info panel
-  const planetInfo = solarInfo.map((planet) =>
-  (selectedPlanet === planet.name &&
-    <div className={style.planetInfo} key={planet.name}>
-      <h2>{planet.name}</h2>
-      <p>{planet.description}</p>
-      <div className={style.planetInfoLinks}><a href={planet.links[0]} target='_blank'>In depth</a></div>
-    </div>
-  )
+  const planetInfo = solarInfo.map(
+    (planet) =>
+      selectedPlanet === planet.name && (
+        <div className={style.planetInfo} key={planet.name}>
+          <h2>{planet.name}</h2>
+          <p>{planet.description}</p>
+          <div className={style.planetInfoLinks}>
+            <a href={planet.links[0].url} target="_blank">
+              {planet.links[0].label}
+            </a>
+            {planet.links.length > 1 && (
+              <a href={planet.links[1].url}>{planet.links[1].label}</a>
+            )}
+          </div>
+        </div>
+      )
   )
 
   return (
     <main className={style.solar}>
       <section>
-        {planetInfo}
+        <div className={style.speedControl}>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.01)
+              setSpinFactor(0.1)
+            }}
+          >
+            0.05x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.1)
+              setSpinFactor(0.5)
+            }}
+          >
+            0.5x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.2)
+              setSpinFactor(1)
+            }}
+          >
+            1x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(0.4)
+              setSpinFactor(2)
+            }}
+          >
+            2x
+          </button>
+          <button
+            onClick={() => {
+              setOrbitFactor(1)
+              setSpinFactor(5)
+            }}
+          >
+            5x
+          </button>
+        </div>
       </section>
-      <Canvas camera={{ far: 4000 }}>
-        <Camera />
-        <Suspense fallback={<Loader title="Simplified Solar System" />}>
+      <section>{planetInfo}</section>
+      {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
+      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
+        <Suspense fallback={null}>
           <Sun />
           {celestialBodies}
           <pointLight
@@ -163,7 +217,8 @@ export default function Solar() {
             enableZoom={true}
             enablePan={false}
             zoomSpeed={1.2}
-            maxDistance={2000}
+            maxDistance={4000}
+            minDistance={0.3}
           />
           <Environment
             background="only"
@@ -175,6 +230,7 @@ export default function Solar() {
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
       </Canvas>
+      <LoaderCustom/>
     </main>
   )
 }

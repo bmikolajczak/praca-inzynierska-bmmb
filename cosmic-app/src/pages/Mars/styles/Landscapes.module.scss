@@ -13,6 +13,10 @@
   .canvas canvas {
     height: 80vh;
     width: 100%;
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }
   .show {
     display: initial;
@@ -28,8 +32,9 @@
     padding: 0.6rem;
     button {
       font-size: 32px;
-      border-radius: .8rem;
-      background-color: rgba($color: #ffffff, $alpha: 0.05);
+      border-radius: 4px;
+      background-color: transparent;
+      border: none;
       color: white;
       cursor: pointer;
     }
@@ -52,7 +57,7 @@
   }
 }
 
-@media screen and (max-width: 1700px) {
+@media screen and (max-width: 1000px) {
   .landscapes {
     .landElement {
       flex-direction: column;

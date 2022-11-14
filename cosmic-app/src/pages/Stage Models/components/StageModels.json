@@ -1,0 +1,155 @@
+[
+  {
+    "name": "Mars Curiosity Rover",
+    "model": "curiosity.glb",
+    "description":"Part of NASA's Mars Science Laboratory mission, Curiosity is the largest and most capable rover ever sent to Mars. Curiosity explores Gale Crater and acquires rock, soil, and air samples for onboard analysis.",
+    "links": [
+      {
+        "label":"Overview",
+        "url": "https://mars.nasa.gov/msl/home/"
+      },
+      {
+        "label":"Rover",
+        "url": "https://mars.nasa.gov/msl/spacecraft/rover/summary/"
+      },
+      {
+        "label":"Mission",
+        "url": "https://mars.nasa.gov/msl/mission/overview/"
+      }
+    ]
+  },
+  {
+    "name": "The Mars Helicopter - Ingenuity",
+    "model": "ingenuity.glb",
+    "description":"Ingenuity is a technology demonstration to test powered, controlled flight on another world for the first time. It hitched a ride to Mars on the Perseverance rover. The helicopter completed its technology demonstration after three successful flights in a thin atmosphere of Mars. It performed the first such flight in any world beyond Earth.",
+    "links": [
+      {
+        "label":"Overview",
+        "url": "https://mars.nasa.gov/technology/helicopter/"
+      },      
+      {
+        "label":"News",
+        "url": "https://mars.nasa.gov/technology/helicopter/#News"
+      },      
+      {
+        "label":"Anatomy",
+        "url": "https://mars.nasa.gov/technology/helicopter/#Anatomy"
+      }
+    ]
+  },
+  {
+    "name": "InSight",
+    "model": "insight.glb",
+    "description":"InSight, short for Interior Exploration using Seismic Investigations, Geodesy and Heat Transport, is a Mars lander. It is the first outer space robotic explorer to study in-depth the 'inner space' of Mars: its crust, mantle, and core.",
+    "links": [
+      {
+        "label":"Mission",
+        "url": "https://mars.nasa.gov/insight/mission/overview/"
+      } ,     {
+        "label":"Anatomy",
+        "url": "https://mars.nasa.gov/insight/spacecraft/about-the-lander/"
+      }   ,   {
+        "label":"News",
+        "url": "https://mars.nasa.gov/insight/news-and-events/news"
+      }
+    ]
+  },
+  {
+    "name": "Mars Exploration Rover",
+    "model": "mars_exploration_rover_twin.glb",
+    "description":"One of the twin rovers that landed on Mars in January 2004 - Spirit and Opportunity. Both rovers lived well beyond their planned 90-day missions. Opportunity worked nearly 15 years on Mars and broke the driving record for putting the most miles on the odometer. They have found geologic evidence that once Mars was wetter, and the conditions could have sustained microbial life.",
+    "links": [
+      {
+        "label":"Mission",
+        "url": "https://mars.nasa.gov/mer/mission/overview/"
+      },      {
+        "label":"Images",
+        "url": "https://mars.nasa.gov/mer/multimedia/images/"
+      },      {
+        "label":"Anatomy",
+        "url": "https://mars.nasa.gov/mer/mission/instruments/"
+      }
+
+    ]
+  },
+  {
+    "name": "Hubble Space Telescope",
+    "model": "hubble.glb",
+    "description":"Orbiting high above the Earth, the Hubble Space Telescope has a clear view of the universe free from the blurring and absorbing effects of the atmosphere. In addition to observing visible and near-infrared light, Hubble detects ultraviolet light, which is absorbed by the atmosphere and visible only from space. The telescope has beamed hundreds of thousands of celestial images back to Earth during its time in space.",
+    "links": [
+      {
+        "label":"Main",
+        "url": "https://hubblesite.org/"
+      },
+      {
+        "label":"Overview",
+        "url": "https://hubblesite.org/mission-and-telescope/the-telescope"
+      }
+    ]
+  },
+  {
+    "name": "Spitzer Space Telescope",
+    "model": "spitzer.glb",
+    "description":"The telescope was a space-borne, cryogenically-cooled infrared observatory capable of studying objects ranging from our Solar System to the distant reaches of the Universe. Spitzer was the final element in NASA's Great Observatories Program, and an important scientific and technical cornerstone of the Astronomical Search for Origins Program.",
+    "links": [
+      {
+        "label":"Main",
+        "url": "https://www.spitzer.caltech.edu/"
+      },
+      {
+        "label":"Mission",
+        "url": "https://www.spitzer.caltech.edu/mission/mission-overview"
+      },
+      {
+        "label":"Fast Facts",
+        "url": "https://www.spitzer.caltech.edu/mission/fast-facts"
+      }
+    ]
+  },
+  {
+    "name": "James Webb Space Telescope",
+    "model": "jwst.glb",
+    "description":"The James Webb Space Telescope is an orbiting infrared observatory that will complement and extend the discoveries of the Hubble Space Telescope, with longer wavelength coverage and greatly improved sensitivity. The longer wavelengths enable Webb to look much closer to the beginning of time and to hunt for the unobserved formation of the first galaxies, as well as to look inside dust clouds where stars and planetary systems are forming today.",
+    "links": [
+      {
+        "label":"Images",
+        "url": "https://webbtelescope.org/resource-gallery/images"
+      },      
+      {
+        "label":"Flickr images",
+        "url": "https://www.flickr.com/photos/nasawebbtelescope/albums"
+      },
+      {
+        "label":"Technologies",
+        "url": "https://jwst.nasa.gov/content/about/innovations/index.html"
+      },      
+      {
+        "label":"Blog",
+        "url": "https://blogs.nasa.gov/webb/"
+      }
+    ]
+  },
+  {
+    "name": "Voyager",
+    "model": "voyager.glb",
+    "description":"One of the twin Voyager spacecrafts. They are exploring where nothing from Earth has flown before. Since their launch in 1977 they continue to send information previously unaccesible to mankind. The primary mission was the exploration of Jupiter and Saturn - which resulted in discoveries of active volcanoes in Jupiter's moon Io. After exploring Uranus and Neptune now they are gathering information about the outermost edge of the Solar System.",
+    "links": [
+      {
+        "label":"Mission",
+        "url": "https://voyager.jpl.nasa.gov/mission/"
+      },
+      {
+        "label":"Spacecraft",
+        "url": "https://voyager.jpl.nasa.gov/mission/spacecraft/"
+      },
+      {
+        "label":"Status",
+        "url": "https://voyager.jpl.nasa.gov/mission/status/"
+      },
+      {
+        "label":"The Golden Record",
+        "url": "https://voyager.jpl.nasa.gov/golden-record/"
+      }
+    ]
+  }
+]
