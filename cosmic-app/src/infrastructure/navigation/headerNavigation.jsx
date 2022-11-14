@@ -18,12 +18,8 @@ export const HeaderNavigation = () => {
 
   return (
     <nav className={style.headerNav}>
-      <Link to="/mars" className={style.logoLink}>
-        <img
-          src="src/assets/cosmic-logo.svg"
-          alt="cosmic logo"
-          className={style.logo}
-        />
+      <Link to="/" className={style.logoLink}>
+        <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
       <ul className={style.links}>
         <li>

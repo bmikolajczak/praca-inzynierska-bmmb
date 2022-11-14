@@ -1,0 +1,25 @@
+@import 'src/assets/variables.scss';
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  a {
+    font-family: 'Poppins';
+    font-size: 2rem;
+    background-color: $black-100;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: $black-700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  a:hover {
+    background-color: $black-700;
+    color: $black-100;
+    transform: scale(1.1) translateY(-5px);
+  }
+}
