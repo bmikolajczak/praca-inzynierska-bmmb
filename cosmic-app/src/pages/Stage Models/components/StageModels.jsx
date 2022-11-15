@@ -25,8 +25,10 @@ function Model(props) {
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
       <Html scale={0.2} transform sprite position={[mark.position.x, mark.position.y, mark.position.z]}>
-        <div className={style.circleIcon}>&nbsp;</div>
-        <p>{mark.userData.name}</p>
+        <div className={style.markerContainer}>
+          <div className={style.circleIcon}>&nbsp;</div>
+          {/* <p className={style.markerName}>{mark.userData.name}</p> */}
+        </div>
       </Html>
     ))
   } else {
