@@ -5,12 +5,12 @@ import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
 import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause } from 'react-icons/ai'
-import { HiPlayPause } from 'react-icons/hi2'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 function Model(props) {
   // HTML Occlude
   const [occluded, setOcclude] = useState()
+  let markers = {}
 
   // Loading GLTF model
   const modelURL = `/src/assets/stage_models/${props.model}`
@@ -18,8 +18,21 @@ function Model(props) {
   const ref = useRef()
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
-    ref.current.rotation.z = Math.sin(t / 2) / 40
+    ref.current.rotation.z = Math.sin(t / 2) / 50
   })
+
+  // Markers muszą być dodane manualnie w Blenderze w formie Empty
+  if (gltf.nodes['Markers']) {
+    markers = gltf.nodes['Markers'].children.map((mark) => (
+      <Html scale={0.2} transform sprite position={[mark.position.x, mark.position.y - 0.5, mark.position.z]}>
+        <p>{mark.userData.name}</p>
+      </Html>
+    ))
+  } else {
+    console.log('nie ma markers')
+    markers = null
+  }
+
   return (
     <group>
       <primitive object={gltf.scene} ref={ref} scale={0.8} position={[0, -0.5, 0]} />
@@ -43,6 +56,7 @@ function Model(props) {
           {/* problem with clickables when set in transform and sprite */}
         </div>
       </Html>
+      {markers}
     </group>
   )
 }
@@ -115,7 +129,7 @@ export default function StageModels(props) {
         <h3 className={style.linksTopBox}>Links</h3>
         <div className={style.linksCol}>
           {modelsJson[activeIndex].links.map((link) => (
-            <a key={link.url} href={link.url} target='_blank'>
+            <a key={link.url} href={link.url} target="_blank">
               {link.label}
             </a>
           ))}
