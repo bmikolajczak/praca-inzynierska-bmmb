@@ -78,4 +78,16 @@
       }
     }
   }
+
+  .circleIcon {
+    background-color: transparent;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    border: white 2px solid;
+    &:hover {
+      background-color: white;
+      transition: all 0.2s ease-in;
+    }
+  }
 }

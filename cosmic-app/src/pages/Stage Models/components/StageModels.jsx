@@ -24,7 +24,8 @@ function Model(props) {
   // Markers muszą być dodane manualnie w Blenderze w formie Empty
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
-      <Html scale={0.2} transform sprite position={[mark.position.x, mark.position.y - 0.5, mark.position.z]}>
+      <Html scale={0.2} transform sprite position={[mark.position.x, mark.position.y, mark.position.z]}>
+        <div className={style.circleIcon}>&nbsp;</div>
         <p>{mark.userData.name}</p>
       </Html>
     ))
@@ -35,7 +36,7 @@ function Model(props) {
 
   return (
     <group>
-      <primitive object={gltf.scene} ref={ref} scale={0.8} position={[0, -0.5, 0]} />
+      <primitive object={gltf.scene} ref={ref} scale={1} position={[0, 0, 0]} />
       <Html
         scale={0.15}
         rotation={[0, 0, 0]}
@@ -98,7 +99,7 @@ export default function StageModels(props) {
             maxDistance={8}
             minDistance={1}
           />
-          <ContactShadows position={[0, -0.8, 0]} opacity={0.75} scale={10} blur={2} far={4} />
+          <ContactShadows position={[0, -0.98, 0]} opacity={0.75} scale={10} blur={2} far={4} />
           <Environment preset="warehouse" />
         </Suspense>
       </Canvas>
