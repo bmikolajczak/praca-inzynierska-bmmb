@@ -75,3 +75,7 @@ npm run dev
 - https://sos.noaa.gov/catalog/datasets/planet-rotations/ - planets spin speed reference
 - https://wasp-planets.net/2018/12/30/solar-system-planet-tilts/ - planets tilt reference
 - https://svs.gsfc.nasa.gov/4851 - star map hdri
+
+Curiosity anatomy:
+- https://g.co/kgs/QjCy2R
+- https://mars.nasa.gov/msl/rover-3d/
