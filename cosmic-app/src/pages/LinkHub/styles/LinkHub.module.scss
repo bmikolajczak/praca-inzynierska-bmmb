@@ -1,25 +1,107 @@
 @import 'src/assets/variables.scss';
 
 .links-container {
-  display: flex;
-  flex-direction: column;
+  // height: 100vh;
+  padding: 6rem;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(3, 200px);
+  grid-template-areas:
+    'a a b b'
+    'a a c c'
+    'd d e e';
   gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
   a {
     font-family: 'Poppins';
     font-size: 2rem;
     background-color: $black-100;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    color: $black-700;
+    display: grid;
+    align-items: center;
+    color: $black-1000;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
+    background-position: center center;
+    background-size: auto contain;
+    background-repeat: no-repeat;
   }
   a:hover {
     background-color: $black-700;
     color: $black-100;
     transform: scale(1.1) translateY(-5px);
+  }
+  a:nth-child(1) {
+    grid-area: a;
+    background-image: linear-gradient(#e3e3efb1, #e3e3efb1), url(../../../assets/link_hub/mars.png);
+    &:hover {
+      background-image: url(../../../assets/link_hub/mars.png);
+    }
+  }
+  a:nth-child(2) {
+    grid-area: b;
+    background-image: linear-gradient(#e3e3efb1, #e3e3efb1), url(../../../assets/link_hub/solar.png);
+    &:hover {
+      background-image: url(../../../assets/link_hub/solar.png);
+    }
+  }
+  a:nth-child(3) {
+    grid-area: c;
+    background-image: linear-gradient(#e3e3efb1, #e3e3efb1), url(../../../assets/link_hub/stage.png);
+    &:hover {
+      background-image: url(../../../assets/link_hub/stage.png);
+    }
+  }
+  a:nth-child(4) {
+    grid-area: d;
+    background-image: linear-gradient(#e3e3efb1, #e3e3efb1), url(../../../assets/link_hub/apod.jpg);
+    &:hover {
+      background-image: url(../../../assets/link_hub/apod.jpg);
+    }
+  }
+  a:nth-child(5) {
+    grid-area: e;
+    background-color: $black-700;
+    background-image: linear-gradient(#e3e3efb1, #e3e3efb1), url(../../../assets/link_hub/Logo_square.svg);
+    &:hover {
+      background-image: url(../../../assets/link_hub/Logo_square.svg);
+      background-size: 25%;
+      color: $black-300;
+    }
+    // Boxes placement
+  }
+  .mars-li {
+    grid-area: a;
+  }
+  .solar-li {
+    grid-area: b;
+  }
+  .stage-li {
+    grid-area: c;
+  }
+  .about-li {
+    grid-area: e;
+  }
+  .apod-li {
+    grid-area: d;
+  }
+}
+
+@media (max-width: 900px) {
+  .links-container {
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(5, 250px);
+    grid-template-areas:
+      'a a'
+      'b b'
+      'c c'
+      'd d'
+      'e e';
+    a {
+      font-size: 1.5rem;
+    }
   }
 }
