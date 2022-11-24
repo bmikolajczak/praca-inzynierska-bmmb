@@ -24,10 +24,20 @@ function Model(props) {
   // Markers muszą być dodane manualnie w Blenderze w formie Empty
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
-      <Html scale={0.2} transform sprite position={[mark.position.x, mark.position.y, mark.position.z]}>
+      <Html
+        key={mark.userData.name}
+        scale={0.2}
+        transform
+        sprite
+        position={[mark.position.x, mark.position.y, mark.position.z]}
+        style={{
+          transition: 'all 0.5s',
+          display: props.infoVisibility ? 'initial' : 'none',
+        }}
+      >
         <div className={style.markerContainer}>
           <div className={style.circleIcon}>&nbsp;</div>
-          {/* <p className={style.markerName}>{mark.userData.name}</p> */}
+          <p className={style.markerName}>{mark.userData.name}</p>
         </div>
       </Html>
     ))
@@ -56,7 +66,6 @@ function Model(props) {
         <div className={style.infoPanel}>
           <h2>{props.name}</h2>
           <p>{props.description}</p>
-          {/* problem with clickables when set in transform and sprite */}
         </div>
       </Html>
       {markers}
