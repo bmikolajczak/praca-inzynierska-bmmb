@@ -10,6 +10,7 @@ import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 function Model(props) {
   // HTML Occlude
   const [occluded, setOcclude] = useState()
+  const [activeMarker, setActiveMarker] = useState('')
   let markers = {}
 
   // Loading GLTF model
@@ -21,7 +22,15 @@ function Model(props) {
     ref.current.rotation.z = Math.sin(t / 2) / 50
   })
 
-  // Markers muszą być dodane manualnie w Blenderze w formie Empty
+  function clickMarker(markerName) {
+    if(markerName === activeMarker) {
+      setActiveMarker('')
+    }
+    else {
+      setActiveMarker(markerName)
+    }
+  }
+  // Markers muszą być dodane manualnie w Blenderze w formie Empties
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
       <Html
@@ -36,17 +45,19 @@ function Model(props) {
         }}
       >
         <div className={style.markerContainer}>
-          <div className={style.circleIcon}>&nbsp;</div>
-          <p className={style.markerName}>{mark.userData.name}</p>
+          <div className={style.circleIcon} onClick={() => clickMarker(mark.userData.name)}>&nbsp;</div>
+          {activeMarker === mark.userData.name &&
+            <p className={style.markerName}>{mark.userData.name}</p>
+          }
         </div>
       </Html>
     ))
-  } else {
-    console.log('nie ma markers')
+  } else { // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
     markers = null
   }
 
   return (
+    // zwracany jest model z markerami oraz info panelem
     <group>
       <primitive object={gltf.scene} ref={ref} scale={1} position={[0, 0, 0]} />
       <Html
