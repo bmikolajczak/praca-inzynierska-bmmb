@@ -79,3 +79,11 @@ npm run dev
 Curiosity anatomy:
 - https://g.co/kgs/QjCy2R
 - https://mars.nasa.gov/msl/rover-3d/
+The rest - anatomy
+- https://mars.nasa.gov/technology/helicopter/#Anatomy
+- https://mars.nasa.gov/insight/spacecraft/about-the-lander/
+- https://mars.nasa.gov/mer/mission/instruments/
+- https://g.co/kgs/uUqjEo
+- https://hubblesite.org/mission-and-telescope/the-telescope
+- https://voyager.jpl.nasa.gov/mission/spacecraft/interactive.php
+
