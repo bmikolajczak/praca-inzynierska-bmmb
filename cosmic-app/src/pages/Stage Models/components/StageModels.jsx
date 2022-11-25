@@ -23,16 +23,41 @@ function Model(props) {
   })
 
   function clickMarker(markerName) {
-    if(markerName === activeMarker) {
+    if (markerName === activeMarker) {
       setActiveMarker('')
-    }
-    else {
+    } else {
       setActiveMarker(markerName)
     }
   }
   // Markers muszą być dodane manualnie w Blenderze w formie Empties
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
+      <group
+        onClick={() => clickMarker(mark.userData.name)}
+        key={mark.userData.name}
+        position={[mark.position.x, mark.position.y, mark.position.z]}
+        scale={0.04}
+        visible={props.infoVisibility}
+      >
+        <mesh>
+          <icosahedronGeometry />
+          <meshStandardMaterial color={'#70deed'} />
+        </mesh>
+        <Html
+          transform
+          sprite
+          scale={0.2}
+          style={{
+            display: props.infoVisibility ? 'initial' : 'none',
+          }}
+        >
+          {activeMarker === mark.userData.name && <p className={style.markerName}>{mark.userData.name}</p>}
+        </Html>
+        {/* Ogromne problemy z wyświetlaniem buttonów na Firefoxie i mniejszych ekranach (np.laptop)
+         kiedy używa się Html z React Three Drei wewnątrz canvas, elementy htmlowe zmieniają swoje pozycje w zależności od skalowania przeglądarki,
+          na firefoxie pokazuje dwa kwadraciki...*/}
+      </group>
+      /*
       <Html
         key={mark.userData.name}
         scale={0.2}
@@ -51,15 +76,17 @@ function Model(props) {
           }
         </div>
       </Html>
+      */
     ))
-  } else { // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
+  } else {
+    // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
     markers = null
   }
 
   return (
     // zwracany jest model z markerami oraz info panelem
-    <group>
-      <primitive object={gltf.scene} ref={ref} scale={1} position={[0, 0, 0]} />
+    <group ref={ref}>
+      <primitive object={gltf.scene} scale={1} position={[0, 0, 0]} />
       <Html
         scale={0.15}
         rotation={[0, 0, 0]}
