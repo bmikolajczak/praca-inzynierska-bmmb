@@ -4,9 +4,14 @@
     height: calc(100vh - 55.6px);
     background-color: #d2d2d2;
     border-radius: 8px;
+
     &:active {
       cursor: grabbing;
     }
+  }
+
+  .infoHTML {
+    z-index: 5;
   }
 
   .infoPanel {
@@ -17,14 +22,16 @@
     border-radius: 8px;
     background-color: rgba($color: #000000, $alpha: 0.6);
   }
+
   .galleryButtons {
     position: absolute;
-    z-index: 20;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, -20%);
     display: flex;
     gap: 4px;
+    z-index: 20;
+
     button {
       display: flex;
       border-radius: 8px;
@@ -34,11 +41,13 @@
       cursor: pointer;
       background-color: #2a2a2a;
       color: white;
+
       &:hover {
         background-color: rgba($color: #000000, $alpha: 0.6);
       }
     }
   }
+
   .linksBar {
     position: absolute;
     left: 0;
@@ -47,14 +56,18 @@
     flex-direction: column;
     align-items: center;
     font-size: 18px;
+    z-index: 15;
+
     h3 {
       margin: 0;
     }
+
     .linksTopBox {
       background-color: #2a2a2a;
       padding: 4px 12px;
       border-radius: 8px 8px 0 0;
     }
+
     .linksCol {
       background-color: #2a2a2a;
       border-radius: 0 16px 16px 0;
@@ -72,6 +85,7 @@
         padding: 4px 8px;
         border-radius: 8px;
         border: 2px solid lightseagreen;
+
         &:hover {
           background-color: lightseagreen;
         }
@@ -79,33 +93,41 @@
     }
   }
 
-  // .circleIcon {
-  //   cursor: pointer;
-  //   background-color: transparent;
-  //   border-radius: 50%;
-  //   width: 14px;
-  //   height: 14px;
-  //   border: white 2px solid;
-  //   &:hover {
-  //     background-color: white;
-  //     transition: all 0.25s ease-in;
-  //   }
-  // }
-  // .markerContainer {
-  //   display: flex;
-  //   flex-direction: row;
-  //   align-items: center;
-  //   gap: 4px;
-  //   user-select: none;
-  // }
-  // .markerName {
-  //   position: absolute;
-  //   left: 20px;
-  //   background-color: rgba($color: #000000, $alpha: 0.6);
-  //   color: white;
-  //   padding: 1px 8px;
-  //   margin: 0;
-  //   border-radius: 6px;
-    
-  // }
+  .markersHTML {
+    z-index: 1;
+  }
+
+  .circleIcon {
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 1px 75% 75% 75%;
+    width: 16px;
+    height: 16px;
+    border: cyan 2px solid;
+
+    &:hover {
+      background-color: cyan;
+      transition: all 0.25s ease-in;
+    }
+  }
+
+  .markerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+  }
+
+  .markerName {
+    position: absolute;
+    font-size: 24px;
+    left: 24px;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    color: white;
+    padding: 1px 8px;
+    margin: 0;
+    border-radius: 6px;
+
+  }
 }

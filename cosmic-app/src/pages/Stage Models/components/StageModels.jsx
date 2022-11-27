@@ -16,58 +16,26 @@ function Model(props) {
   // Loading GLTF model
   const modelURL = `/src/assets/stage_models/${props.model}`
   const gltf = useLoader(GLTFLoader, modelURL)
-  const ref = useRef()
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    ref.current.rotation.z = Math.sin(t / 2) / 50
-  })
 
   function clickMarker(markerName) {
     if (markerName === activeMarker) {
       setActiveMarker('')
-    } else {
+    }
+    else {
       setActiveMarker(markerName)
     }
   }
   // Markers muszą być dodane manualnie w Blenderze w formie Empties
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
-      <group
-        onClick={() => clickMarker(mark.userData.name)}
-        key={mark.userData.name}
-        position={[mark.position.x, mark.position.y, mark.position.z]}
-        scale={0.04}
-        visible={props.infoVisibility}
-      >
-        <mesh>
-          <icosahedronGeometry />
-          <meshStandardMaterial color={'#70deed'} />
-        </mesh>
-        <Html
-          transform
-          sprite
-          scale={0.2}
-          style={{
-            display: props.infoVisibility ? 'initial' : 'none',
-          }}
-        >
-          {activeMarker === mark.userData.name && <p className={style.markerName}>{mark.userData.name}</p>}
-        </Html>
-        {/* Ogromne problemy z wyświetlaniem buttonów na Firefoxie i mniejszych ekranach (np.laptop)
-         kiedy używa się Html z React Three Drei wewnątrz canvas, elementy htmlowe zmieniają swoje pozycje w zależności od skalowania przeglądarki,
-          na firefoxie pokazuje dwa kwadraciki...*/}
-      </group>
-      /*
       <Html
         key={mark.userData.name}
-        scale={0.2}
-        transform
-        sprite
         position={[mark.position.x, mark.position.y, mark.position.z]}
         style={{
-          transition: 'all 0.5s',
           display: props.infoVisibility ? 'initial' : 'none',
         }}
+        wrapperClass={style.markersHTML}
+        zIndexRange={[2, 0]}
       >
         <div className={style.markerContainer}>
           <div className={style.circleIcon} onClick={() => clickMarker(mark.userData.name)}>&nbsp;</div>
@@ -76,16 +44,14 @@ function Model(props) {
           }
         </div>
       </Html>
-      */
     ))
-  } else {
-    // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
+  } else { // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
     markers = null
   }
 
   return (
     // zwracany jest model z markerami oraz info panelem
-    <group ref={ref}>
+    <group>
       <primitive object={gltf.scene} scale={1} position={[0, 0, 0]} />
       <Html
         scale={0.15}
@@ -100,6 +66,8 @@ function Model(props) {
           opacity: occluded ? 0.2 : 1,
           display: props.infoVisibility ? 'initial' : 'none',
         }}
+        wrapperClass={style.infoHTML}
+        zIndexRange={[5, 0]}
       >
         <div className={style.infoPanel}>
           <h2>{props.name}</h2>
@@ -129,6 +97,42 @@ export default function StageModels(props) {
 
   return (
     <main className={style.main}>
+      <section>
+        <div className={style.galleryButtons}>
+          <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
+            <AiFillCaretLeft />
+          </button>
+          <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.65 : 1 }}>
+            <AiOutlinePause />
+          </button>
+          <button onClick={nextModel} style={{ opacity: activeIndex === modelsJson.length - 1 ? 0.3 : 1 }}>
+            <AiFillCaretRight />
+          </button>
+          <button onClick={() => setInfo(!infoVisibility)}>
+            {infoVisibility ? <AiFillEye /> : <AiFillEyeInvisible />}
+          </button>
+        </div>
+      </section>
+      <section>
+        <div
+          className={style.linksBar}
+          style={{
+            visibility: infoVisibility ? 'visible' : 'hidden',
+            opacity: infoVisibility ? 1 : 0,
+            left: infoVisibility ? 0 : -50,
+            transition: 'all 0.5s ease-out',
+          }}
+        >
+          <h3 className={style.linksTopBox}>Links</h3>
+          <div className={style.linksCol}>
+            {modelsJson[activeIndex].links.map((link) => (
+              <a key={link.url} href={link.url} target="_blank">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1.5, 4], fov: 60 }}>
         <Suspense fallback={null}>
           <ambientLight intensity={0.2} />
@@ -153,38 +157,6 @@ export default function StageModels(props) {
         </Suspense>
       </Canvas>
       <LoaderCustom />
-      <div className={style.galleryButtons}>
-        <button onClick={prevModel} style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}>
-          <AiFillCaretLeft />
-        </button>
-        <button onClick={() => setPaused(!paused)} style={{ opacity: paused ? 0.65 : 1 }}>
-          <AiOutlinePause />
-        </button>
-        <button onClick={nextModel} style={{ opacity: activeIndex === modelsJson.length - 1 ? 0.3 : 1 }}>
-          <AiFillCaretRight />
-        </button>
-        <button onClick={() => setInfo(!infoVisibility)}>
-          {infoVisibility ? <AiFillEye /> : <AiFillEyeInvisible />}
-        </button>
-      </div>
-      <div
-        className={style.linksBar}
-        style={{
-          visibility: infoVisibility ? 'visible' : 'hidden',
-          opacity: infoVisibility ? 1 : 0,
-          left: infoVisibility ? 0 : -50,
-          transition: 'all 0.5s ease-out',
-        }}
-      >
-        <h3 className={style.linksTopBox}>Links</h3>
-        <div className={style.linksCol}>
-          {modelsJson[activeIndex].links.map((link) => (
-            <a key={link.url} href={link.url} target="_blank">
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
     </main>
   )
 }
