@@ -9,6 +9,7 @@ import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
+import { Link } from 'react-router-dom'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -60,7 +61,7 @@ function CelestialModel(props) {
             type="button"
             onClick={() => {
               document.querySelector('canvas').classList.add(style.animateSnapCamera)
-              setTimeout(() => {document.querySelector('canvas').classList.remove(style.animateSnapCamera)}, 1500)
+              setTimeout(() => { document.querySelector('canvas').classList.remove(style.animateSnapCamera) }, 1500)
               props.handleClick(props.name)
               snapCamera()
             }}
@@ -135,7 +136,7 @@ export default function Solar() {
               {planet.links[0].label}
             </a>
             {planet.links.length > 1 && (
-              <a href={planet.links[1].url}>{planet.links[1].label}</a>
+              <Link to={planet.links[1].url}>{planet.links[1].label}</Link>
             )}
           </div>
         </div>
@@ -230,7 +231,7 @@ export default function Solar() {
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
       </Canvas>
-      <LoaderCustom/>
+      <LoaderCustom />
     </main>
   )
 }
