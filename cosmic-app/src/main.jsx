@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import './index.css'
+import './index.scss'
 import Mars from './pages/Mars/components/Mars'
 import { App } from './App'
 import { Settings } from './pages/Settings Page/components/Settings'
