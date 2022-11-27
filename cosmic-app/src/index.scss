@@ -1,0 +1,38 @@
+// Scrollbar
+@mixin scrollbar($size: 9px, $foreground-color: #dcdcdc, $background-color: transparent) {
+  // For Chrome & Safari
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: $foreground-color;
+    &:hover {
+      background-color: white;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: $background-color;
+  }
+}
+// Fonts
+@font-face {
+  font-family: Playfair Display SemiBoldItalic;
+  src: url('./assets/fonts/PlayfairDisplay/PlayfairDisplay-SemiBoldItalic.ttf');
+}
+@font-face {
+  font-family: Poppins Light;
+  src: url('./assets/fonts/Poppins/Poppins-Light.ttf');
+}
+// Body
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: white;
+  @include scrollbar();
+}

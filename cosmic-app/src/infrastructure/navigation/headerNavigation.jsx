@@ -5,15 +5,18 @@ import style from './headerNavigation.module.scss'
 export const HeaderNavigation = () => {
   return (
     <nav className={style.headerNav}>
-      <Link to="/mars" className={style.logoLink}>
+      <Link to="/" className={style.logoLink}>
         <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
       <ul className={style.links}>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/mars">Mars</Link>
         </li>
         <li>
-          <Link to="/settings">Settings</Link>
+          <Link to="/solar">Solar</Link>
+        </li>        
+        <li>
+          <Link to="/stage">Stage</Link>
         </li>
         <li>
           <Link to="/account">Account</Link>
