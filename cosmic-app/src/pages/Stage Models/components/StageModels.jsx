@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
-import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause } from 'react-icons/ai'
+import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause, AiOutlineMenu } from 'react-icons/ai'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 function Model(props) {
@@ -83,6 +83,7 @@ export default function StageModels(props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [infoVisibility, setInfo] = useState(true)
+  const [linksVisibility, setLinks] = useState(true)
 
   function nextModel() {
     if (activeIndex < modelsJson.length - 1) {
@@ -113,13 +114,13 @@ export default function StageModels(props) {
           </button>
         </div>
       </section>
-      <section>
+      <section className={style.links}>
         <div
           className={style.linksBar}
           style={{
-            visibility: infoVisibility ? 'visible' : 'hidden',
-            opacity: infoVisibility ? 1 : 0,
-            left: infoVisibility ? 0 : -50,
+            visibility: linksVisibility ? 'visible' : 'hidden',
+            opacity: linksVisibility ? 1 : 0,
+            transform: linksVisibility ? 'translateX(0px)' : 'translateX(-50px)',
             transition: 'all 0.5s ease-out',
           }}
         >
@@ -132,6 +133,7 @@ export default function StageModels(props) {
             ))}
           </div>
         </div>
+        <button className={style.toggle} onClick={() => setLinks(!linksVisibility)}><AiOutlineMenu /></button>
       </section>
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1.5, 4], fov: 60 }}>
         <Suspense fallback={null}>
