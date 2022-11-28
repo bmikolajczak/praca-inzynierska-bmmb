@@ -10,6 +10,7 @@ import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -21,11 +22,16 @@ function CelestialModel(props) {
   const group = useRef()
   const controls = useThree((state) => state.controls)
 
+  // run only once, on mount, thanks to empty []
+  useEffect(() => {
+    group.current.rotateY(randomRotationOnOrbit())
+  },[])
+
   useFrame((state, delta) => {
     // rotate around local Y axis
-    mesh.current.rotateY(props.spinSpeed * props.spinFactor*delta)
+    mesh.current.rotateY(props.spinSpeed * props.spinFactor * delta)
     // orbit group
-    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor*delta)
+    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor * delta)
     // onClick currentObject switching
     if (props.currentTarget === props.name) {
       mesh.current.getWorldPosition(controls.target)
@@ -37,18 +43,13 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    console.log('controls.object.position: ', controls.object.position)
-    addendVector.set(
-      props.radius + props.radius * 0.5,
-      props.radius * 0.5,
-      props.radius + props.radius * 0.5
-    )
+    addendVector.set(props.radius + props.radius * 0.5, props.radius * 0.5, props.radius + props.radius * 0.5)
     controls.object.position.add(addendVector)
     controls.update()
   }
 
   function randomRotationOnOrbit() {
-    return MathUtils.degToRad(Math.floor(Math.random()* 360))
+    return MathUtils.degToRad(Math.floor(Math.random() * 360 - 179))
   }
 
   return (
@@ -65,7 +66,9 @@ function CelestialModel(props) {
             type="button"
             onClick={() => {
               document.querySelector('canvas').classList.add(style.animateSnapCamera)
-              setTimeout(() => { document.querySelector('canvas').classList.remove(style.animateSnapCamera) }, 1500)
+              setTimeout(() => {
+                document.querySelector('canvas').classList.remove(style.animateSnapCamera)
+              }, 1500)
               props.handleClick(props.name)
               snapCamera()
             }}
@@ -79,21 +82,9 @@ function CelestialModel(props) {
 }
 function OrbitRing(props) {
   return (
-    <mesh
-      rotation={[
-        MathUtils.degToRad(90),
-        MathUtils.degToRad(props.orbitTilt),
-        0,
-      ]}
-      position={[0, 0, 0]}
-    >
+    <mesh rotation={[MathUtils.degToRad(90), MathUtils.degToRad(props.orbitTilt), 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 220]} />
-      <meshBasicMaterial
-        color="white"
-        side={DoubleSide}
-        transparent={true}
-        opacity={0.2}
-      />
+      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={0.2} />
     </mesh>
   )
 }
@@ -139,9 +130,7 @@ export default function Solar() {
             <a href={planet.links[0].url} target="_blank">
               {planet.links[0].label}
             </a>
-            {planet.links.length > 1 && (
-              <Link to={planet.links[1].url}>{planet.links[1].label}</Link>
-            )}
+            {planet.links.length > 1 && <Link to={planet.links[1].url}>{planet.links[1].label}</Link>}
           </div>
         </div>
       )
@@ -199,24 +188,9 @@ export default function Solar() {
         <Suspense fallback={null}>
           <Sun />
           {celestialBodies}
-          <pointLight
-            color={'white'}
-            intensity={0.8}
-            position={[0, 0, 0]}
-            decay={2}
-          />
-          <pointLight
-            color={'white'}
-            intensity={0.5}
-            position={[0, 25, 0]}
-            decay={2}
-          />
-          <pointLight
-            color={'white'}
-            intensity={0.5}
-            position={[0, -25, 0]}
-            decay={2}
-          />
+          <pointLight color={'white'} intensity={0.8} position={[0, 0, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, 25, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, -25, 0]} decay={2} />
           <OrbitControls
             makeDefault
             enableZoom={true}
@@ -225,10 +199,7 @@ export default function Solar() {
             maxDistance={4000}
             minDistance={0.3}
           />
-          <Environment
-            background="only"
-            files="src/assets/solar_system/starmap2020dark_6k.hdr"
-          />
+          <Environment background="only" files="src/assets/solar_system/starmap2020dark_6k.hdr" />
         </Suspense>
         <EffectComposer>
           <Noise opacity={0.026} />
