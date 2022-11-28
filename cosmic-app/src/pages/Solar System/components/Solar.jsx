@@ -21,11 +21,11 @@ function CelestialModel(props) {
   const group = useRef()
   const controls = useThree((state) => state.controls)
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     // rotate around local Y axis
-    mesh.current.rotateY(props.spinSpeed * props.spinFactor)
+    mesh.current.rotateY(props.spinSpeed * props.spinFactor*delta)
     // orbit group
-    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
+    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor*delta)
     // onClick currentObject switching
     if (props.currentTarget === props.name) {
       mesh.current.getWorldPosition(controls.target)
