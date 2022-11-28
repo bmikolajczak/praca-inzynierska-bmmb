@@ -47,6 +47,10 @@ function CelestialModel(props) {
     controls.update()
   }
 
+  function randomRotationOnOrbit() {
+    return MathUtils.degToRad(Math.floor(Math.random()* 360))
+  }
+
   return (
     <group ref={group} rotation={[0, 0, MathUtils.degToRad(props.orbitTilt)]}>
       <primitive
