@@ -11,6 +11,7 @@ import { DoubleSide, MathUtils, Vector3 } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import { AiOutlineMenu, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -25,7 +26,7 @@ function CelestialModel(props) {
   // run only once, on mount, thanks to empty []
   useEffect(() => {
     group.current.rotateY(randomRotationOnOrbit())
-  },[])
+  }, [])
 
   useFrame((state, delta) => {
     // rotate around local Y axis
@@ -64,6 +65,9 @@ function CelestialModel(props) {
         <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
           <button
             type="button"
+            style={{
+              visibility: props.planetLabelVis ? 'visible' : 'hidden',
+            }}
             onClick={() => {
               document.querySelector('canvas').classList.add(style.animateSnapCamera)
               setTimeout(() => {
@@ -84,7 +88,7 @@ function OrbitRing(props) {
   return (
     <mesh rotation={[MathUtils.degToRad(90), MathUtils.degToRad(props.orbitTilt), 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 220]} />
-      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={0.2} />
+      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={props.planetLabelVis ? 0.2 : 0} />
     </mesh>
   )
 }
@@ -93,6 +97,8 @@ export default function Solar() {
   const [selectedPlanet, setPlanet] = useState('')
   const [selectedOrbitFactor, setOrbitFactor] = useState(0.2)
   const [selectedSpinFactor, setSpinFactor] = useState(1)
+  const [planetInfoVis, setPlanetInfoVis] = useState(true)
+  const [planetLabelVis, setPlanetLabelVis] = useState(true)
 
   // preparing every planet with orbits
   const celestialBodies = celestials.map((celes) => [
@@ -101,6 +107,7 @@ export default function Solar() {
       innerRadius={celes.position[0] - 0.04}
       outerRadius={celes.position[0] + 0.04}
       orbitTilt={celes.orbitTilt}
+      planetLabelVis={planetLabelVis}
     />,
     <CelestialModel
       model={celes.model}
@@ -116,6 +123,7 @@ export default function Solar() {
       orbitTilt={celes.orbitTilt}
       handleClick={setPlanet}
       currentTarget={selectedPlanet}
+      planetLabelVis={planetLabelVis}
     />,
   ])
 
@@ -123,7 +131,16 @@ export default function Solar() {
   const planetInfo = solarInfo.map(
     (planet) =>
       selectedPlanet === planet.name && (
-        <div className={style.planetInfo} key={planet.name}>
+        <div
+          className={style.planetInfo}
+          key={planet.name}
+          style={{
+            visibility: planetInfoVis ? 'visible' : 'hidden',
+            opacity: planetInfoVis ? 1 : 0,
+            zIndex: planetInfoVis ? 15 : -1,
+            transition: 'all 0.5s ease-out',
+          }}
+        >
           <h2>{planet.name}</h2>
           <p>{planet.description}</p>
           <div className={style.planetInfoLinks}>
@@ -138,7 +155,7 @@ export default function Solar() {
 
   return (
     <main className={style.solar}>
-      <section>
+      <section className={style.menu}>
         <div className={style.speedControl}>
           <button
             onClick={() => {
@@ -179,6 +196,22 @@ export default function Solar() {
             }}
           >
             5x
+          </button>
+        </div>
+        <div>
+          <button
+            title="Toggle planet info"
+            onClick={() => setPlanetInfoVis(!planetInfoVis)}
+            style={{ backgroundColor: planetInfoVis ? '#242424' : '#cf1130' }}
+          >
+            <AiOutlineMenu />
+          </button>
+          <button
+            title="Toggle 3D augmentations"
+            onClick={() => setPlanetLabelVis(!planetLabelVis)}
+            style={{ backgroundColor: planetLabelVis ? '#242424' : '#cf1130' }}
+          >
+            3D
           </button>
         </div>
       </section>

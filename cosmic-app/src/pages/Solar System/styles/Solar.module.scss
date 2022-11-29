@@ -43,25 +43,29 @@
         color: white;
         padding: 4px 8px;
         border-radius: 8px;
-        border: 2px solid darkviolet;
+        border: 2px solid lightseagreen;
         &:hover {
-          background-color: darkviolet;
+          background-color: lightseagreen;
         }
       }
     }
   }
-  .speedControl {
+  .menu {
     position: absolute;
     z-index: 20;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, -10%);
     display: flex;
-    gap: 3px;
+    gap: 14px;
+    border-color: #0088ff;
+    border-width: 2px 2px 0 2px;
+    border-style: solid;
+    border-radius: 8px 8px 0 0;
+    padding: 4px 4px 0;
     button {
       background-color: rgba($color: #ffffff, $alpha: 0.2);
-      font-size: 16px;
-      padding: 4px;
+      font-size: 18px;
       border-radius: 4px;
       color: white;
       border-color: transparent;
@@ -69,6 +73,10 @@
       &:hover {
         background-color: rgba($color: #ffffff, $alpha: 0.1);
       }
+    }
+    div {
+      display: flex;
+      gap: 3px;
     }
   }
   @keyframes fade-in {
