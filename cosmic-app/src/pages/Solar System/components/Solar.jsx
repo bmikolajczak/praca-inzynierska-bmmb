@@ -11,7 +11,7 @@ import { DoubleSide, MathUtils, Vector3 } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
-import { AiOutlineMenu, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { BiInfoCircle } from 'react-icons/bi'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -88,7 +88,7 @@ function OrbitRing(props) {
   return (
     <mesh rotation={[MathUtils.degToRad(90), MathUtils.degToRad(props.orbitTilt), 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 220]} />
-      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} opacity={props.planetLabelVis ? 0.2 : 0} />
+      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} visible={props.planetLabelVis} opacity={ 0.2 } />
     </mesh>
   )
 }
@@ -200,18 +200,22 @@ export default function Solar() {
         </div>
         <div>
           <button
-            title="Toggle planet info"
-            onClick={() => setPlanetInfoVis(!planetInfoVis)}
-            style={{ backgroundColor: planetInfoVis ? '#242424' : '#cf1130' }}
-          >
-            <AiOutlineMenu />
-          </button>
-          <button
             title="Toggle 3D augmentations"
             onClick={() => setPlanetLabelVis(!planetLabelVis)}
-            style={{ backgroundColor: planetLabelVis ? '#242424' : '#cf1130' }}
+            style={{ backgroundColor: planetLabelVis ? '#242424' : '#450101' }}
           >
             3D
+          </button>
+          <button
+            title="Toggle planet info"
+            onClick={() => setPlanetInfoVis(!planetInfoVis)}
+            style={{
+              display: 'flex',
+              fontSize: '20px',
+              backgroundColor: planetInfoVis ? '#242424' : '#450101'
+            }}
+          >
+           <BiInfoCircle/>
           </button>
         </div>
       </section>
