@@ -33,6 +33,33 @@
   h5 {
     font-size: 18px;
   }
+
+  .canvasContainer {
+    height: 100vh;
+    background-image: url('/src/assets/mars/2k_stars.jpg');
+    background-color: black; /* Backup background */
+  }
+  
+  .overviewContainer {
+    position: relative;
+  }
+  
+  .overviewInfo {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 40%;
+    padding-right: 2em;
+    p {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  }
+  .heading {
+    color: white;
+  }
+
   @media screen and (max-width: 1000px) {
     h1,h2 {
       font-size: 32px;
@@ -43,37 +70,14 @@
       }
     }
   }
-}
-
-.canvasContainer {
-  height: 100vh;
-  background-image: url('/src/assets/mars/2k_stars.jpg');
-  background-color: black; /* Backup background */
-}
-
-.overviewContainer {
-  position: relative;
-}
-
-.overviewInfo {
-  position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-  right: 0;
-  width: 40%;
-  padding-right: 2em;
-  p {
-    font-size: 24px;
-    line-height: 36px;
+  @media screen and (max-width: 600px) {
+    .overviewInfo {
+      bottom: 0;
+      left: 50%;
+      width: 90%;
+      transform: translate(-50%, 0);
+    }
   }
 }
-.heading {
-  color: white;
-}
-.loading {
-  font-size: 32px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-}
+
+
