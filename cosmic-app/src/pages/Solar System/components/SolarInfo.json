@@ -31,7 +31,7 @@
   },
   {
     "name": "Mars",
-    "description": "Mars is about half the diameter of Earth, yet its surface has nearly the same area as Earth's dry land. Its volcanoes, impact craters, crustal movement, and atmospheric conditions such as dust storms have altered the landscape of Mars over many years, creating some of the solar system's most interesting topographical features. Mars has a thin atmosphere. To our eyes, the sky would be hazy and red because of suspended dust instead of the familiar blue tint we see on Earth.",
+    "description": "Mars is about half the diameter of Earth, yet its surface has nearly the same area as Earth's dry land. Its volcanoes, impact craters, crustal movement, and atmospheric conditions such as dust storms have altered the landscape of Mars over many years, creating some of the solar system's most interesting topographical features. Mars has a thin atmosphere. To our eyes, the sky would be hazy and red because of suspended dust.",
     "links": [
       {
         "label": "In depth",
@@ -45,7 +45,7 @@
   },
   {
     "name": "Jupiter",
-    "description": "The largest planet in the solar system - more than twice as massive as all the other planets combined. Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter is surrounded by dozens of moons. Jupiter also has several rings, but unlike the famous rings of Saturn, Jupiter's rings are very faint and made of dust, not ice.",
+    "description": "The largest planet in the solar system - more than twice as massive as all the other planets combined. Jupiter's stripes and swirls are actually cold, windy clouds of ammonia and water, floating in an atmosphere of hydrogen and helium. Jupiter is surrounded by dozens of moons. Jupiter also has several rings, but unlike Saturn's, Jupiter's rings are very faint and made of dust, not ice.",
     "links": [
       {
         "label": "In depth",
@@ -55,7 +55,7 @@
   },
   {
     "name": "Saturn",
-    "description": "Saturn is a massive ball made mostly of hydrogen and helium. Saturn is not the only planet to have rings, but none are as spectacular or as complex as Saturn’s. Saturn also has dozens of moons. Saturn's rings are thought to be pieces of comets, asteroids, or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity. The ring particles mostly range from tiny, dust-sized icy grains to chunks as big as a house. A few particles are as large as mountains.",
+    "description": "Saturn is a massive ball made mostly out of hydrogen and helium. Saturn is not the only planet to have rings, but none are as spectacular or as complex as Saturn's. Saturn also has dozens of moons. Saturn's rings are thought to be pieces of comets, asteroids, or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity. The ring particles are ranging from tiny, dust-sized icy grains to chunks as large as mountains.",
     "links": [
       {
         "label": "In depth",

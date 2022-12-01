@@ -7,8 +7,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00159,
-    "spinSpeed": 0.0005,
+    "orbitalSpeed": 0.02776,
+    "spinSpeed": 0.0014,
     "radius": 0.095,
     "tilt": 0,
     "orbitTilt": 7
@@ -21,8 +21,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00117,
-    "spinSpeed": -0.00006,
+    "orbitalSpeed": 0.02050,
+    "spinSpeed": -0.0008,
     "radius": 0.2375,
     "tilt": 177.3,
     "orbitTilt": 3.4
@@ -35,8 +35,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.001,
-    "spinSpeed": 0.006,
+    "orbitalSpeed": 0.01745,
+    "spinSpeed": 0.2,
     "radius": 0.25,
     "tilt": 23.4,
     "orbitTilt": 0
@@ -49,8 +49,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00081,
-    "spinSpeed": 0.003,
+    "orbitalSpeed": 0.01411,
+    "spinSpeed": 0.1100,
     "radius": 0.1325,
     "tilt": 25.2,
     "orbitTilt": 1.8
@@ -63,8 +63,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00044,
-    "spinSpeed": 0.018,
+    "orbitalSpeed": 0.00767,
+    "spinSpeed": 2.3168,
     "radius": 2.745,
     "tilt": 3.1,
     "orbitTilt": 1.3
@@ -77,8 +77,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00033,
-    "spinSpeed": 0.016,
+    "orbitalSpeed": 0.00568,
+    "spinSpeed": 1.8724,
     "radius": 2.25,
     "tilt": 26.7,
     "orbitTilt": 2.5
@@ -91,8 +91,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00023,
-    "spinSpeed": -0.008,
+    "orbitalSpeed": 0.00398,
+    "spinSpeed": -0.7519,
     "radius": 0.995,
     "tilt": 97.8,
     "orbitTilt": 0.8
@@ -105,8 +105,8 @@
       0,
       0
     ],
-    "orbitalSpeed": 0.00018,
-    "spinSpeed": 0.011,
+    "orbitalSpeed": 0.00316,
+    "spinSpeed": 0.4940,
     "radius": 0.965,
     "tilt": 28.3,
     "orbitTilt": 1.8
