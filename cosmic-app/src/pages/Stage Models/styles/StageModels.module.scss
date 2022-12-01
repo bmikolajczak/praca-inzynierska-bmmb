@@ -25,9 +25,9 @@
 
   .galleryButtons {
     position: absolute;
-    bottom: 0;
+    bottom: 6px;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translateX(-50%);
     display: flex;
     gap: 4px;
     z-index: 20;
@@ -102,10 +102,10 @@
           color: white;
           padding: 4px 8px;
           border-radius: 8px;
-          border: 2px solid lightseagreen;
+          border: 2px solid #00ddff;
 
           &:hover {
-            background-color: lightseagreen;
+            background-color: #00ddff;
           }
         }
       }
@@ -122,11 +122,12 @@
     border-radius: 1px 75% 75% 75%;
     width: 16px;
     height: 16px;
-    border: cyan 2px solid;
+    border: #00ddff 2px solid;
+    background-color: rgba($color: #00ddff, $alpha: 0.2);
 
     &:hover {
-      background-color: cyan;
-      transition: all 0.25s ease-in;
+      background-color: #00ddff;
+      transition: all 0.5s ease-out;
     }
   }
 
