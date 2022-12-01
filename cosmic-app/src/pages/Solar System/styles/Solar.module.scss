@@ -26,49 +26,62 @@
   .planetInfo {
     position: absolute;
     z-index: 15;
-    top: 40%;
+    top: 50%;
     right: 4px;
+    transform: translateY(-50%);
     width: 30%;
     color: white;
     background-color: rgba($color: #000000, $alpha: 0.8);
     padding: 8px 12px;
     border-radius: 8px;
+    border-width: 0 0 2px;
+    border-color: #00ddff;
+    border-style: solid;
     .planetInfoLinks {
       display: flex;
       gap: 8px;
       justify-content: center;
+      align-items: center;
       padding: 6px;
       a {
         text-decoration: none;
         color: white;
         padding: 4px 8px;
         border-radius: 8px;
-        border: 2px solid darkviolet;
+        border: 2px solid #00ddff;
         &:hover {
-          background-color: darkviolet;
+          background-color: #00ddff;
         }
       }
     }
   }
-  .speedControl {
+  .menu {
     position: absolute;
     z-index: 20;
-    bottom: 0;
+    bottom: 4px;
     left: 50%;
-    transform: translate(-50%, -10%);
+    transform: translateX(-50%);
     display: flex;
-    gap: 3px;
+    gap: 14px;
+    border-color: #00ddff;
+    border-width: 2px 0 0;
+    border-style: solid;
+    border-radius: 8px 8px 0 0;
+    padding: 4px 4px 0;
     button {
-      background-color: rgba($color: #ffffff, $alpha: 0.2);
-      font-size: 16px;
-      padding: 4px;
+      background-color: #242424;
+      font-size: 18px;
       border-radius: 4px;
       color: white;
       border-color: transparent;
       cursor: pointer;
       &:hover {
-        background-color: rgba($color: #ffffff, $alpha: 0.1);
+        background-color: #111111;
       }
+    }
+    div {
+      display: flex;
+      gap: 3px;
     }
   }
   @keyframes fade-in {
@@ -81,5 +94,24 @@
   }
   .animateSnapCamera {
     animation: fade-in 1.5s ease-out;
+  }
+
+  @media screen and (max-width: 700px) {
+    .planetInfoParent{
+      position: relative;
+      .planetInfo {
+        top: 0;
+        width: 95%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        .planetInfoLinks {
+          text-align: center;
+        }
+      }
+    }
+    .menu {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
