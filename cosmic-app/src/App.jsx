@@ -4,16 +4,20 @@ import { Outlet } from 'react-router-dom'
 import { LinkHub } from './pages/LinkHub/components/LinkHub'
 import { HeaderNavigation } from './infrastructure/navigation/headerNavigation'
 import { Form } from './pages/Account/components/Form'
+import { ApodModal } from './pages/APOD/components/Modal'
+
+import { useSelector, useDispatch } from 'react-redux'
 
 export function App() {
-  const [hubVisible, setHubVisible] = useState(false)
+  // const [hubVisible, setHubVisible] = useState(false)
+  const modal = useSelector((state) => state.app.modalShown)
 
-  function toggleHub() {}
   return (
     <div>
       <HeaderNavigation />
-      <LinkHub />
+      {modal && <LinkHub />}
       <Outlet />
+      <ApodModal />
       <Form />
     </div>
   )

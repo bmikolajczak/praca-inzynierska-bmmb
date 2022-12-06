@@ -7,43 +7,33 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
-import {
-  collection,
-  setDoc,
-  doc,
-  getDoc,
-  arrayRemove,
-  updateDoc,
-} from 'firebase/firestore'
+import { collection, setDoc, doc, getDoc, arrayRemove, updateDoc } from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
+import { useDispatch, useSelector } from 'react-redux'
+
 import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
+import { changeUserLoggedIn } from '../../../infrastructure/store/appState'
 
 export function Account() {
-  const [activeTab, setActiveTab] = useState('signin')
-  const [isformActive, setFormActive] = useState(false)
-
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
-
-  //LOGIN
-  const [loginEmail, setLoginEmial] = useState('')
-  const [loginPassword, setloginPassword] = useState('')
 
   //Saved images
   const [savedImages, setSavedImages] = useState([])
 
   //user object retrieved from auth
   const user = auth.currentUser
-
   //user colelction ref
   const usersRef = collection(db, 'users')
-  //const Google provider
-  const googleProvider = new GoogleAuthProvider()
 
   //user's doc reference with saved images
   const userDocRef = doc(db, 'users', auth.currentUser.uid)
+
+  //Dispatch and selector from redux store
+  const dispatch = useDispatch()
+  const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
   async function GetSavedImages() {
     const userDocSnapshot = await getDoc(userDocRef)
@@ -62,80 +52,16 @@ export function Account() {
   useEffect(() => {
     GetSavedImages()
   }, [user])
-  async function registerUser() {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      )
-      console.log(user.user.uid)
-      try {
-        const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
-          name: 'Testy',
-          surname: 'Smith',
-          email: userEmail,
-        })
-        console.log('New document with user info: ', newUserRef)
-      } catch (error) {
-        console.log('Problem when creating user:', error)
-      }
-    } catch (error) {
-      console.log('OOh no,', error.message)
-    }
-  }
-
-  async function loginUser() {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      )
-      console.log('user: ', user.user)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
-  async function signInGoogle() {
-    try {
-      const result = await signInWithPopup(auth, googleProvider)
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-      //info about signd in user
-      const user = result.user
-      const newUserRef = await setDoc(doc(usersRef, user.uid), {
-        name: user.displayName,
-        email: user.email,
-      })
-      console.log(newUserRef)
-    } catch (error) {
-      const errorCode = error.code
-      const errorMessage = error.message
-      // The email of the user's account used.
-      const email = error.customData.email
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error)
-      console.log(
-        'code: ',
-        errorCode,
-        'message: ',
-        errorMessage,
-        'email: ',
-        email,
-        'credential used: ',
-        credential
-      )
-    }
-  }
+  //
 
   async function signoutUser() {
     try {
-      signOut(auth)
-      console.log('user is signed out')
+      await signOut(auth)
+      dispatch(changeUserLoggedIn())
+      alert('user is signed out', userLoggedIn)
+      window.location.href = '/about'
     } catch (error) {
-      console.log('error', error.message)
+      console.log('something went wrong', error.message)
     }
   }
 
@@ -143,16 +69,14 @@ export function Account() {
     const userDocRef = doc(db, 'users', user.uid)
     await updateDoc(userDocRef, { savedImages: arrayRemove(image) })
     //remove image from array
-    setSavedImages(
-      savedImages.filter((savedImg) => savedImg.title !== image.title)
-    )
+    setSavedImages(savedImages.filter((savedImg) => savedImg.title !== image.title))
     console.log('new seved images:', savedImages)
   }
   return (
     <div>
       <button onClick={signoutUser}>Sign Out</button>
       {/* <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button> */}
-      {auth.currentUser !== null ? (
+      {userLoggedIn ? (
         <div className={styles['profile-tile']}>
           <p className={styles['profile-header']}>Your Profile</p>
           <img src={auth.currentUser.photoURL} alt="placeholder image" />
@@ -162,22 +86,16 @@ export function Account() {
       ) : (
         <h1>Sign in to your exsisting account or create new one</h1>
       )}
-      {auth.currentUser !== null ? (
+      {userLoggedIn ? (
         <div className={styles['saved-images']}>
           <p className={styles['images-header']}>Saved Images</p>
           <div className={styles['cards']}>
             {savedImages.map((image, index) => (
               <div className={styles['image-card']}>
                 <div className={styles['card-visuals']}>
-                  <img
-                    src={image.url}
-                    alt={image.title}
-                    className={styles['fetched-photo']}
-                  />
+                  <img src={image.url} alt={image.title} className={styles['fetched-photo']} />
                   <p className={styles['image-title']}>{image.title}</p>
-                  <button onClick={() => removeImage(image)}>
-                    Remove image
-                  </button>
+                  <button onClick={() => removeImage(image)}>Remove image</button>
                 </div>
                 <p className={styles['image-desc']}>{image.explanation}</p>
               </div>
@@ -188,3 +106,67 @@ export function Account() {
     </div>
   )
 }
+
+// async function loginUser() {
+//   try {
+//     const user = await signInWithEmailAndPassword(
+//       auth,
+//       loginEmail,
+//       loginPassword
+//     )
+//     console.log('user: ', user.user)
+//   } catch (error) {
+//     console.log(error.message)
+//   }
+// }
+
+// async function signInGoogle() {
+//   try {
+//     const result = await signInWithPopup(auth, googleProvider)
+//     const credential = GoogleAuthProvider.credentialFromResult(result)
+//     const token = credential.accessToken
+//     //info about signd in user
+//     const user = result.user
+//     const newUserRef = await setDoc(doc(usersRef, user.uid), {
+//       name: user.displayName,
+//       email: user.email,
+//     })
+//     console.log(newUserRef)
+//   } catch (error) {
+//     const errorCode = error.code
+//     const errorMessage = error.message
+//     // The email of the user's account used.
+//     const email = error.customData.email
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error)
+//     console.log(
+//       'code: ',
+//       errorCode,
+//       'message: ',
+//       errorMessage,
+//       'email: ',
+//       email,
+//       'credential used: ',
+//       credential
+//     )
+//   }
+// }
+
+//async function registerUser() {
+//   try {
+//     const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
+//     console.log(user.user.uid)
+//     try {
+//       const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
+//         name: 'Testy',
+//         surname: 'Smith',
+//         email: userEmail,
+//       })
+//       console.log('New document with user info: ', newUserRef)
+//     } catch (error) {
+//       console.log('Problem when creating user:', error)
+//     }
+//   } catch (error) {
+//     console.log('OOh no,', error.message)
+//   }
+// }

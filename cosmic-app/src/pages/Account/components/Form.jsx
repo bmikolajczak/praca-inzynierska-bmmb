@@ -13,6 +13,8 @@ import { auth, db } from '../../../infrastructure/firebase/firebase'
 
 import styles from '../styles/Account.module.scss'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeUserLoggedIn, setActiveUser } from '../../../infrastructure/store/appState'
 
 export function Form() {
   const [showForm, setShowForm] = useState(false)
@@ -33,13 +35,14 @@ export function Form() {
   //const Google provider
   const googleProvider = new GoogleAuthProvider()
 
+  //ref to redux state and dispatch
+  const formVisible = useSelector((state) => state.app.loginFormShown)
+  const activeUser = useSelector((state) => state.app.currentUser)
+  const dispatch = useDispatch()
+
   async function registerUser() {
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      )
+      const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
       console.log(user.user.uid)
       try {
         const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
@@ -48,6 +51,8 @@ export function Form() {
           email: userEmail,
         })
         console.log('New document with user info: ', newUserRef)
+        //redirect to user page after successful registration
+        // setTimeout(() => (window.location.href = '/account'), 1000)
       } catch (error) {
         console.log('Problem when creating user:', error)
       }
@@ -58,14 +63,14 @@ export function Form() {
 
   async function loginUser() {
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      )
+      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       console.log('user: ', user.user)
+      dispatch(changeUserLoggedIn())
+
+      //redirect to user page after successful registration
+      // setTimeout(() => (window.location.href = '/account'), 1000)
     } catch (error) {
-      console.log(error.message)
+      console.log('something went wrong when logging you in', error.message)
     }
   }
 
@@ -76,11 +81,17 @@ export function Form() {
       const token = credential.accessToken
       //info about signd in user
       const user = result.user
+      dispatch(setActiveUser(user))
+
       const newUserRef = await setDoc(doc(usersRef, user.uid), {
         name: user.displayName,
         email: user.email,
       })
-      console.log(newUserRef)
+
+      console.log('new google user:', newUserRef)
+      console.log('user in REDUX', activeUser)
+      //redirect to another window
+      // setTimeout(() => (window.location.href = '/account'), 1000)
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
@@ -88,22 +99,13 @@ export function Form() {
       const email = error.customData.email
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error)
-      console.log(
-        'code: ',
-        errorCode,
-        'message: ',
-        errorMessage,
-        'email: ',
-        email,
-        'credential used: ',
-        credential
-      )
+      console.log('code: ', errorCode, 'message: ', errorMessage, 'email: ', email, 'credential used: ', credential)
     }
   }
+
   useEffect(() => {}, [user])
   return (
-    showForm &&
-    user === null && (
+    formVisible && (
       <div className={styles['account-form']}>
         <div className={styles['welcome-part']}>
           <h3>Welcome</h3>
@@ -122,21 +124,13 @@ export function Form() {
         <div className={styles['input-part']}>
           <ul className={styles.tabs}>
             <li
-              className={
-                activeTab === 'signin'
-                  ? styles['active-tab']
-                  : styles['inactive-tab']
-              }
+              className={activeTab === 'signin' ? styles['active-tab'] : styles['inactive-tab']}
               onClick={() => setActiveTab('signin')}
             >
               Sign In
             </li>
             <li
-              className={
-                activeTab === 'register'
-                  ? styles['active-tab']
-                  : styles['inactive-tab']
-              }
+              className={activeTab === 'register' ? styles['active-tab'] : styles['inactive-tab']}
               onClick={() => setActiveTab('register')}
             >
               Sign Up
@@ -145,11 +139,7 @@ export function Form() {
           {activeTab === 'register' && (
             <div className={styles.registerForm}>
               <label for="name">Name</label>
-              <input
-                className={styles['input-field']}
-                placeholder="Enter your name"
-                id="name"
-              />
+              <input className={styles['input-field']} placeholder="Enter your name" id="name" />
               <label for="email">Email</label>
               <input
                 className={styles['input-field']}
@@ -171,11 +161,7 @@ export function Form() {
               <label className={styles['input-field']} for="confirm">
                 Confirm Password
               </label>
-              <input
-                className={styles['input-field']}
-                placeholder="Re-enter your password"
-                id="confirm"
-              />
+              <input className={styles['input-field']} placeholder="Re-enter your password" id="confirm" />
               <button className={styles['button']} onClick={registerUser}>
                 Register
               </button>
@@ -184,27 +170,15 @@ export function Form() {
           {activeTab === 'signin' && (
             <div className={styles.loginForm}>
               <label for="email">Email</label>
-              <input
-                className={styles['input-field']}
-                placeholder="email"
-                id="login-email"
-              />
+              <input className={styles['input-field']} placeholder="email" id="login-email" />
               <label for="password">Password</label>
-              <input
-                className={styles['input-field']}
-                placeholder="Enter your password"
-                id="login-password"
-              />
+              <input className={styles['input-field']} placeholder="Enter your password" id="login-password" />
               <button className={styles.button} onClick={loginUser}>
                 Sign In
               </button>
             </div>
           )}
-          <button
-            className={styles.button}
-            id={styles['google-button']}
-            onClick={signInGoogle}
-          >
+          <button className={styles.button} id={styles['google-button']} onClick={signInGoogle}>
             <img height={16} src="src/assets/google-logo.png" />
             Sign In with Google
           </button>

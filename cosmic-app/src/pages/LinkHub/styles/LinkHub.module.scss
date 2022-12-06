@@ -1,7 +1,14 @@
 @import 'src/assets/variables.scss';
 
+.parent-cont {
+  max-width: 100vw;
+}
 .links-container {
   // height: 100vh;
+  width: 80vw;
+  background-color: #24254ec6;
+  position: absolute;
+  z-index: 2;
   padding: 6rem;
   display: grid;
   grid-template-columns: repeat(4, 25%);

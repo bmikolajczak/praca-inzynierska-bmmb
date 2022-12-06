@@ -13,6 +13,16 @@
     gap: 2rem;
     li {
       list-style: none;
+      p {
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px solid white;
+        &:hover {
+          border-color: $primary-color;
+          transition: 0.3s ease border-color;
+          cursor: pointer;
+        }
+      }
       a {
         color: white;
         text-decoration: none;
@@ -20,6 +30,7 @@
         &:hover {
           border-color: $primary-color;
           transition: 0.3s ease border-color;
+          cursor: pointer;
         }
       }
     }
