@@ -6,6 +6,12 @@ const initialState = {
   loginFormShown: false,
   userLoggedIn: true,
   currentUser: null,
+  chosenPhoto: {
+    pictureUrl: '',
+    pictureTitle: '',
+    pictureExplanation: '',
+    pictureCopyright: '',
+  },
 }
 
 const appSlice = createSlice({
