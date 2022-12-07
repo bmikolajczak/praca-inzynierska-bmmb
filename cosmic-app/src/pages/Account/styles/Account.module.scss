@@ -247,6 +247,10 @@
   display: none;
 }
 
+#remove-btn {
+  background-color: rgb(229, 74, 74);
+}
+
 @media (max-width: 614px) {
   .saved-images {
     margin: 5rem 0 7.5rem;

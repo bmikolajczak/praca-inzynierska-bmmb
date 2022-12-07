@@ -81,7 +81,7 @@ export function Account() {
 
   return (
     <div>
-      <button onClick={signoutUser}>Sign Out</button>
+      {/* <button onClick={signoutUser}>Sign Out</button> */}
       {/* <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button> */}
       {userLoggedIn ? (
         <div className={styles['profile-tile']}>
@@ -107,7 +107,9 @@ export function Account() {
                     className={styles['fetched-photo']}
                   />
                   <p className={styles['image-title']}>{image.title}</p>
-                  <button onClick={() => removeImage(image)}>Remove image</button>
+                  <button id={styles['remove-btn']} onClick={() => removeImage(image)}>
+                    Remove image
+                  </button>
                 </div>
                 <p className={styles['image-desc']}>{image.explanation}</p>
               </div>

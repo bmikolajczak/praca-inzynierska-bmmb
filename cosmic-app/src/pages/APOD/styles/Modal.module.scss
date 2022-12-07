@@ -1,0 +1,43 @@
+@import 'src/assets/variables.scss';
+
+.container {
+  background-color: #081122ee;
+  padding: 3rem 5rem;
+  position: absolute;
+  top: 100px;
+  margin: 0 100px;
+  border-radius: 30px;
+}
+#close {
+  background-color: rgb(229, 74, 74);
+  font-size: 1.5rem;
+  padding: 5px 5px 0;
+  border-radius: 10px;
+  color: white;
+  border: none;
+}
+.content-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .img-box {
+    img {
+      max-width: 700px;
+    }
+  }
+  .info {
+    h1 {
+      color: white;
+    }
+    flex-grow: 1;
+    color: $black-100;
+    .add-btn {
+      margin-top: 30px;
+      background-color: rgb(48, 170, 88);
+      color: white;
+      padding: 10px 5px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+    }
+  }
+}
