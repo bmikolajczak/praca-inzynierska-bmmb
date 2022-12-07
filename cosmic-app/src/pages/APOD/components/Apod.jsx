@@ -5,6 +5,11 @@ import { useEffect, useState } from 'react'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 
+import { useDispatch } from 'react-redux'
+import { setChosenPhoto, showChosenPhoto } from '../../../infrastructure/store/appState'
+
+import { BsFillPlusCircleFill } from 'react-icons/bs'
+
 import style from '../styles/Apod.module.scss'
 import styles2 from '../../Account/styles/Account.module.scss'
 
@@ -32,9 +37,7 @@ function CallApodApi() {
     await updateDoc(currentUserRef, {
       savedImages: arrayUnion({ ...image }),
     })
-    console.log(
-      `saved iamge: ' ${image.url} to account: ${auth.currentUser.uid}`
-    )
+    console.log(`saved iamge: ' ${image.url} to account: ${auth.currentUser.uid}`)
     alert('You saved an image.')
   }
 
@@ -65,6 +68,13 @@ function CallApodApi() {
     await updateDoc(currentUserRef, { savedImages: arrayUnion({ ...image }) })
     console.log(`image ${image.title} successfully added`)
   }
+  //set chosen pic function
+  const dispatch = useDispatch()
+  function updateChosenPic(image) {
+    dispatch(setChosenPhoto(image))
+    dispatch(showChosenPhoto())
+  }
+
   if (error) {
     return <div>Error: {error.message}</div>
   } else if (!isLoaded) {
@@ -77,11 +87,7 @@ function CallApodApi() {
             <b>{image.title}</b>
           </p>
           <div className={style.apodImageContainer}>
-            <img
-              className={style.apodImageCol + ' ' + style.apodImage}
-              src={image.url}
-              alt={image.title}
-            />
+            <img className={style.apodImageCol + ' ' + style.apodImage} src={image.url} alt={image.title} />
             <div className={style.apodInfo + ' ' + style.apodImageCol}>
               <p>{image.explanation}</p>
               <p>{image.date}</p>
@@ -95,7 +101,7 @@ function CallApodApi() {
           </div>
           <div className={style.apodButtons}>
             <button onClick={downloadImage}>Open</button>
-            <button onClick={saveImage}>Save</button>
+            <button onClick={saveToProfile(image)}>Save</button>
           </div>
         </div>
         <div className={styles2['saved-images']}>
@@ -105,13 +111,14 @@ function CallApodApi() {
               <div className={styles2['image-card']}>
                 <div className={styles2['card-visuals']}>
                   <img
+                    onClick={() => updateChosenPic(image)}
                     src={image.url}
                     alt={image.title}
                     className={style['fetched-photo']}
                   />
                   <p className={styles2['image-title']}>{image.title}</p>
                   <button onClick={() => saveToProfile(image)}>
-                    Save Image
+                    <BsFillPlusCircleFill /> Save Image
                   </button>
                 </div>
                 <p className={styles2['image-desc']}>{image.explanation}</p>

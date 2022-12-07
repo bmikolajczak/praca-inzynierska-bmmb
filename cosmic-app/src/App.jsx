@@ -11,13 +11,13 @@ import { useSelector, useDispatch } from 'react-redux'
 export function App() {
   // const [hubVisible, setHubVisible] = useState(false)
   const modal = useSelector((state) => state.app.modalShown)
-
+  const chosenPhotoShown = useSelector((state) => state.app.chosenPhotoShown)
   return (
     <div>
       <HeaderNavigation />
       {modal && <LinkHub />}
       <Outlet />
-      <ApodModal />
+      {chosenPhotoShown && <ApodModal />}
       <Form />
     </div>
   )

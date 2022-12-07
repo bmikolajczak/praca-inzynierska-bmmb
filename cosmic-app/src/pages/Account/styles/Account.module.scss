@@ -20,8 +20,7 @@
   background-color: $primary-light;
   display: flex;
   flex-direction: column;
-  background-image: url(src/assets/account/images/Wave1.svg),
-    url(src/assets/account/images/Wave2.svg);
+  background-image: url(src/assets/account/images/Wave1.svg), url(src/assets/account/images/Wave2.svg);
   background-position: left 10% bottom, right bottom 50%;
   background-repeat: no-repeat;
   h3 {
@@ -197,36 +196,37 @@
   align-items: flex-start;
   transition: 0.5s linear;
   background-color: $black-100;
+  cursor: pointer;
   p {
     color: $black-700;
   }
   button {
     // display: none;
     border-radius: 30px;
-    background-color: #bf1741;
+    background-color: #2c8b4c;
     color: $black-100;
     border-color: $black-700;
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
   }
-  &:hover {
-    position: relative;
-    transform: scale(1.05);
-    border-radius: 20px;
-    flex-basis: 750px;
-    padding: 1rem 2rem;
-    z-index: 10;
-    box-shadow: -2px 6px 29px 0px rgba(36, 37, 78, 1);
-  }
-  &:hover button {
-    display: block;
-  }
-  &:hover .image-desc {
-    display: block;
-    transition: 0.5s linear;
-    padding: 0 0.5rem 1rem;
-  }
+  // &:hover {
+  //   position: relative;
+  //   transform: scale(1.05);
+  //   border-radius: 20px;
+  //   flex-basis: 750px;
+  //   padding: 1rem 2rem;
+  //   z-index: 10;
+  //   box-shadow: -2px 6px 29px 0px rgba(36, 37, 78, 1);
+  // }
+  // &:hover button {
+  //   display: block;
+  // }
+  // &:hover .image-desc {
+  //   display: block;
+  //   transition: 0.5s linear;
+  //   padding: 0 0.5rem 1rem;
+  // }
 }
 .image-title {
   width: 100%;

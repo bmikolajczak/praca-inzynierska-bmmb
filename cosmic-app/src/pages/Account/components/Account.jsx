@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
-import { changeUserLoggedIn } from '../../../infrastructure/store/appState'
+import { changeUserLoggedIn, showChosenPhoto, setChosenPhoto } from '../../../infrastructure/store/appState'
 
 export function Account() {
   const [userEmail, setUserEmail] = useState('')
@@ -72,6 +72,13 @@ export function Account() {
     setSavedImages(savedImages.filter((savedImg) => savedImg.title !== image.title))
     console.log('new seved images:', savedImages)
   }
+
+  //chosen pic in store
+  function updateChosenPic(image) {
+    dispatch(setChosenPhoto(image))
+    dispatch(showChosenPhoto())
+  }
+
   return (
     <div>
       <button onClick={signoutUser}>Sign Out</button>
@@ -93,7 +100,12 @@ export function Account() {
             {savedImages.map((image, index) => (
               <div className={styles['image-card']}>
                 <div className={styles['card-visuals']}>
-                  <img src={image.url} alt={image.title} className={styles['fetched-photo']} />
+                  <img
+                    onClick={() => updateChosenPic(image)}
+                    src={image.url}
+                    alt={image.title}
+                    className={styles['fetched-photo']}
+                  />
                   <p className={styles['image-title']}>{image.title}</p>
                   <button onClick={() => removeImage(image)}>Remove image</button>
                 </div>
