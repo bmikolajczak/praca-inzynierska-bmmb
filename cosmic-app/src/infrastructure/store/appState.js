@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 //inital state
 const initialState = {
-  modalShown: false,
+  modalShown: true,
   loginFormShown: false,
   userLoggedIn: true,
   currentUser: null,

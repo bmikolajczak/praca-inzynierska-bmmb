@@ -17,6 +17,7 @@ const API_URL = 'https://api.nasa.gov/planetary/apod?api_key='
 const RandomImageCount = '&count=4'
 // TODO Not secured API key
 const API_KEY = '0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND'
+const MEDIA_TYPE = '&media_type="image"'
 
 // Note: concept_tags functionality is turned off in API
 
@@ -25,6 +26,8 @@ function CallApodApi() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [image, setImage] = useState('')
   const [fetchedImages, setFetchedImages] = useState([])
+  const [apodStartDate, setStartDate] = useState('')
+  const [apodEndDate, setEndDate] = useState('')
 
   const currentUserRef = doc(db, 'users', auth.currentUser.uid)
 
@@ -59,7 +62,6 @@ function CallApodApi() {
       .then(
         (result) => {
           setFetchedImages(result)
-          console.log('fetched: ', fetchedImages)
         },
         (error) => console.log('Error appeared: ', error)
       )
@@ -73,6 +75,32 @@ function CallApodApi() {
   function updateChosenPic(image) {
     dispatch(setChosenPhoto(image))
     dispatch(showChosenPhoto())
+  }
+
+  //filter function
+  async function getImages(numberOfImages) {
+    const imageCount = `&count=${numberOfImages}`
+    await fetch(API_URL + API_KEY + imageCount)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setFetchedImages(result)
+        },
+        (error) => console.log('Error appeared: ', error)
+      )
+  }
+  //search by date function
+  async function getImagesByDates() {
+    const startDate = `&start_date=${apodStartDate}`
+    const endDate = `&end_date=${apodEndDate}`
+    await fetch(API_URL + API_KEY + startDate + endDate)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setFetchedImages(result)
+        },
+        (error) => console.log('Error appeared: ', error)
+      )
   }
 
   if (error) {
@@ -101,11 +129,39 @@ function CallApodApi() {
           </div>
           <div className={style.apodButtons}>
             <button onClick={downloadImage}>Open</button>
-            <button onClick={saveToProfile(image)}>Save</button>
+            <button onClick={() => saveToProfile(image)}>Save</button>
           </div>
         </div>
         <div className={styles2['saved-images']}>
           <p className={styles2['images-header']}>Discover more</p>
+          <div className={style['filters']}>
+            <div>
+              <button onClick={() => getImages(3)}>Random 3 Images</button>
+              <button onClick={() => getImages(5)}>Random 5 Images</button>
+              <button onClick={() => getImages(10)}>Random 10 Images</button>
+            </div>
+            <div>
+              <span>from</span>
+              <input
+                type="date"
+                name="start-date"
+                onChange={(event) => {
+                  setStartDate(event.target.value)
+                  console.log(apodStartDate)
+                }}
+              />
+              <span>to</span>
+              <input
+                type="date"
+                name="end-date"
+                onChange={(event) => {
+                  setStartDate(event.target.value)
+                  console.log(apodEndDate)
+                }}
+              />
+              <button onClick={() => getImagesByDates()}>Search by date</button>
+            </div>
+          </div>
           <div className={styles2['cards']}>
             {fetchedImages.map((image) => (
               <div className={styles2['image-card']}>

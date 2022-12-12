@@ -58,3 +58,9 @@ p {
   max-height: 200px;
   width: auto;
 }
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.625rem;
+}

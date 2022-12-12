@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { LinkHub } from './pages/LinkHub/components/LinkHub'
@@ -9,7 +9,6 @@ import { ApodModal } from './pages/APOD/components/Modal'
 import { useSelector, useDispatch } from 'react-redux'
 
 export function App() {
-  // const [hubVisible, setHubVisible] = useState(false)
   const modal = useSelector((state) => state.app.modalShown)
   const chosenPhotoShown = useSelector((state) => state.app.chosenPhotoShown)
   return (
