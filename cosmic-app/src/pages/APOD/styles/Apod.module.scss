@@ -53,14 +53,52 @@ p {
   }
 }
 
+.filter-btn {
+  background-color: $primary-grey;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Poppins';
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+//span
+.datesSpan {
+  color: $black-700;
+  font-family: 'Poppins';
+  font-size: 1rem;
+}
+
 //FETCHED IMAGES
+.image-div {
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
 .fetched-photo {
-  max-height: 200px;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .filters {
   display: flex;
+  align-items: center;
   gap: 2rem;
   margin-bottom: 0.625rem;
+}
+.dates-div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.date-input {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: 'Poppins';
+  border-radius: 6px;
 }

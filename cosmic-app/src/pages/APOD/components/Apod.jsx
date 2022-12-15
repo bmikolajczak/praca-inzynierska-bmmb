@@ -136,13 +136,20 @@ function CallApodApi() {
           <p className={styles2['images-header']}>Discover more</p>
           <div className={style['filters']}>
             <div>
-              <button onClick={() => getImages(3)}>Random 3 Images</button>
-              <button onClick={() => getImages(5)}>Random 5 Images</button>
-              <button onClick={() => getImages(10)}>Random 10 Images</button>
+              <button className={style['filter-btn']} onClick={() => getImages(3)}>
+                Random 3 Images
+              </button>
+              <button className={style['filter-btn']} onClick={() => getImages(5)}>
+                Random 5 Images
+              </button>
+              <button className={style['filter-btn']} onClick={() => getImages(10)}>
+                Random 10 Images
+              </button>
             </div>
-            <div>
-              <span>from</span>
+            <div className={style['dates-div']}>
+              <span className={style['datesSpan']}>From</span>
               <input
+                className={style['date-input']}
                 type="date"
                 name="start-date"
                 onChange={(event) => {
@@ -150,8 +157,9 @@ function CallApodApi() {
                   console.log(apodStartDate)
                 }}
               />
-              <span>to</span>
+              <span className={style['datesSpan']}>To</span>
               <input
+                className={style['date-input']}
                 type="date"
                 name="end-date"
                 onChange={(event) => {
@@ -159,19 +167,23 @@ function CallApodApi() {
                   console.log(apodEndDate)
                 }}
               />
-              <button onClick={() => getImagesByDates()}>Search by date</button>
+              <button className={style['filter-btn']} onClick={() => getImagesByDates()}>
+                Search by date
+              </button>
             </div>
           </div>
           <div className={styles2['cards']}>
             {fetchedImages.map((image) => (
               <div className={styles2['image-card']}>
                 <div className={styles2['card-visuals']}>
-                  <img
-                    onClick={() => updateChosenPic(image)}
-                    src={image.url}
-                    alt={image.title}
-                    className={style['fetched-photo']}
-                  />
+                  <div className={style['image-div']}>
+                    <img
+                      onClick={() => updateChosenPic(image)}
+                      src={image.url}
+                      alt={image.title}
+                      className={style['fetched-photo']}
+                    />
+                  </div>
                   <p className={styles2['image-title']}>{image.title}</p>
                   <button onClick={() => saveToProfile(image)}>
                     <BsFillPlusCircleFill /> Save Image

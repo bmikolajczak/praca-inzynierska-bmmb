@@ -188,14 +188,21 @@
 }
 .cards {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
+  margin-top: 2.5rem;
 }
 .image-card {
   display: flex;
+  flex-basis: 20%;
+  justify-content: center;
   align-items: flex-start;
-  transition: 0.5s linear;
+  transition: 0.3s linear;
   background-color: $black-100;
+  box-shadow: -10px 13px 24px -12px rgba(8, 17, 34, 1);
+  border-radius: 30px;
+  padding: 1rem 0.75rem;
   cursor: pointer;
   p {
     color: $black-700;
@@ -210,25 +217,17 @@
     padding: 0.25rem 0.5rem;
     cursor: pointer;
   }
-  // &:hover {
-  //   position: relative;
-  //   transform: scale(1.05);
-  //   border-radius: 20px;
-  //   flex-basis: 750px;
-  //   padding: 1rem 2rem;
-  //   z-index: 10;
-  //   box-shadow: -2px 6px 29px 0px rgba(36, 37, 78, 1);
-  // }
-  // &:hover button {
-  //   display: block;
-  // }
-  // &:hover .image-desc {
-  //   display: block;
-  //   transition: 0.5s linear;
-  //   padding: 0 0.5rem 1rem;
-  // }
+  &:hover {
+    transform: translateY(-30px);
+    background-color: $black-700;
+    box-shadow: -2px 6px 29px 0px rgba(36, 37, 78, 1);
+  }
+  &:hover .image-title {
+    color: $black-100;
+  }
 }
 .image-title {
+  text-align: center;
   width: 100%;
   font-family: 'Poppins';
   font-weight: 600;
