@@ -28,8 +28,8 @@ export function LinkHub() {
         <Link to="/apod" className="apod-li" onClick={() => closeLinkHub()}>
           See interesting astronomy pictures
         </Link>
-        <Link to="/about" className="about-li" onClick={() => closeLinkHub()}>
-          Learn more about the project
+        <Link to="/quiz" className="about-li" onClick={() => closeLinkHub()}>
+          Check your knowledge with our quizes
         </Link>
       </div>
     </div>

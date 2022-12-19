@@ -13,6 +13,7 @@ import { App } from './App'
 import { Account } from './pages/Account/components/Account'
 import { About } from './pages/About Page/components/About'
 import { Apod } from './pages/APOD/components/Apod'
+import { Quizes } from './pages/Quizes/components/Quizes'
 import Solar from './pages/Solar System/components/Solar'
 import StageModels from './pages/Stage Models/components/StageModels'
 
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/apod" element={<Apod />} />
             <Route path="/solar" element={<Solar />} />
             <Route path="/stage" element={<StageModels />} />
+            <Route path="/quiz" element={<Quizes />} />
           </Route>
         </Routes>
       </BrowserRouter>
