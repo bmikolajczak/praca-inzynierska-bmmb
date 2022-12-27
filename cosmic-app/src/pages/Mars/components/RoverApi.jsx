@@ -12,8 +12,9 @@ export default function RoverApi() {
     fetch(baseUrl + '/rovers?api_key=' + apiKey)
       .then((res) => res.json())
       .then((result) => {
-        setData(result)
+        setData(result.rovers)
         setLoaded(true)
+        console.log(result.rovers);
       })
   }, [])
 
@@ -22,7 +23,7 @@ export default function RoverApi() {
       <h2>Mars Rover Photos</h2>
       <div className={style.formsContainer}>
         {loaded ? 
-          <SelectForm name="rovers" labelText="Available rovers " data={data.rovers} /> 
+          <SelectForm name="rovers" labelText="Available rovers " data={data} /> 
           : <div>Loading...</div>
         }
         

@@ -13,6 +13,7 @@ export default function SelectForm(props) {
   function handleSubmit(event) {
     event.preventDefault()
     console.log(selectedItem)
+    if(selectedItem === 'empty') return
     fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/'+ selectedItem +'/latest_photos?api_key=' + '0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND')
       .then((res) => res.json())
       .then((result) => {
@@ -37,10 +38,11 @@ export default function SelectForm(props) {
         </form>
         {loaded && data.length &&
           <div>
-            <p>{data[0].img_src}</p>
+            <p>{data[0].earth_date}</p>
             <img src={data[0].img_src}/>
           </div>
         }
+
       </div>
     )
 }
