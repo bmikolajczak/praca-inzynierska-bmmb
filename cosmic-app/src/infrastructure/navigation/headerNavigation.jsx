@@ -60,9 +60,9 @@ export const HeaderNavigation = () => {
             <a href="">Sign Out</a>
           </li>
         )}
-        <li onClick={() => signoutUser()}>
+        {/* <li onClick={() => signoutUser()}>
           <a href="">Sign Out</a>
-        </li>
+        </li> */}
       </ul>
     </nav>
   )

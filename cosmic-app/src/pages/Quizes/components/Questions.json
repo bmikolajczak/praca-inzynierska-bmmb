@@ -80,5 +80,169 @@
         { "answer": "Answer 3", "isTrue": false }
       ]
     }
+  ],
+  "solarQuestions": [
+    {
+      "question": "Why is Sun hot?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 2?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 3?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 4?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 5?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 6?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 7?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 8?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 9?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Question about Solar system 10?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    }
+  ],
+  "vehicleQuestions": [
+    {
+      "question": "Which of the following was sent to Mars?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 2?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 3?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 4?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 5?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 6?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 7?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 8?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 9?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    },
+    {
+      "question": "Questions about vehicles 10?",
+      "answers": [
+        { "answer": "Answer 1", "isTrue": false },
+        { "answer": "Answer 2", "isTrue": true },
+        { "answer": "Answer 3", "isTrue": false }
+      ]
+    }
   ]
 }
