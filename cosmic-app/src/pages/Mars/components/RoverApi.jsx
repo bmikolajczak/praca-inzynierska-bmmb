@@ -1,6 +1,6 @@
 import style from '../styles/RoverApi.module.scss'
 import React, { useState, useEffect } from 'react'
-import SelectForm from './SelectForm'
+import RoverForm from './RoverForm'
 
 export default function RoverApi() {
   const [loaded, setLoaded] = useState(false)
@@ -23,7 +23,7 @@ export default function RoverApi() {
       <h2>Mars Rover Photos</h2>
       <div className={style.formsContainer}>
         {loaded ? 
-          <SelectForm name="rovers" labelText="Available rovers " data={data} /> 
+          <RoverForm name="rovers" labelText="Available rovers " data={data} /> 
           : <div>Loading...</div>
         }
         
