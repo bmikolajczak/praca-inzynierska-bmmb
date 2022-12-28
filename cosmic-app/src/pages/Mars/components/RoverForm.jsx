@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import style from '../styles/RoverForm.module.scss'
 
 export default function RoverForm(props) {
@@ -36,18 +36,19 @@ export default function RoverForm(props) {
   function handleSubmit(event) {
     event.preventDefault()
     setIsSubmitted(false)
-    console.log('Sol:', sol);
-    console.log('selectedItem:', selectedItem);
-    if(selectedItem!== 'empty'){
-      fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`)
-        .then(res => res.json())
-        .then(result => {
+    console.log('Sol:', sol)
+    console.log('selectedItem:', selectedItem)
+    if (selectedItem !== 'empty') {
+      fetch(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
+      )
+        .then((res) => res.json())
+        .then((result) => {
           setPhotos(result.photos)
           setIsSubmitted(true)
           console.log(result.photos)
         })
     }
-
   }
   function handleSolChange(event) {
     setSol(event.target.value)
@@ -64,29 +65,41 @@ export default function RoverForm(props) {
             </option>
           ))}
         </select>
-        {/* <input type="submit" value="Submit"/> */}
-        {isLoaded && !error && (
-          <div>
-            <p>
-              Rover: <b>{rover.name}</b>
-            </p>
-            <p>Mission status: {rover.status}</p>
-            <p>Max Sol: {rover.max_sol}</p>
-            <p>Max date: {rover.max_date}</p>
-            <p>Launch date: {rover.launch_date}</p>
-            <p>Landing date: {rover.landing_date}</p>
-            <p>Total number of photos: {rover.total_photos}</p>
-          </div>
-        )}
-        <label htmlFor="sol">Choose Sol (between 0 and {rover.max_sol})</label>
+        <label htmlFor="sol">Choose Sol</label>
         <input type="number" name="sol" id="sol" value={sol} onChange={handleSolChange} min="0" max={rover.max_sol} />
         <input type="submit" value="Submit" />
       </form>
-      {isSubmitted && photos.length &&
-      <div>
-        <img src={photos[0].img_src} className={style.photo}/>
-      </div>      
-      }
+      {isLoaded && !error && (
+        <div>
+          <p>
+            Rover: <b>{rover.name}</b>
+          </p>
+          <p>
+            Mission status: <b>{rover.status}</b>
+          </p>
+          <p>
+            Max Sol: <b>{rover.max_sol}</b>
+          </p>
+          <p>
+            Max date: <b>{rover.max_date}</b>
+          </p>
+          <p>
+            Launch date: <b>{rover.launch_date}</b>
+          </p>
+          <p>
+            Landing date: <b>{rover.landing_date}</b>
+          </p>
+          <p>
+            Total number of photos: <b>{rover.total_photos}</b>
+          </p>
+        </div>
+      )}
+      {isSubmitted && photos.length && (
+        <div className={style.photo}>
+          <img src={photos[0].img_src} />
+          <p>blabla</p>
+        </div>
+      )}
     </div>
   )
 }
