@@ -10,6 +10,7 @@ export default function RoverForm(props) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [sol, setSol] = useState(0)
   const [photos, setPhotos] = useState([])
+  const [photoIndex, setPhotoIndex] = useState(0)
 
   function handleRoverChange(event) {
     setIsLoaded(false)
@@ -37,6 +38,7 @@ export default function RoverForm(props) {
   function handleSubmit(event) {
     event.preventDefault()
     setIsSubmitted(false)
+    setPhotoIndex(0)
     console.log('Sol:', sol)
     console.log('selectedItem:', selectedItem)
     if (selectedItem !== 'empty') {
@@ -55,10 +57,16 @@ export default function RoverForm(props) {
     setSol(event.target.value)
   }
   function prevPhoto(){
+    if(photoIndex > 0) {
+      setPhotoIndex(photoIndex - 1);
+    }
+
 
   }
   function nextPhoto() {
-    
+    if(photoIndex < photos.length - 1) {
+      setPhotoIndex(photoIndex + 1);
+    }
   }
 
   return (
@@ -108,17 +116,17 @@ export default function RoverForm(props) {
         {isSubmitted && photos.length && (
           <div className={style.photoContainer}>
             <div className={style.photoTags}>
-              <span>{photos[0].camera.full_name}</span>
-              <span>{photos[0].earth_date}</span>
+              <span>{photos[photoIndex].camera.name}</span>
+              <span>{photos[photoIndex].earth_date}</span>
             </div>
-            <img src={photos[0].img_src} />
+            <img src={photos[photoIndex].img_src} />
             <div className={style.stepsContainer}>
               <button onClick={prevPhoto}>
                 <AiFillCaretLeft />
               </button>
-              <span>x</span>
+              <span>{photoIndex + 1}</span>
               <span>/</span>
-              <span>y</span>
+              <span>{photos.length}</span>
               <button onClick={nextPhoto}>
                 <AiFillCaretRight />
               </button>
