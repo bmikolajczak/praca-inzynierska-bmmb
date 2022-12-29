@@ -85,6 +85,10 @@ export default function Landscapes() {
         <button onClick={prevLand}>
           <AiFillCaretLeft />
         </button>
+        <span>{activeIndex + 1}</span>
+              <span>/</span>
+              <span>{landscapes.length}</span>
+
         <button onClick={nextLand}>
           <AiFillCaretRight />
         </button>
