@@ -1,24 +1,69 @@
 .roverForm {
   transition: all 0.8s ease;
-  background-color: darkgreen;
+  background-color: #0d0d0d;
   padding: 2em;
   display: flex;
   align-items: center;
-  min-height: 80vh;
-  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 60vh;
+  flex-direction: row;
   gap: 2em;
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  .photo {
-    img {
-      max-width: 400px;
-      height: auto;
-      object-fit: contain;
+  .formInfoPanel {
+    form {
+      display: flex;
+      flex-direction: column;
+      input[type='number'],
+      select {
+        padding: 4px;
+        font-size: inherit;
+        font-family: inherit;
+        border: none;
+        border-radius: 4px;
+        background-color: #1e1e1e;
+        color: white;
+        text-align: center;
+      }
+      input[type='submit'] {
+        font-size: inherit;
+        font-family: inherit;
+        margin: 8px 0;
+        border-radius: 4px;
+        background-color: #1e1e1e;
+        color: white;
+        padding: 8px;
+        border: 3px solid #0088ff;
+      }
     }
-    display: flex;
-    flex-direction: column;
+  }
+  .photoTagsPanel {
+    .photoContainer {
+      .photoTags {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      background-color: #0088ff;
+      padding: 8px;
+      img {
+        max-width: 360px;
+        height: auto;
+        object-fit: contain;
+      }
+      .stepsContainer {
+        display: flex;
+        justify-content: center;
     align-items: center;
+
+        button {
+          display: flex;
+          font-size: 32px;
+          border-radius: 4px;
+          background-color: transparent;
+          border: none;
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

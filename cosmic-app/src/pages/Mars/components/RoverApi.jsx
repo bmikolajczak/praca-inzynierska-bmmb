@@ -23,7 +23,7 @@ export default function RoverApi() {
       <h2>Mars Rover Photos</h2>
       <div className={style.formsContainer}>
         {loaded ? 
-          <RoverForm name="rovers" labelText="Available rovers " data={data} /> 
+          <RoverForm name="rovers" labelText="Choose rover " data={data} /> 
           : <div>Loading...</div>
         }
         

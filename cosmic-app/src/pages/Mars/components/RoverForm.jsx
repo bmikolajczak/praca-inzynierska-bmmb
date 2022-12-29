@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import style from '../styles/RoverForm.module.scss'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 export default function RoverForm(props) {
   const [selectedItem, setItem] = useState('empty')
@@ -53,53 +54,78 @@ export default function RoverForm(props) {
   function handleSolChange(event) {
     setSol(event.target.value)
   }
+  function prevPhoto(){
+
+  }
+  function nextPhoto() {
+    
+  }
+
   return (
     <div className={style.roverForm}>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor={props.name}>{props.labelText}</label>
-        <select name={props.name} id={props.name} onChange={handleRoverChange}>
-          <option value="empty"></option>
-          {props.data.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="sol">Choose Sol</label>
-        <input type="number" name="sol" id="sol" value={sol} onChange={handleSolChange} min="0" max={rover.max_sol} />
-        <input type="submit" value="Submit" />
-      </form>
-      {isLoaded && !error && (
-        <div>
-          <p>
-            Rover: <b>{rover.name}</b>
-          </p>
-          <p>
-            Mission status: <b>{rover.status}</b>
-          </p>
-          <p>
-            Max Sol: <b>{rover.max_sol}</b>
-          </p>
-          <p>
-            Max date: <b>{rover.max_date}</b>
-          </p>
-          <p>
-            Launch date: <b>{rover.launch_date}</b>
-          </p>
-          <p>
-            Landing date: <b>{rover.landing_date}</b>
-          </p>
-          <p>
-            Total number of photos: <b>{rover.total_photos}</b>
-          </p>
-        </div>
-      )}
-      {isSubmitted && photos.length && (
-        <div className={style.photo}>
-          <img src={photos[0].img_src} />
-          <p>blabla</p>
-        </div>
-      )}
+      <div className={style.formInfoPanel}>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor={props.name}>{props.labelText}</label>
+          <select name={props.name} id={props.name} onChange={handleRoverChange}>
+            <option value="empty"></option>
+            {props.data.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="sol">Choose Sol</label>
+          <input type="number" name="sol" id="sol" value={sol} onChange={handleSolChange} min="0" max={rover.max_sol} />
+          <input type="submit" value="Submit" />
+        </form>
+        {isLoaded && !error && (
+          <div>
+            <p>
+              Rover: <b>{rover.name}</b>
+            </p>
+            <p>
+              Mission status: <b>{rover.status}</b>
+            </p>
+            <p>
+              Last Sol: <b>{rover.max_sol}</b>
+            </p>
+            <p>
+              Last date: <b>{rover.max_date}</b>
+            </p>
+            <p>
+              Launch date: <b>{rover.launch_date}</b>
+            </p>
+            <p>
+              Landing date: <b>{rover.landing_date}</b>
+            </p>
+            <p>
+              Total number of photos: <b>{rover.total_photos}</b>
+            </p>
+          </div>
+        )}
+      </div>
+      <div className={style.photoTagsPanel}>
+        {isSubmitted && photos.length && (
+          <div className={style.photoContainer}>
+            <div className={style.photoTags}>
+              <span>{photos[0].camera.full_name}</span>
+              <span>{photos[0].earth_date}</span>
+            </div>
+            <img src={photos[0].img_src} />
+            <div className={style.stepsContainer}>
+              <button onClick={prevPhoto}>
+                <AiFillCaretLeft />
+              </button>
+              <span>x</span>
+              <span>/</span>
+              <span>y</span>
+              <button onClick={nextPhoto}>
+                <AiFillCaretRight />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
