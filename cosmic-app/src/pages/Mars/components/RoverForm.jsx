@@ -60,8 +60,6 @@ export default function RoverForm(props) {
     if(photoIndex > 0) {
       setPhotoIndex(photoIndex - 1);
     }
-
-
   }
   function nextPhoto() {
     if(photoIndex < photos.length - 1) {
