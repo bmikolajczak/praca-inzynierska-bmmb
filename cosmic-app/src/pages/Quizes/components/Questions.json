@@ -1,247 +1,277 @@
 {
   "marsQuestions": [
     {
-      "question": "Why is Mars red?",
+      "question": "What does the soil of Mars consist of?",
+      "explanation": "Martian is slightly alkaline and contains elements such as magnesium, sodium, potassium and chlorine. These nutrients are found in soils on Earth as well.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "magnesium, sodium, potassium and chlorine", "isTrue": true },
+        { "answer": "potassium, chlorine, zinc and coal", "isTrue": false },
+        { "answer": "magnesium, silver, chlorine and potassium", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 2",
+      "question": "What gives Mars its red color?",
+      "explanation": "The Red appearance of Mars is caused by the iron oxide prevalent on its surface.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Radioactive isotopes in the soil", "isTrue": false },
+        { "answer": "Iron oxide in the soil", "isTrue": true },
+        { "answer": "Refraction of light in the atmosphere", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 3",
+      "question": "What element makes up most of the Martian atmosphere?",
+      "explanation": "The atmosphere of Mars consists of about 96% carbon dioxide, 1.93% argon and 1.89% nitrogen along with traces of oxygen and water. The atmosphere is quite dusty, containing particulates about 1.5 µm in diameter which give the Martian sky a tawny color when seen from the surface",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "nitrogen", "isTrue": false },
+        { "answer": "oxygen", "isTrue": false },
+        { "answer": "carbon dioxide", "isTrue": true }
       ]
     },
     {
-      "question": "Question about Mars 4",
+      "question": "What is the highest mountain on Mars?",
+      "explanation": "Olympus Mons is 21.9 km tall which makes it two and half times the height of Mount Everest.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Ascraeus Mons", "isTrue": false },
+        { "answer": "Olympus Mons", "isTrue": true },
+        { "answer": "Arsia Mons", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 5",
+      "question": "Which of the natural features are both met on Earth and Mars?",
+      "explanation": "Mars, similar to Earth, has two polar ice caps. During a pole's winter, it lies in continuous darkness, chilling the surface and causing the deposition of 25–30% of the atmosphere into slabs of dry ice. When the poles are again exposed to sunlight, the frozen dry ice sublimes.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "clouds", "isTrue": false },
+        { "answer": "oceans", "isTrue": false },
+        { "answer": "polar ice caps", "isTrue": true }
       ]
     },
     {
-      "question": "Question about Mars 6",
+      "question": "Select the correct order of missions to Mars",
+      "explanation": "Opportunity mission was launched on 8th of July 2003; Curiosity on 26th of November 2011; InSight on 5th of May 2018; Perseverance on 30th July 2020",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Opportunity, Curiosity, InSight, Perseverance", "isTrue": true },
+        { "answer": "Perseverance, Opportunity, InSight, Curiosity", "isTrue": false },
+        { "answer": "Curiosity, Perseverance, Opportunity, InSight", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 7",
+      "question": "How much taller than Mount Everest is Olympus Mons?",
+      "explanation": "Olympus Mons is about two and a half times as tall as Mount Everest with a height of 21,9km.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "five times as tall", "isTrue": false },
+        { "answer": "three times as tall", "isTrue": false },
+        { "answer": "two and a half times as tall", "isTrue": true }
       ]
     },
     {
-      "question": "Question about Mars 8",
+      "question": "Which of the following entrepreneurs is passionate about Mars exploration?",
+      "explanation": "Founder of SpaceX and Tesla- Elon Musk is known for his interest in colonization of Mars.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Bill Gates", "isTrue": false },
+        { "answer": "Elon Musk", "isTrue": true },
+        { "answer": "Warren Buffet", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 9",
+      "question": "Which of the following nations was the first to attempt a Mars mission?",
+      "explanation": "The first nation to attempt a Mars mission was The Soviet Union, which launched the 1M No.1 mission on 10th of October 1960.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "The United States ", "isTrue": false },
+        { "answer": "The Soviet Union", "isTrue": true },
+        { "answer": "China", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Mars 10",
+      "question": "How many moons does Mars have?",
+      "explanation": "Mars has two irregularly shaped moons: Phobos and Deimos, whose names were inspired by Greek mythological twins.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "One", "isTrue": false },
+        { "answer": "Two", "isTrue": true },
+        { "answer": "Three", "isTrue": false }
       ]
     }
   ],
   "solarQuestions": [
     {
-      "question": "Why is Sun hot?",
+      "question": "Which of the following planets barely spins?",
+      "explanation": "Venus takes 243 Earth days to rotate one time, but its atmosphere circulates the planet every four days.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Earth", "isTrue": false },
+        { "answer": "Venus", "isTrue": true },
+        { "answer": "Saturn", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 2?",
+      "question": "During a day on this planet the temperature is high enough to melt lead but at night drops -178C. Which planet is it?",
+      "explanation": "Temperatures on Mercury are extreme. During the day, temperatures on the surface can reach 430 degrees Celsius. During the night temperature can drop down to 180 degrees Celsius.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Mercury", "isTrue": true },
+        { "answer": "Venus", "isTrue": false },
+        { "answer": "Neptune", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 3?",
+      "question": "Which of the following is a dwarf planet?",
+      "explanation": "Pluto was reclassified as a dwarf planet in 2006, thus not being a part of the Solar System.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Pluto", "isTrue": true },
+        { "answer": "Mercury", "isTrue": false },
+        { "answer": "Venus", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 4?",
+      "question": "What are the two biggest planets in our solar system made of?",
+      "explanation": "The two largest planets in our solar system - Jupiter and Saturn,are made of hydrogen and helium.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "iron and potassium", "isTrue": false },
+        { "answer": "hydrogen and helium", "isTrue": true },
+        { "answer": "ammonia and methane", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 5?",
+      "question": "How old is the solar system?",
+      "explanation": "The solar system that we know today was formed 4.5 billion years ago.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "6 billion years", "isTrue": false },
+        { "answer": "20 billion years", "isTrue": false },
+        { "answer": "4.5 billion years", "isTrue": true }
       ]
     },
     {
-      "question": "Question about Solar system 6?",
+      "question": "Which spiral arm of our galaxy is the solar system located in?",
+      "explanation": "Spiral arms are parts of the Milky way that wind outward the center. Our solar system is located in Orion Arm.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Perseus Arm", "isTrue": false },
+        { "answer": "Orion Arm", "isTrue": true },
+        { "answer": "Sagittarius Arm", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 7?",
+      "question": "How far away is the Earth located from the Sun?",
+      "explanation": "The Earth is 150,000,000 kilometers, about 93,000,000 miles, away from the Sun.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "150,000,000 km", "isTrue": true },
+        { "answer": "350,000 km", "isTrue": false },
+        { "answer": "100,000,000 km", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 8?",
+      "question": "How much of the solar system mass (excluding the Sun) do Saturn and Jupiter account for?",
+      "explanation": "Jupiter and Saturn make up for 90% of the mass of the Solar System.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "74%", "isTrue": false },
+        { "answer": "90%", "isTrue": true },
+        { "answer": "30%", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 9?",
+      "question": "What are Saturn’s rings mostly made of?",
+      "explanation": "The ring particles are made almost entirely of water ice, with a trace component of rocky material.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Rock", "isTrue": false },
+        { "answer": "Ice", "isTrue": true },
+        { "answer": "Frozen lava", "isTrue": false }
       ]
     },
     {
-      "question": "Question about Solar system 10?",
+      "question": "Which of the following names a set of planets that all have rings?",
+      "explanation": "Jupiter, Saturn, Uranus, and Neptune all have rings. Only Saturn’s are so clearly visible with a naked eye.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Venus, Saturn, Jupiter, Neptune", "isTrue": false },
+        { "answer": "Jupiter, Mars, Saturn, Venus", "isTrue": false },
+        { "answer": "Jupiter, Saturn, Uranus, and Neptune", "isTrue": true }
       ]
     }
   ],
   "vehicleQuestions": [
     {
-      "question": "Which of the following was sent to Mars?",
+      "question": "What was the name of the robotic lander that was used to study the deep interior of Mars?",
+      "explanation": "The lander was called InSight it stand for: Interior Exploration using Seismic Investigations, Geodesy and Heat Transport",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Perseverance", "isTrue": false },
+        { "answer": "InSight", "isTrue": true },
+        { "answer": "Opportunity", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 2?",
+      "question": "Which of the following telescopes was launched in December 2021?",
+      "explanation": "James Webb Space Telescope was launched in December 2021. It’s the largest optical telescope in space, its high resolution and sensitivity allow it to view objects too old, distant, or faint for the Hubble Space Telescope.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Hubble", "isTrue": false },
+        { "answer": "Hitomi", "isTrue": false },
+        { "answer": "James Webb ", "isTrue": true }
       ]
     },
     {
-      "question": "Questions about vehicles 3?",
+      "question": "How big is the Hubble Space Telescope?",
+      "explanation": "Hubble is 13.2 m long and 4.2 m wide  at the back, where the scientific instruments are housed. Weighing about 12,246 kg, the telescope is approximately the same size and weight as a school bus.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "the size of a house ", "isTrue": false },
+        { "answer": "the size of a school bus", "isTrue": true },
+        { "answer": "the size of a car", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 4?",
+      "question": "Which of the following contains the Golden Record- sounds and imagery of Earth?",
+      "explanation": "The Voyager message is carried by a phonograph record, a 12-inch gold-plated copper disk containing sounds and images selected to portray the diversity of life and culture on Earth.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Voyager 1", "isTrue": false },
+        { "answer": "Both Voyagers 1 and 2", "isTrue": true },
+        { "answer": "Perseverance", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 5?",
+      "question": "Which of the following was the first to successfully land and operate on Mars?",
+      "explanation": "Viking 1 was the first successful MArs lander. It landed on Mars on 20 July 1976 and operated for 2245 sols.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Perseverance", "isTrue": false },
+        { "answer": "Viking 1", "isTrue": true },
+        { "answer": "Ingenuity", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 6?",
+      "question": "Which of the following was the first to be tested to fly on another planet?",
+      "explanation": "The Mars Helicopter, Ingenuity, is a technology demonstration to test powered, controlled flight on another world for the first time.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Ingenuity", "isTrue": true },
+        { "answer": "Perseverance", "isTrue": false },
+        { "answer": "InSight", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 7?",
+      "question": "Which of the following is the most accurate telescope?",
+      "explanation": "High resolution and sensitivity of James Webb space telescopes will enable  investigations across many fields of astronomy and cosmology, such as observation of the first stars, the formation of the first galaxies, and detailed atmospheric characterization of potentially habitable exoplanets.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Hubble", "isTrue": false },
+        { "answer": "James Webb", "isTrue": true },
+        { "answer": "Spitzer", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 8?",
+      "question": "Which of the following is a twin rover to the Opportunity and were sent together to conduct research on Mars?",
+      "explanation": "Opportunity landed on Mars three weeks after his twin rover - Spirit landed within impact crater Gusev.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "InSight", "isTrue": false },
+        { "answer": "Spirit", "isTrue": true },
+        { "answer": "Perseverance", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 9?",
+      "question": "What is the name of the location Perseverance was planned to land on?",
+      "explanation": "Perseverance landed in the martian crater called Jezro, which was once flooded with water.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Jezero Crater", "isTrue": true },
+        { "answer": "Holden Crater", "isTrue": false },
+        { "answer": "Olympus Mons", "isTrue": false }
       ]
     },
     {
-      "question": "Questions about vehicles 10?",
+      "question": "Which of the missions was devoted to understanding the atmosphere of Mars?",
+      "explanation": "The Mars Atmosphere and Volatile EvolutioN (MAVEN) mission is to determine the role that loss of atmospheric gas to space played in changing the Martian climate through time.",
       "answers": [
-        { "answer": "Answer 1", "isTrue": false },
-        { "answer": "Answer 2", "isTrue": true },
-        { "answer": "Answer 3", "isTrue": false }
+        { "answer": "Odyssey", "isTrue": false },
+        { "answer": "MAVEN", "isTrue": true },
+        { "answer": "Ingenuity", "isTrue": false }
       ]
     }
   ]
