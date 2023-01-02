@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import style from '../styles/RoverForm.module.scss'
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
+import { useEffect } from 'react'
 
 export default function RoverForm(props) {
   const [selectedItem, setItem] = useState('empty')
-  const [error, setError] = useState(null)
+  const [roverError, setRoverError] = useState(null)
+  const [submitError, setSubmitError] = useState(null)
   const [rover, setRover] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isSubmitLoaded, setSubmitLoaded] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [sol, setSol] = useState(0)
   const [photos, setPhotos] = useState([])
-  const [photoIndex, setPhotoIndex] = useState(0)
 
   function handleRoverChange(event) {
     setIsLoaded(false)
     setIsSubmitted(false)
-    setError(null)
+    setRoverError(null)
     setItem(event.target.value)
     console.log(event.target.value)
     if (event.target.value !== 'empty') {
@@ -26,21 +28,19 @@ export default function RoverForm(props) {
         .then((result) => {
           setRover(result.rover)
           setIsLoaded(true)
-          console.log(result.rover)
+          setIsSubmitted(false)
         }),
-        (error) => {
+        (roverError) => {
           setIsLoaded(true)
-          setError(error)
-          console.log(error)
+          setRoverError(roverError)
+          console.warn(roverError)
         }
     }
   }
   function handleSubmit(event) {
     event.preventDefault()
-    setIsSubmitted(false)
-    setPhotoIndex(0)
-    console.log('Sol:', sol)
-    console.log('selectedItem:', selectedItem)
+    setIsSubmitted(true)
+    setSubmitLoaded(false)
     if (selectedItem !== 'empty') {
       fetch(
         `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
@@ -48,23 +48,18 @@ export default function RoverForm(props) {
         .then((res) => res.json())
         .then((result) => {
           setPhotos(result.photos)
+          setSubmitLoaded(true)
+        }),
+        (submitError) => {
           setIsSubmitted(true)
-          console.log(result.photos)
-        })
+          setSubmitLoaded(true)
+          setSubmitError(submitError)
+          console.warn(submitError)
+        }
     }
   }
   function handleSolChange(event) {
     setSol(event.target.value)
-  }
-  function prevPhoto(){
-    if(photoIndex > 0) {
-      setPhotoIndex(photoIndex - 1);
-    }
-  }
-  function nextPhoto() {
-    if(photoIndex < photos.length - 1) {
-      setPhotoIndex(photoIndex + 1);
-    }
   }
 
   return (
@@ -84,7 +79,7 @@ export default function RoverForm(props) {
           <input type="number" name="sol" id="sol" value={sol} onChange={handleSolChange} min="0" max={rover.max_sol} />
           <input type="submit" value="Submit" />
         </form>
-        {isLoaded && !error && (
+        {isLoaded && !roverError && (
           <div>
             <p>
               Rover: <b>{rover.name}</b>
@@ -111,27 +106,60 @@ export default function RoverForm(props) {
         )}
       </div>
       <div className={style.photoTagsPanel}>
-        {isSubmitted && photos.length && (
-          <div className={style.photoContainer}>
-            <div className={style.photoTags}>
-              <span>{photos[photoIndex].camera.name}</span>
-              <span>{photos[photoIndex].earth_date}</span>
-            </div>
-            <img src={photos[photoIndex].img_src} />
-            <div className={style.stepsContainer}>
-              <button onClick={prevPhoto}>
-                <AiFillCaretLeft />
-              </button>
-              <span>{photoIndex + 1}</span>
-              <span>/</span>
-              <span>{photos.length}</span>
-              <button onClick={nextPhoto}>
-                <AiFillCaretRight />
-              </button>
-            </div>
-          </div>
-        )}
+        <PhotoFrame photos={photos} isSubmitted={isSubmitted} isLoaded={isSubmitLoaded} error={submitError} />
       </div>
     </div>
   )
+}
+
+function PhotoFrame(props) {
+  const photos = props.photos
+  const isSubmitted = props.isSubmitted
+  const isLoaded = props.isLoaded
+  const error = props.error
+  const [photoIndex, setPhotoIndex] = useState(0)
+
+  useEffect(()=> {
+    setPhotoIndex(0)
+  }, [photos])
+
+  function prevPhoto() {
+    if (photoIndex > 0) {
+      setPhotoIndex(photoIndex - 1)
+    }
+  }
+  function nextPhoto() {
+    if (photoIndex < photos.length - 1) {
+      setPhotoIndex(photoIndex + 1)
+    }
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>
+  } else if (!isLoaded && isSubmitted) {
+    return <div>Loading...</div>
+  } else if (isSubmitted && photos.length == 0) {
+    return <div>No photos on chosen Sol</div>
+  } else if (isSubmitted) {
+    return (
+      <div className={style.photoContainer}>
+        <div className={style.photoTags}>
+          <span>{photos[photoIndex].camera.name}</span>
+          <span>{photos[photoIndex].earth_date}</span>
+        </div>
+        <img src={photos[photoIndex].img_src} />
+        <div className={style.stepsContainer}>
+          <button onClick={prevPhoto}>
+            <AiFillCaretLeft />
+          </button>
+          <span>{photoIndex + 1}</span>
+          <span>/</span>
+          <span>{photos.length}</span>
+          <button onClick={nextPhoto}>
+            <AiFillCaretRight />
+          </button>
+        </div>
+      </div>
+    )
+  }
 }
