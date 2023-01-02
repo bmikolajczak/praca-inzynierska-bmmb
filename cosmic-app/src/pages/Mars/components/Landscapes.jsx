@@ -77,7 +77,7 @@ export default function Landscapes() {
               <OrbitControls makeDefault enableZoom={true} enablePan={false} zoomSpeed={0.7} />
             </Suspense>
           </Canvas>
-          <LoaderCustom/>
+          <LoaderCustom />
         </div>
         <div className={style.landInfo}>{landsInfo}</div>
       </div>
@@ -85,6 +85,10 @@ export default function Landscapes() {
         <button onClick={prevLand}>
           <AiFillCaretLeft />
         </button>
+        <span>{activeIndex + 1}</span>
+        <span>/</span>
+        <span>{landscapes.length}</span>
+
         <button onClick={nextLand}>
           <AiFillCaretRight />
         </button>

@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import Landscapes from './Landscapes'
 import { Clock } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
+import RoverApi from './RoverApi'
 
 // Imported 3D Globe model
 function MarsGlobe() {
@@ -42,6 +43,7 @@ export default function Mars() {
         </div>
       </section>
       <Landscapes />
+      <RoverApi />
     </main>
   )
 }
