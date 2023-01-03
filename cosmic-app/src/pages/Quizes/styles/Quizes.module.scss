@@ -13,6 +13,11 @@
     font-size: 30;
   }
 }
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .question-box {
   display: flex;
   flex-direction: column;
@@ -59,4 +64,29 @@
   border-color: $black-100;
   background-color: $black-700;
   padding: 18px 47px;
+}
+
+.quiz-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.choice-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+.choice-button {
+  font-weight: 300;
+  font-size: 30px;
+  color: $black-100;
+  background-color: $black-700;
+  padding: 18px 47px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s linear;
+  &:hover {
+    background-color: $black-100;
+    color: $black-700;
+  }
 }

@@ -12,11 +12,13 @@ export function Quizes() {
   const [summaryVisible, setSummaryVisibility] = useState(false)
   const [chosenQuiz, setChosenQuiz] = useState('marsQuestions')
   const [showQuizSelection, setShowQuizSelection] = useState(true)
+  const [quizVisible, setQuizVisible] = useState(false)
 
   function choseQuiz(quiz) {
     setChosenQuiz(quiz)
     setShowQuizSelection(false)
-    console.log(chosenQuiz)
+    setQuizVisible(true)
+    // console.log(chosenQuiz)
   }
 
   function toggleNextQuestion() {
@@ -26,6 +28,7 @@ export function Quizes() {
     } else {
       setExplanationVisibility(true)
       setSummaryVisibility(true)
+      setQuizVisible(false)
     }
   }
   function retryQuiz() {
@@ -33,6 +36,7 @@ export function Quizes() {
     setScore(0)
     setExplanationVisibility(false)
     setSummaryVisibility(false)
+    setQuizVisible(false)
     setShowQuizSelection(true)
   }
 
@@ -48,35 +52,45 @@ export function Quizes() {
   return (
     <div className={styles['main-container']}>
       {showQuizSelection && (
-        <div>
+        <div className={styles['quiz-choice']}>
           <h1>Choose the Quiz</h1>
-          <div>
-            <button onClick={() => choseQuiz('marsQuestions')}>Mars Quiz</button>
-            <button onClick={() => choseQuiz('solarQuestions')}>Solar System Quiz</button>
-            <button onClick={() => choseQuiz('vehicleQuestions')}>NASA Vehicles Quiz</button>
+          <div className={styles['choice-buttons']}>
+            <button className={styles['choice-button']} onClick={() => choseQuiz('marsQuestions')}>
+              Mars Quiz
+            </button>
+            <button className={styles['choice-button']} onClick={() => choseQuiz('solarQuestions')}>
+              Solar System Quiz
+            </button>
+            <button className={styles['choice-button']} onClick={() => choseQuiz('vehicleQuestions')}>
+              NASA Vehicles Quiz
+            </button>
           </div>
         </div>
       )}
-      <h1>Question {currentQuestionIndex + 1}/10</h1>
-      {currentQuestionIndex < 10 && (
-        <div className={styles['question-box']}>
-          <h3>{quizes[chosenQuiz][currentQuestionIndex].question}</h3>
-          {explanationVisible && <h4>Explanation to the question</h4>}
-          <div className={styles['answer-buttons']}>
-            {quizes.marsQuestions[currentQuestionIndex].answers.map((elem) => (
-              <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
-            ))}
-          </div>
+      {quizVisible && (
+        <div className={styles['quiz-box']}>
+          <h1>Question {currentQuestionIndex + 1}/10</h1>
+          {currentQuestionIndex < 10 && (
+            <div className={styles['question-box']}>
+              <h3>{quizes[chosenQuiz][currentQuestionIndex].question}</h3>
+              {explanationVisible && <h4>{quizes[chosenQuiz][currentQuestionIndex].explanation}</h4>}
+              <div className={styles['answer-buttons']}>
+                {quizes[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
+                  <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
+                ))}
+              </div>
+            </div>
+          )}
+          <button
+            className={styles['next-question-btn']}
+            onClick={() => {
+              toggleNextQuestion()
+            }}
+          >
+            Next question
+          </button>
         </div>
       )}
-      <button
-        className={styles['next-question-btn']}
-        onClick={() => {
-          toggleNextQuestion()
-        }}
-      >
-        Next question
-      </button>
       {summaryVisible && (
         <div className={styles['question-box']}>
           <h3>Congrats you answered correctly {score} out of 10 questions!</h3>
