@@ -39,24 +39,26 @@ export default function RoverForm(props) {
   }
   function handleSubmit(event) {
     event.preventDefault()
+    if (selectedItem === 'empty') {
+      alert('You need to choose a rover')
+      return
+    }
     setIsSubmitted(true)
     setSubmitLoaded(false)
-    if (selectedItem !== 'empty') {
-      fetch(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
-      )
-        .then((res) => res.json())
-        .then((result) => {
-          setPhotos(result.photos)
-          setSubmitLoaded(true)
-        }),
-        (submitError) => {
-          setIsSubmitted(true)
-          setSubmitLoaded(true)
-          setSubmitError(submitError)
-          console.warn(submitError)
-        }
-    }
+    fetch(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setPhotos(result.photos)
+        setSubmitLoaded(true)
+      }),
+      (submitError) => {
+        setIsSubmitted(true)
+        setSubmitLoaded(true)
+        setSubmitError(submitError)
+        console.warn(submitError)
+      }
   }
   function handleSolChange(event) {
     setSol(event.target.value)
@@ -79,31 +81,33 @@ export default function RoverForm(props) {
           <input type="number" name="sol" id="sol" value={sol} onChange={handleSolChange} min="0" max={rover.max_sol} />
           <input type="submit" value="Submit" />
         </form>
-        {isLoaded && !roverError && (
-          <div>
-            <p>
-              Rover: <b>{rover.name}</b>
-            </p>
-            <p>
-              Mission status: <b>{rover.status}</b>
-            </p>
-            <p>
-              Last Sol: <b>{rover.max_sol}</b>
-            </p>
-            <p>
-              Last date: <b>{rover.max_date}</b>
-            </p>
-            <p>
-              Launch date: <b>{rover.launch_date}</b>
-            </p>
-            <p>
-              Landing date: <b>{rover.landing_date}</b>
-            </p>
-            <p>
-              Total number of photos: <b>{rover.total_photos}</b>
-            </p>
-          </div>
-        )}
+        <div className={style.roverInfo}>
+          {isLoaded && !roverError && (
+            <>
+              <p>
+                Rover: <b>{rover.name}</b>
+              </p>
+              <p>
+                Mission status: <b>{rover.status}</b>
+              </p>
+              <p>
+                Last Sol: <b>{rover.max_sol}</b>
+              </p>
+              <p>
+                Last date: <b>{rover.max_date}</b>
+              </p>
+              <p>
+                Launch date: <b>{rover.launch_date}</b>
+              </p>
+              <p>
+                Landing date: <b>{rover.landing_date}</b>
+              </p>
+              <p>
+                Total number of photos: <b>{rover.total_photos}</b>
+              </p>
+            </>
+          )}
+        </div>
       </div>
       <div className={style.photoTagsPanel}>
         <PhotoFrame photos={photos} isSubmitted={isSubmitted} isLoaded={isSubmitLoaded} error={submitError} />
@@ -119,7 +123,7 @@ function PhotoFrame(props) {
   const error = props.error
   const [photoIndex, setPhotoIndex] = useState(0)
 
-  useEffect(()=> {
+  useEffect(() => {
     setPhotoIndex(0)
   }, [photos])
 
@@ -135,11 +139,11 @@ function PhotoFrame(props) {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div className={style.centered}>Error: {error.message}</div>
   } else if (!isLoaded && isSubmitted) {
-    return <div>Loading...</div>
+    return <div className={style.centered}>Loading...</div>
   } else if (isSubmitted && photos.length == 0) {
-    return <div>No photos on chosen Sol</div>
+    return <div className={style.centered}>No photos on chosen Sol</div>
   } else if (isSubmitted) {
     return (
       <div className={style.photoContainer}>
