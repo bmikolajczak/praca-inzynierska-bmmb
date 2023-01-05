@@ -214,7 +214,7 @@ export default function Solar() {
       </section>
       <section className={style.planetInfoParent}>{planetInfo}</section>
       {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
-      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[0.8, 1]}>
+      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
         <Suspense fallback={null}>
           <Sun />
           {celestialBodies}

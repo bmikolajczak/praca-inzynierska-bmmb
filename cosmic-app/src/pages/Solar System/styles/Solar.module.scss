@@ -31,7 +31,7 @@
   }
   .planetInfo {
     overflow: auto;
-    height: 250px;
+    max-height: 280px;
     @include scrollbar(5px);
     position: absolute;
     z-index: 15;
@@ -110,6 +110,7 @@
     .planetInfoParent {
       position: relative;
       .planetInfo {
+        max-height: 186px;
         top: 0;
         width: 95%;
         left: 50%;
