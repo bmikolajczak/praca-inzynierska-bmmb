@@ -69,7 +69,7 @@ export default function Landscapes() {
       <h2>Landscapes</h2>
       <div className={style.landElement}>
         <div className={style.canvas}>
-          <Canvas camera={{ fov: 60, position: [0, 20, 30] }}>
+          <Canvas camera={{ fov: 60, position: [0, 15, 40] }}>
             <Suspense fallback={null}>
               {lands}
               <ambientLight intensity={0.2} />

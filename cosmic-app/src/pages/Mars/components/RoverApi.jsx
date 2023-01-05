@@ -28,7 +28,7 @@ export default function RoverApi() {
     <section className={style.roverApi}>
       <h2>Mars Rover Photos</h2>
       <div className={style.formsContainer}>
-        {isInitialLoaded && !initialError ? <RoverForm name="rovers" labelText="Choose rover " data={initialData} /> : <div className={style.loading}>Loading...</div>}
+        {isInitialLoaded && !initialError ? <RoverForm data={initialData} baseUrl={baseUrl} apiKey={apiKey}/> : <div className={style.loading}>Loading...</div>}
       </div>
     </section>
   )

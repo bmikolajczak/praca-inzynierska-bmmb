@@ -22,7 +22,7 @@ export default function RoverForm(props) {
     console.log(event.target.value)
     if (event.target.value !== 'empty') {
       fetch(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${event.target.value}?api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
+        `${props.baseUrl}/rovers/${event.target.value}?api_key=${props.apiKey}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -46,7 +46,7 @@ export default function RoverForm(props) {
     setIsSubmitted(true)
     setSubmitLoaded(false)
     fetch(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedItem}/photos?sol=${sol}&api_key=0381f1py7G8yhbs9VvrxN9JPn2O5LJ88EEqolGND`
+      `${props.baseUrl}/rovers/${selectedItem}/photos?sol=${sol}&api_key=${props.apiKey}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -68,8 +68,8 @@ export default function RoverForm(props) {
     <div className={style.roverForm}>
       <div className={style.formInfoPanel}>
         <form onSubmit={handleSubmit}>
-          <label htmlFor={props.name}>{props.labelText}</label>
-          <select name={props.name} id={props.name} onChange={handleRoverChange}>
+          <label htmlFor="rovers">Choose rover </label>
+          <select name="rovers" id="rovers" onChange={handleRoverChange}>
             <option value="empty"></option>
             {props.data.map((item) => (
               <option key={item.name} value={item.name}>
@@ -142,23 +142,23 @@ function PhotoFrame(props) {
     return <div className={style.centered}>Error: {error.message}</div>
   } else if (!isLoaded && isSubmitted) {
     return <div className={style.centered}>Loading...</div>
-  } else if (isSubmitted && photos.length == 0) {
+  } else if (isSubmitted && photos?.length == 0) {
     return <div className={style.centered}>No photos on chosen Sol</div>
   } else if (isSubmitted) {
     return (
       <div className={style.photoContainer}>
         <div className={style.photoTags}>
-          <span>{photos[photoIndex].camera.name}</span>
-          <span>{photos[photoIndex].earth_date}</span>
+          <span>{photos[photoIndex]?.camera.name}</span>
+          <span>{photos[photoIndex]?.earth_date}</span>
         </div>
-        <img src={photos[photoIndex].img_src} />
+        <img src={photos[photoIndex]?.img_src} />
         <div className={style.stepsContainer}>
           <button onClick={prevPhoto}>
             <AiFillCaretLeft />
           </button>
           <span>{photoIndex + 1}</span>
           <span>/</span>
-          <span>{photos.length}</span>
+          <span>{photos?.length}</span>
           <button onClick={nextPhoto}>
             <AiFillCaretRight />
           </button>

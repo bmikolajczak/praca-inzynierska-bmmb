@@ -12,3 +12,10 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 950px) {
+  .roverApi {
+    .formsContainer {
+      margin: 1rem 0.5rem;
+    }
+  }
+}
