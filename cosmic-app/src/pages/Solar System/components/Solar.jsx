@@ -163,15 +163,7 @@ export default function Solar() {
               setSpinFactor(0.1)
             }}
           >
-            0.05x
-          </button>
-          <button
-            onClick={() => {
-              setOrbitFactor(0.1)
-              setSpinFactor(0.5)
-            }}
-          >
-            0.5x
+            0.1x
           </button>
           <button
             onClick={() => {
@@ -202,7 +194,7 @@ export default function Solar() {
           <button
             title="Toggle 3D augmentations"
             onClick={() => setPlanetLabelVis(!planetLabelVis)}
-            style={{ backgroundColor: planetLabelVis ? '#242424' : '#450101' }}
+            style={{ backgroundColor: planetLabelVis ? 'rgba(36, 36, 36, 1)' : 'rgba(36, 36, 36, 0.5)' }}
           >
             3D
           </button>
@@ -211,8 +203,9 @@ export default function Solar() {
             onClick={() => setPlanetInfoVis(!planetInfoVis)}
             style={{
               display: 'flex',
-              fontSize: '20px',
-              backgroundColor: planetInfoVis ? '#242424' : '#450101'
+              alignItems: 'center',
+              fontSize: '22px',
+              backgroundColor: planetInfoVis ? 'rgba(36, 36, 36, 1)' : 'rgba(36, 36, 36, 0.5)' 
             }}
           >
            <BiInfoCircle/>
@@ -221,7 +214,7 @@ export default function Solar() {
       </section>
       <section className={style.planetInfoParent}>{planetInfo}</section>
       {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
-      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
+      <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[0.8, 1]}>
         <Suspense fallback={null}>
           <Sun />
           {celestialBodies}
