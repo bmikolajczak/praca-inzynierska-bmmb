@@ -29,7 +29,6 @@ export function Quizes() {
   }
 
   async function toggleNextQuestion() {
-    const quiz = choseQuiz
     if (currentQuestionIndex < 9) {
       addIndex(currentQuestionIndex + 1)
       setExplanationVisibility(false)
@@ -39,7 +38,13 @@ export function Quizes() {
       setSummaryVisibility(true)
       setQuizVisible(false)
       try {
-        await updateDoc(currentUserRef, { quizScores: { quiz: `${score}/10` } })
+        if (chosenQuiz === 'marsQuestions') {
+          await updateDoc(currentUserRef, { marsQuiz: `${score}/10` })
+        } else if (chosenQuiz === 'solarQuestionss') {
+          await updateDoc(currentUserRef, { solarQuiz: `${score}/10` })
+        } else if (chosenQuiz === 'vehicleQuestions') {
+          await updateDoc(currentUserRef, { vehicleQuiz: `${score}/10` })
+        }
       } catch (error) {
         console.log('Error when upadting quiz score', error)
       }
