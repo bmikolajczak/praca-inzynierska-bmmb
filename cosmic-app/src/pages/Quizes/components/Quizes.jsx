@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
+import { updateDoc, doc } from 'firebase/firestore'
+import { db, auth } from '../../../infrastructure/firebase/firebase'
+
 import styles from '../styles/Quizes.module.scss'
 
 import quizes from './Questions.json'
@@ -13,6 +16,10 @@ export function Quizes() {
   const [chosenQuiz, setChosenQuiz] = useState('marsQuestions')
   const [showQuizSelection, setShowQuizSelection] = useState(true)
   const [quizVisible, setQuizVisible] = useState(false)
+  const [answerCorrect, setAnswerCorrect] = useState(true)
+
+  //user ref
+  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
 
   function choseQuiz(quiz) {
     setChosenQuiz(quiz)
@@ -21,14 +28,21 @@ export function Quizes() {
     // console.log(chosenQuiz)
   }
 
-  function toggleNextQuestion() {
+  async function toggleNextQuestion() {
+    const quiz = choseQuiz
     if (currentQuestionIndex < 9) {
       addIndex(currentQuestionIndex + 1)
       setExplanationVisibility(false)
+      setQuizVisible(true)
     } else {
       setExplanationVisibility(true)
       setSummaryVisibility(true)
       setQuizVisible(false)
+      try {
+        await updateDoc(currentUserRef, { quizScores: { quiz: `${score}/10` } })
+      } catch (error) {
+        console.log('Error when upadting quiz score', error)
+      }
     }
   }
   function retryQuiz() {
@@ -44,8 +58,12 @@ export function Quizes() {
     if (answer) {
       setScore(score + 1)
       setExplanationVisibility(true)
+      setQuizVisible(false)
+      setAnswerCorrect(true)
     } else {
       setExplanationVisibility(true)
+      setAnswerCorrect(false)
+      setQuizVisible(false)
     }
   }
   useEffect(() => console.log(currentQuestionIndex), [currentQuestionIndex])
@@ -67,13 +85,12 @@ export function Quizes() {
           </div>
         </div>
       )}
+      {(quizVisible || explanationVisible) && <h1>Question {currentQuestionIndex + 1}/10</h1>}
       {quizVisible && (
         <div className={styles['quiz-box']}>
-          <h1>Question {currentQuestionIndex + 1}/10</h1>
           {currentQuestionIndex < 10 && (
             <div className={styles['question-box']}>
               <h3>{quizes[chosenQuiz][currentQuestionIndex].question}</h3>
-              {explanationVisible && <h4>{quizes[chosenQuiz][currentQuestionIndex].explanation}</h4>}
               <div className={styles['answer-buttons']}>
                 {quizes[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
                   <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
@@ -81,6 +98,14 @@ export function Quizes() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {explanationVisible && (
+        <div className={styles['quiz-box']}>
+          <h4 className={answerCorrect ? styles['correct'] : styles['incorrect']}>
+            {quizes[chosenQuiz][currentQuestionIndex].explanation}
+          </h4>
           <button
             className={styles['next-question-btn']}
             onClick={() => {
@@ -88,9 +113,10 @@ export function Quizes() {
             }}
           >
             Next question
-          </button>
+          </button>{' '}
         </div>
       )}
+
       {summaryVisible && (
         <div className={styles['question-box']}>
           <h3>Congrats you answered correctly {score} out of 10 questions!</h3>
