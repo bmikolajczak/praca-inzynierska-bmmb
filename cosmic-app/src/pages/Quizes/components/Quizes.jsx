@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
-import { updateDoc, doc } from 'firebase/firestore'
+import { updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../../infrastructure/firebase/firebase'
 
 import styles from '../styles/Quizes.module.scss'
@@ -17,9 +17,12 @@ export function Quizes() {
   const [showQuizSelection, setShowQuizSelection] = useState(true)
   const [quizVisible, setQuizVisible] = useState(false)
   const [answerCorrect, setAnswerCorrect] = useState(true)
+  const [quizesFirestore, setQuizesFirestore] = useState({})
 
   //user ref
   const currentUserRef = doc(db, 'users', auth.currentUser.uid)
+  //quuestions ref
+  const questionsRef = doc(db, 'quizes', 'questions')
 
   function choseQuiz(quiz) {
     setChosenQuiz(quiz)
@@ -70,7 +73,17 @@ export function Quizes() {
       setAnswerCorrect(false)
       setQuizVisible(false)
     }
+    // console.log('quizes', quizesFirestore)
   }
+  async function getQuestions() {
+    const questionsSnapshot = await getDoc(questionsRef)
+    if (questionsSnapshot.exists()) {
+      setQuizesFirestore(questionsSnapshot.data())
+    }
+  }
+  useEffect(() => {
+    getQuestions()
+  }, [])
   useEffect(() => console.log(currentQuestionIndex), [currentQuestionIndex])
   return (
     <div className={styles['main-container']}>
@@ -95,9 +108,9 @@ export function Quizes() {
         <div className={styles['quiz-box']}>
           {currentQuestionIndex < 10 && (
             <div className={styles['question-box']}>
-              <h3>{quizes[chosenQuiz][currentQuestionIndex].question}</h3>
+              <h3>{quizesFirestore[chosenQuiz][currentQuestionIndex].question}</h3>
               <div className={styles['answer-buttons']}>
-                {quizes[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
+                {quizesFirestore[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
                   <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
                 ))}
               </div>
