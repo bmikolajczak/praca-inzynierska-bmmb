@@ -27,13 +27,14 @@
     border-color: $black-100;
     border-style: solid;
   }
+  .correct {
+    background-color: rgb(31, 143, 117);
+  }
+  .incorrect {
+    background-color: rgb(154, 50, 50);
+  }
 }
-.correct {
-  background-color: rgb(31, 143, 117);
-}
-.incorrect {
-  background-color: rgb(154, 50, 50);
-}
+
 .question-box {
   display: flex;
   flex-direction: column;

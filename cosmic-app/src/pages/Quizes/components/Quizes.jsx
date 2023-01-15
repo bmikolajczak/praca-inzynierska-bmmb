@@ -81,9 +81,11 @@ export function Quizes() {
       setQuizesFirestore(questionsSnapshot.data())
     }
   }
+
   useEffect(() => {
     getQuestions()
   }, [])
+
   useEffect(() => console.log(currentQuestionIndex), [currentQuestionIndex])
   return (
     <div className={styles['main-container']}>

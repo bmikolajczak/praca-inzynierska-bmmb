@@ -35,12 +35,12 @@ export const HeaderNavigation = () => {
   }
   return (
     <nav className={style.headerNav}>
-      <Link to="/" className={style.logoLink}>
+      <Link to="/menu" className={style.logoLink}>
         <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
       <ul className={style.links}>
         <li>
-          <p onClick={() => closeLinkHub()}>Menu</p>
+          <Link to="/menu">Menu</Link>
         </li>
         <li>
           <Link to="/account">Account</Link>

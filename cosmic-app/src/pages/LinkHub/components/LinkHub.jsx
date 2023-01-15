@@ -10,25 +10,25 @@ export function LinkHub() {
   //creating ref to dispatch
   const dispatch = useDispatch()
 
-  function closeLinkHub() {
-    dispatch(changeModalVisible())
-  }
+  // function closeLinkHub() {
+  //   dispatch(changeModalVisible())
+  // }
   return (
     <div className="parent-cont">
       <div className={styles['links-container']}>
-        <Link to="/mars" className="mars-li" onClick={() => closeLinkHub()}>
+        <Link to="/mars" className="mars-li">
           Learn about Mars
         </Link>
-        <Link to="/solar" className="solar-li" onClick={() => closeLinkHub()}>
+        <Link to="/solar" className="solar-li">
           Learn about our Solar System
         </Link>
-        <Link to="/stage" className="stage-li" onClick={() => closeLinkHub()}>
+        <Link to="/stage" className="stage-li">
           Learn about NASA'S inventions
         </Link>
-        <Link to="/apod" className="apod-li" onClick={() => closeLinkHub()}>
+        <Link to="/apod" className="apod-li">
           See interesting astronomy pictures
         </Link>
-        <Link to="/quiz" className="about-li" onClick={() => closeLinkHub()}>
+        <Link to="/quiz" className="about-li">
           Check your knowledge with our quizes
         </Link>
       </div>

@@ -185,8 +185,8 @@ function CallApodApi() {
                     />
                   </div>
                   <p className={styles2['image-title']}>{image.title}</p>
-                  <button onClick={() => saveToProfile(image)}>
-                    <BsFillPlusCircleFill /> Save Image
+                  <button title="Save image to profile" onClick={() => saveToProfile(image)}>
+                    <BsFillPlusCircleFill />
                   </button>
                 </div>
                 <p className={styles2['image-desc']}>{image.explanation}</p>
