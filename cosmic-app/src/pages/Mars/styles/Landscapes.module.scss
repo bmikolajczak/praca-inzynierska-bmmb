@@ -10,6 +10,9 @@
   h2 {
     text-align: center;
   }
+  .canvas {
+    flex-basis: 55%;
+  }
   .canvas canvas {
     height: 80vh;
     width: 100%;
@@ -25,12 +28,15 @@
     display: none;
   }
   .landButtons {
+    background-color: #0d0d0d;
+    border-radius: 0 0 1rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.6rem;
+    gap: 0.4rem;
+    padding: 0.4rem;
     button {
+      display: flex;
       font-size: 32px;
       border-radius: 4px;
       background-color: transparent;
@@ -45,8 +51,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background-color: rgba($color: #ffffff, $alpha: 0.05);
-    border-radius: 1rem;
+    background-color: #0d0d0d;
+    border-radius: 1rem 1rem 0 0;
     .landInfo {
       flex-basis: 45%;
       padding: .5rem;
@@ -62,5 +68,10 @@
     .landElement {
       flex-direction: column;
     }
+  }
+}
+@media screen and (max-width: 600px) {
+  .landscapes {
+    margin: 5rem 0.5rem 1rem;
   }
 }

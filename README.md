@@ -75,3 +75,18 @@ npm run dev
 - https://sos.noaa.gov/catalog/datasets/planet-rotations/ - planets spin speed reference
 - https://wasp-planets.net/2018/12/30/solar-system-planet-tilts/ - planets tilt reference
 - https://svs.gsfc.nasa.gov/4851 - star map hdri
+
+Curiosity anatomy:
+- https://g.co/kgs/QjCy2R
+- https://mars.nasa.gov/msl/rover-3d/
+
+The rest - anatomy:
+- https://mars.nasa.gov/technology/helicopter/#Anatomy
+- https://mars.nasa.gov/insight/spacecraft/about-the-lander/
+- https://mars.nasa.gov/mer/mission/instruments/
+- https://g.co/kgs/uUqjEo
+- https://hubblesite.org/mission-and-telescope/the-telescope
+- https://voyager.jpl.nasa.gov/mission/spacecraft/interactive.php
+
+Dev
+- https://discoverthreejs.com/book/first-steps/animation-loop/#measuring-time-across-frames

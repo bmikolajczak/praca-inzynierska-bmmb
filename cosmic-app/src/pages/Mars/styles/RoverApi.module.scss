@@ -1,0 +1,21 @@
+.roverApi {
+  * {
+    font-family: "Poppins", sans-serif;
+  }
+  h2 {
+    text-align: center;
+  }
+  .formsContainer {
+    margin: 1rem 2rem 2rem;
+  }
+  .loading {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 950px) {
+  .roverApi {
+    .formsContainer {
+      margin: 1rem 0.5rem;
+    }
+  }
+}

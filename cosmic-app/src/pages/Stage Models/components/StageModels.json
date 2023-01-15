@@ -1,7 +1,7 @@
 [
   {
     "name": "Mars Curiosity Rover",
-    "model": "curiosity.glb",
+    "model": "curiosityMarkers.glb",
     "description":"Part of NASA's Mars Science Laboratory mission, Curiosity is the largest and most capable rover ever sent to Mars. Curiosity explores Gale Crater and acquires rock, soil, and air samples for onboard analysis.",
     "links": [
       {

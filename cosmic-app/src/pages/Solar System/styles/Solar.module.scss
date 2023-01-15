@@ -1,4 +1,10 @@
+@import 'src/index.scss';
+
 .solar {
+  * {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
   canvas {
     // height of navbar
     // maybe global variable for navbar height?
@@ -10,12 +16,12 @@
     }
   }
   .planetName {
-    font-family: Poppins;
     font-size: 4px;
     // no text highlight
     user-select: none;
     button {
-      color: rgba($color: #ffffff, $alpha: 1);
+    font-weight: 400;
+      color: white;
       background-color: rgba($color: #000000, $alpha: 0.5);
       border: none;
       border-radius: 6px;
@@ -24,51 +30,68 @@
     }
   }
   .planetInfo {
+    overflow: auto;
+    max-height: 280px;
+    @include scrollbar(5px);
     position: absolute;
     z-index: 15;
-    top: 40%;
+    top: 50%;
     right: 4px;
+    transform: translateY(-50%);
     width: 30%;
     color: white;
     background-color: rgba($color: #000000, $alpha: 0.8);
     padding: 8px 12px;
     border-radius: 8px;
+    border-width: 0 0 2px;
+    border-color: #0088ff;
+    border-style: solid;
+    p,
+    a {
+      font-size: 18px;
+    }
     .planetInfoLinks {
       display: flex;
       gap: 8px;
       justify-content: center;
+      align-items: center;
       padding: 6px;
       a {
         text-decoration: none;
         color: white;
         padding: 4px 8px;
         border-radius: 8px;
-        border: 2px solid darkviolet;
+        border: 2px solid #0088ff;
         &:hover {
-          background-color: darkviolet;
+          background-color: #0088ff;
         }
       }
     }
   }
-  .speedControl {
+  .menu {
     position: absolute;
     z-index: 20;
-    bottom: 0;
+    bottom: 4px;
     left: 50%;
-    transform: translate(-50%, -10%);
+    transform: translateX(-50%);
     display: flex;
-    gap: 3px;
+    gap: 14px;
+    padding: 4px 4px 0;
     button {
-      background-color: rgba($color: #ffffff, $alpha: 0.2);
-      font-size: 16px;
-      padding: 4px;
+      background-color: #242424;
+      font-size: 18px;
+      font-weight: 400;
       border-radius: 4px;
       color: white;
       border-color: transparent;
       cursor: pointer;
       &:hover {
-        background-color: rgba($color: #ffffff, $alpha: 0.1);
+        background-color: #111111;
       }
+    }
+    div {
+      display: flex;
+      gap: 3px;
     }
   }
   @keyframes fade-in {
@@ -81,5 +104,25 @@
   }
   .animateSnapCamera {
     animation: fade-in 1.5s ease-out;
+  }
+
+  @media screen and (max-width: 700px) {
+    .planetInfoParent {
+      position: relative;
+      .planetInfo {
+        max-height: 186px;
+        top: 0;
+        width: 95%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        .planetInfoLinks {
+          text-align: center;
+        }
+      }
+    }
+    .menu {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }

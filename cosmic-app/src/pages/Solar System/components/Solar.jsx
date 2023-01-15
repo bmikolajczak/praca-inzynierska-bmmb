@@ -9,6 +9,9 @@ import Sun from './SunShader'
 import { EffectComposer, Noise, Vignette } from '@react-three/postprocessing'
 import { DoubleSide, MathUtils, Vector3 } from 'three'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BiInfoCircle } from 'react-icons/bi'
 
 // Globally declared for use later
 const addendVector = new Vector3()
@@ -20,11 +23,16 @@ function CelestialModel(props) {
   const group = useRef()
   const controls = useThree((state) => state.controls)
 
-  useFrame(() => {
+  // run only once, on mount, thanks to empty []
+  useEffect(() => {
+    group.current.rotateY(randomRotationOnOrbit())
+  }, [])
+
+  useFrame((state, delta) => {
     // rotate around local Y axis
-    mesh.current.rotateY(props.spinSpeed * props.spinFactor)
+    mesh.current.rotateY(props.spinSpeed * props.spinFactor * delta)
     // orbit group
-    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor)
+    group.current.rotateY(props.orbitalSpeed * props.orbitalFactor * delta)
     // onClick currentObject switching
     if (props.currentTarget === props.name) {
       mesh.current.getWorldPosition(controls.target)
@@ -36,14 +44,13 @@ function CelestialModel(props) {
     // Snap Camera to the mesh
     // copy mesh current absolute position into orbitControls position
     mesh.current.getWorldPosition(controls.object.position)
-    console.log('controls.object.position: ', controls.object.position)
-    addendVector.set(
-      props.radius + props.radius * 0.5,
-      props.radius * 0.5,
-      props.radius + props.radius * 0.5
-    )
+    addendVector.set(props.radius + props.radius * 0.5, props.radius * 0.5, props.radius + props.radius * 0.5)
     controls.object.position.add(addendVector)
     controls.update()
+  }
+
+  function randomRotationOnOrbit() {
+    return MathUtils.degToRad(Math.floor(Math.random() * 360 - 179))
   }
 
   return (
@@ -58,9 +65,14 @@ function CelestialModel(props) {
         <Html zIndexRange={[10, 0]} wrapperClass={style.planetName}>
           <button
             type="button"
+            style={{
+              visibility: props.planetLabelVis ? 'visible' : 'hidden',
+            }}
             onClick={() => {
               document.querySelector('canvas').classList.add(style.animateSnapCamera)
-              setTimeout(() => {document.querySelector('canvas').classList.remove(style.animateSnapCamera)}, 1500)
+              setTimeout(() => {
+                document.querySelector('canvas').classList.remove(style.animateSnapCamera)
+              }, 1500)
               props.handleClick(props.name)
               snapCamera()
             }}
@@ -74,21 +86,9 @@ function CelestialModel(props) {
 }
 function OrbitRing(props) {
   return (
-    <mesh
-      rotation={[
-        MathUtils.degToRad(90),
-        MathUtils.degToRad(props.orbitTilt),
-        0,
-      ]}
-      position={[0, 0, 0]}
-    >
+    <mesh rotation={[MathUtils.degToRad(90), MathUtils.degToRad(props.orbitTilt), 0]} position={[0, 0, 0]}>
       <ringBufferGeometry args={[props.innerRadius, props.outerRadius, 220]} />
-      <meshBasicMaterial
-        color="white"
-        side={DoubleSide}
-        transparent={true}
-        opacity={0.2}
-      />
+      <meshBasicMaterial color="white" side={DoubleSide} transparent={true} visible={props.planetLabelVis} opacity={ 0.2 } />
     </mesh>
   )
 }
@@ -97,6 +97,8 @@ export default function Solar() {
   const [selectedPlanet, setPlanet] = useState('')
   const [selectedOrbitFactor, setOrbitFactor] = useState(0.2)
   const [selectedSpinFactor, setSpinFactor] = useState(1)
+  const [planetInfoVis, setPlanetInfoVis] = useState(true)
+  const [planetLabelVis, setPlanetLabelVis] = useState(true)
 
   // preparing every planet with orbits
   const celestialBodies = celestials.map((celes) => [
@@ -105,6 +107,7 @@ export default function Solar() {
       innerRadius={celes.position[0] - 0.04}
       outerRadius={celes.position[0] + 0.04}
       orbitTilt={celes.orbitTilt}
+      planetLabelVis={planetLabelVis}
     />,
     <CelestialModel
       model={celes.model}
@@ -120,6 +123,7 @@ export default function Solar() {
       orbitTilt={celes.orbitTilt}
       handleClick={setPlanet}
       currentTarget={selectedPlanet}
+      planetLabelVis={planetLabelVis}
     />,
   ])
 
@@ -127,16 +131,23 @@ export default function Solar() {
   const planetInfo = solarInfo.map(
     (planet) =>
       selectedPlanet === planet.name && (
-        <div className={style.planetInfo} key={planet.name}>
+        <div
+          className={style.planetInfo}
+          key={planet.name}
+          style={{
+            visibility: planetInfoVis ? 'visible' : 'hidden',
+            opacity: planetInfoVis ? 1 : 0,
+            zIndex: planetInfoVis ? 15 : -1,
+            transition: 'all 0.5s ease-out',
+          }}
+        >
           <h2>{planet.name}</h2>
           <p>{planet.description}</p>
           <div className={style.planetInfoLinks}>
             <a href={planet.links[0].url} target="_blank">
               {planet.links[0].label}
             </a>
-            {planet.links.length > 1 && (
-              <a href={planet.links[1].url}>{planet.links[1].label}</a>
-            )}
+            {planet.links.length > 1 && <Link to={planet.links[1].url}>{planet.links[1].label}</Link>}
           </div>
         </div>
       )
@@ -144,7 +155,7 @@ export default function Solar() {
 
   return (
     <main className={style.solar}>
-      <section>
+      <section className={style.menu}>
         <div className={style.speedControl}>
           <button
             onClick={() => {
@@ -152,15 +163,7 @@ export default function Solar() {
               setSpinFactor(0.1)
             }}
           >
-            0.05x
-          </button>
-          <button
-            onClick={() => {
-              setOrbitFactor(0.1)
-              setSpinFactor(0.5)
-            }}
-          >
-            0.5x
+            0.1x
           </button>
           <button
             onClick={() => {
@@ -187,31 +190,37 @@ export default function Solar() {
             5x
           </button>
         </div>
+        <div>
+          <button
+            title="Toggle 3D augmentations"
+            onClick={() => setPlanetLabelVis(!planetLabelVis)}
+            style={{ backgroundColor: planetLabelVis ? 'rgba(36, 36, 36, 1)' : 'rgba(36, 36, 36, 0.5)' }}
+          >
+            3D
+          </button>
+          <button
+            title="Toggle planet info"
+            onClick={() => setPlanetInfoVis(!planetInfoVis)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '22px',
+              backgroundColor: planetInfoVis ? 'rgba(36, 36, 36, 1)' : 'rgba(36, 36, 36, 0.5)' 
+            }}
+          >
+           <BiInfoCircle/>
+          </button>
+        </div>
       </section>
-      <section>{planetInfo}</section>
+      <section className={style.planetInfoParent}>{planetInfo}</section>
       {/* dpr: Pixel-ratio, use window.devicePixelRatio, or automatic: [min, max] */}
       <Canvas camera={{ far: 4000, position: [-110, 30, 110] }} dpr={[1, 2]}>
         <Suspense fallback={null}>
           <Sun />
           {celestialBodies}
-          <pointLight
-            color={'white'}
-            intensity={0.8}
-            position={[0, 0, 0]}
-            decay={2}
-          />
-          <pointLight
-            color={'white'}
-            intensity={0.5}
-            position={[0, 25, 0]}
-            decay={2}
-          />
-          <pointLight
-            color={'white'}
-            intensity={0.5}
-            position={[0, -25, 0]}
-            decay={2}
-          />
+          <pointLight color={'white'} intensity={0.8} position={[0, 0, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, 25, 0]} decay={2} />
+          <pointLight color={'white'} intensity={0.5} position={[0, -25, 0]} decay={2} />
           <OrbitControls
             makeDefault
             enableZoom={true}
@@ -220,17 +229,14 @@ export default function Solar() {
             maxDistance={4000}
             minDistance={0.3}
           />
-          <Environment
-            background="only"
-            files="src/assets/solar_system/starmap2020dark_6k.hdr"
-          />
+          <Environment background="only" files="src/assets/solar_system/starmap2020dark_6k.hdr" />
         </Suspense>
         <EffectComposer>
           <Noise opacity={0.026} />
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
       </Canvas>
-      <LoaderCustom/>
+      <LoaderCustom />
     </main>
   )
 }
