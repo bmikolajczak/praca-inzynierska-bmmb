@@ -51,8 +51,6 @@ export function Form() {
           email: userEmail,
         })
         console.log('New document with user info: ', newUserRef)
-        //redirect to user page after successful registration
-        // setTimeout(() => (window.location.href = '/account'), 1000)
       } catch (error) {
         console.log('Problem when creating user:', error)
       }

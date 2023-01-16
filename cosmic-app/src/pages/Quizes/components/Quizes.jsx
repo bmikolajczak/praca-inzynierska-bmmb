@@ -100,7 +100,7 @@ export function Quizes() {
               Solar System Quiz
             </button>
             <button className={styles['choice-button']} onClick={() => choseQuiz('vehicleQuestions')}>
-              NASA Vehicles Quiz
+              NASA Missions Quiz
             </button>
           </div>
         </div>

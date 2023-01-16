@@ -8,7 +8,7 @@
   font-family: 'Poppins', 'sans-serif';
   padding: 40px 109px;
   h1 {
-    color: $black-100;
+    color: $font-white;
     font-weight: 100;
     font-size: 30;
   }
@@ -20,7 +20,7 @@
   h4 {
     font-weight: 100;
     font-size: 30px;
-    background-color: $black-700;
+    background-color: $dark-grey-bg;
     padding: 26px 100px;
     border-radius: 30px;
     border-width: 4px;
@@ -42,11 +42,12 @@
   h3 {
     font-weight: 100;
     font-size: 30px;
-    background-color: $black-700;
+    background-color: $dark-grey-bg;
+    border-width: 0.125rem;
+    border-color: $light-grey-bg;
     padding: 26px 100px;
     border-radius: 30px;
     border-width: 4px;
-    border-color: $black-100;
     border-style: solid;
   }
   .answer-buttons {
@@ -58,15 +59,17 @@
       font-weight: 300;
       font-size: 30px;
       color: $black-100;
-      background-color: $black-700;
+      background-color: $dark-grey-bg;
+      border-color: $accent-blue;
+      border-width: 0.25rem;
       padding: 18px 47px;
       border-radius: 30px;
       cursor: pointer;
       transition: 0.3s linear;
     }
     button:hover {
-      background-color: $black-100;
-      color: $black-700;
+      background-color: $font-white;
+      color: $dark-grey-bg;
     }
   }
 }
@@ -77,8 +80,8 @@
   border-width: 4px;
   color: $black-100;
   cursor: pointer;
-  border-color: $black-100;
-  background-color: $black-700;
+  border-color: $accent-blue;
+  background-color: $dark-grey-bg;
   padding: 18px 47px;
 }
 
@@ -98,13 +101,15 @@
   font-weight: 300;
   font-size: 30px;
   color: $black-100;
-  background-color: $black-700;
+  background-color: $dark-grey-bg;
+  border-color: $accent-blue;
+  border-width: 0.125rem;
   padding: 18px 47px;
   border-radius: 30px;
   cursor: pointer;
   transition: 0.3s linear;
   &:hover {
-    background-color: $black-100;
-    color: $black-700;
+    background-color: $light-grey-bg;
+    color: $font-white;
   }
 }

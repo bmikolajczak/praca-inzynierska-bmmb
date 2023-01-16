@@ -16,6 +16,8 @@ import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
 import { changeUserLoggedIn, showChosenPhoto, setChosenPhoto } from '../../../infrastructure/store/appState'
 
+import { BsFillTrashFill } from 'react-icons/bs'
+
 export function Account() {
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -108,7 +110,7 @@ export function Account() {
                   />
                   <p className={styles['image-title']}>{image.title}</p>
                   <button id={styles['remove-btn']} onClick={() => removeImage(image)}>
-                    Remove image
+                    <BsFillTrashFill />
                   </button>
                 </div>
                 <p className={styles['image-desc']}>{image.explanation}</p>

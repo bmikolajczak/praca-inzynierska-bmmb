@@ -111,12 +111,13 @@ function CallApodApi() {
     return (
       <div>
         <div className={style.apodContentContainer}>
-          <p>
-            <b>{image.title}</b>
-          </p>
           <div className={style.apodImageContainer}>
             <img className={style.apodImageCol + ' ' + style.apodImage} src={image.url} alt={image.title} />
             <div className={style.apodInfo + ' ' + style.apodImageCol}>
+              <p>
+                <b>{image.title}</b>
+              </p>
+              <br />
               <p>{image.explanation}</p>
               <p>{image.date}</p>
               {/* Conditionally render copyright if exists */}

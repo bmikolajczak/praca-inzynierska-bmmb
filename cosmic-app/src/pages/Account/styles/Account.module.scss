@@ -152,7 +152,10 @@
   margin: 2rem auto 0;
   width: max-content;
   padding: 1rem 4rem;
-  background-color: $black-100;
+  background-color: $dark-grey-bg;
+  border-color: $light-grey-bg;
+  border-style: solid;
+  border-width: 0.25rem;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
@@ -169,18 +172,21 @@
   p {
     font-family: 'Poppins';
     font-size: 1.5rem;
-    color: $black-700;
+    color: $font-white;
   }
 }
 
 .saved-images {
-  background-color: $black-100;
+  background-color: $dark-grey-bg;
   border-radius: 30px;
+  border-color: $light-grey-bg;
+  border-style: solid;
+  border-width: 0.25rem;
   padding: 2rem;
   margin: 5rem 5rem 7.5rem;
   .images-header {
     font-family: 'Poppins';
-    color: $black-700;
+    color: $font-white;
     font-weight: 700;
     font-size: 1.5rem;
     margin-bottom: 1.25rem;
@@ -199,31 +205,31 @@
   justify-content: center;
   align-items: flex-start;
   transition: 0.3s linear;
-  background-color: $black-100;
-  box-shadow: -10px 13px 24px -12px rgba(8, 17, 34, 1);
+  background-color: $light-grey-bg;
+  // box-shadow: -10px 13px 24px -12px rgb(88, 132, 214);
   border-radius: 30px;
   padding: 1rem 0.75rem;
   cursor: pointer;
   p {
-    color: $black-700;
+    color: $font-white;
   }
   button {
     // display: none;
     border-radius: 30px;
     background-color: #2c8b4c;
     color: $black-100;
-    border-color: $black-700;
+    // border-color: $black-700;
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
   }
   &:hover {
     transform: translateY(-30px);
-    background-color: $black-700;
-    box-shadow: -2px 6px 29px 0px rgba(36, 37, 78, 1);
+    background-color: $font-white;
+    box-shadow: -2px 6px 29px 0px $accent-blue;
   }
   &:hover .image-title {
-    color: $black-100;
+    color: $light-grey-bg;
   }
 }
 .image-title {

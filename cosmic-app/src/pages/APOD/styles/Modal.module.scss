@@ -2,7 +2,8 @@
 @import 'src/index.scss';
 
 .container {
-  background-color: #081122ee;
+  background-color: $dark-grey-bg;
+  border: 3px solid $font-white;
   padding: 2rem 5rem;
   position: fixed;
   top: 50%;
