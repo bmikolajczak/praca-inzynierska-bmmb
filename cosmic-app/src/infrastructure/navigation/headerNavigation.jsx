@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './headerNavigation.module.scss'
 import { auth } from '../firebase/firebase'
-import { changeModalVisible, showLoginForm } from '../store/appState'
+import { changeModalVisible, changeSideMenuVisible, showLoginForm } from '../store/appState'
+import { AiOutlineMenu } from 'react-icons/ai'
 
 export const HeaderNavigation = () => {
   const user = auth.currentUser
@@ -33,11 +34,18 @@ export const HeaderNavigation = () => {
   function showForm() {
     dispatch(showLoginForm())
   }
+  function toggleMenu() {
+    dispatch(changeSideMenuVisible())
+  }
   return (
     <nav className={style.headerNav}>
       <Link to="/menu" className={style.logoLink}>
         <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
+      <button id={style['hamburger-icon']} onClick={toggleMenu}>
+        {' '}
+        <AiOutlineMenu />
+      </button>
       <ul className={style.links}>
         <li>
           <Link to="/menu">Menu</Link>
@@ -60,25 +68,7 @@ export const HeaderNavigation = () => {
             <a href="">Sign Out</a>
           </li>
         )}
-        {/* <li onClick={() => signoutUser()}>
-          <a href="">Sign Out</a>
-        </li> */}
       </ul>
     </nav>
   )
-}
-
-{
-  /* <li>
-          <Link to="/mars">Mars</Link>
-        </li>
-        <li>
-          <Link to="/solar">Solar</Link>
-        </li>
-        <li>
-          <Link to="/stage">Stage</Link>
-        </li>
-        <li>
-          <Link to="/apod">APOD</Link>
-        </li> */
 }
