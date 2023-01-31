@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   modalShown: false,
   sideMenuShown: false,
-  loginFormShown: false,
+  loginFormShown: true,
   userLoggedIn: true,
   currentUser: null,
   chosenPhotoShown: false,

@@ -6,7 +6,7 @@
   left: 30%;
   width: 620px;
   margin: 0 auto;
-  background-color: $black-100;
+  background-color: $font-white;
   display: flex;
   // align-items: center;
   gap: 2rem;
@@ -17,7 +17,7 @@
 //Welcome part
 .welcome-part {
   padding: 1.25em;
-  background-color: $primary-light;
+  background-color: $new-black-full;
   display: flex;
   flex-direction: column;
   background-image: url(src/assets/account/images/Wave1.svg), url(src/assets/account/images/Wave2.svg);
@@ -64,7 +64,7 @@
 // INPUT FIELDS
 .input-field {
   border-width: 3px;
-  border-color: $black-300;
+  border-color: $dark-grey-bg;
   border-radius: 8px;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
@@ -80,7 +80,7 @@
 }
 .inactive-tab {
   background-color: none;
-  color: $black-700;
+  color: $new-black-full;
   font-size: 1rem;
   font-family: 'Poppins';
   font-weight: 400;
@@ -88,12 +88,13 @@
   border-style: solid;
   border-width: 3px;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
+  padding: 12px 24px;
   cursor: pointer;
 }
 .active-tab {
-  background-color: #1d1e40;
-  color: $black-100;
+  background-color: $dark-grey-bg;
+  border: 3px solid $accent-blue;
+  color: $font-white;
   font-size: 1rem;
   font-family: 'Poppins';
   font-weight: 400;
@@ -111,7 +112,7 @@
 .loginForm label,
 .registerForm label {
   align-self: flex-start;
-  color: $black-700;
+  color: $new-black-full;
   font-family: 'Poppins';
 }
 .loginForm {
@@ -123,8 +124,8 @@
 }
 
 .button {
-  background-color: $black-700;
-  color: $black-100;
+  background-color: $new-black-full;
+  color: $font-white;
   border-radius: 8px;
   padding: 8px 16px;
   margin-top: 1.25rem;
@@ -133,8 +134,8 @@
   cursor: pointer;
 }
 #google-button {
-  color: $black-700;
-  background-color: $black-100;
+  color: $new-black-full;
+  background-color: $font-white;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   border-radius: 8px;
