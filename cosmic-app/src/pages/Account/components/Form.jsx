@@ -2,8 +2,6 @@ import { useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
