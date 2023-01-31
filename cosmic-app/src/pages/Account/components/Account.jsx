@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,230 +7,182 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
-import { collection, setDoc, doc } from 'firebase/firestore'
+import { collection, setDoc, doc, getDoc, arrayRemove, updateDoc } from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
+import { useDispatch, useSelector } from 'react-redux'
+
 import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
+import { changeUserLoggedIn, showChosenPhoto, setChosenPhoto } from '../../../infrastructure/store/appState'
+
+import { BsFillTrashFill } from 'react-icons/bs'
 
 export function Account() {
-  const [activeTab, setActiveTab] = useState('signin')
-  const [isformActive, setFormActive] = useState(false)
-
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
 
-  //LOGIN
-  const [loginEmail, setLoginEmial] = useState('')
-  const [loginPassword, setloginPassword] = useState('')
+  //Saved images
+  const [savedImages, setSavedImages] = useState([])
 
+  //user object retrieved from auth
+  const user = auth.currentUser
   //user colelction ref
   const usersRef = collection(db, 'users')
 
-  //const Google provider
-  const googleProvider = new GoogleAuthProvider()
+  //user's doc reference with saved images
+  const userDocRef = doc(db, 'users', auth.currentUser.uid)
 
-  onAuthStateChanged(auth, (user) => {
+  //Dispatch and selector from redux store
+  const dispatch = useDispatch()
+  const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
+
+  async function GetSavedImages() {
+    const userDocSnapshot = await getDoc(userDocRef)
+    if (userDocSnapshot.exists()) {
+      setSavedImages(userDocSnapshot.data().savedImages)
+    }
+  }
+  //CHECKING WETHER USER IS LOGGED IN
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       console.log('Current User: ', user)
     } else {
       console.log('user signed out')
     }
   })
-
-  async function registerUser() {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      )
-      console.log(user.user.uid)
-      try {
-        const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
-          name: 'Testy',
-          surname: 'Smith',
-          email: userEmail,
-        })
-        console.log('New document with user info: ', newUserRef)
-      } catch (error) {
-        console.log('Problem when creating user:', error)
-      }
-    } catch (error) {
-      console.log('OOh no,', error.message)
-    }
-  }
-
-  async function loginUser() {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      )
-      console.log('user: ', user.user)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-
-  async function signInGoogle() {
-    try {
-      const result = await signInWithPopup(auth, googleProvider)
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-      //info about signd in user
-      const user = result.user
-      const newUserRef = await setDoc(doc(usersRef, user.uid), {
-        name: user.displayName,
-        email: user.email,
-      })
-      console.log(newUserRef)
-    } catch (error) {
-      const errorCode = error.code
-      const errorMessage = error.message
-      // The email of the user's account used.
-      const email = error.customData.email
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error)
-      console.log(
-        'code: ',
-        errorCode,
-        'message: ',
-        errorMessage,
-        'email: ',
-        email,
-        'credential used: ',
-        credential
-      )
-    }
-  }
+  useEffect(() => {
+    GetSavedImages()
+  }, [user])
+  //
 
   async function signoutUser() {
     try {
-      signOut(auth)
-      console.log('user is signed out')
+      await signOut(auth)
+      dispatch(changeUserLoggedIn())
+      alert('user is signed out', userLoggedIn)
+      window.location.href = '/about'
     } catch (error) {
-      console.log('error', error.message)
+      console.log('something went wrong', error.message)
     }
+  }
+
+  async function removeImage(image) {
+    const userDocRef = doc(db, 'users', user.uid)
+    await updateDoc(userDocRef, { savedImages: arrayRemove(image) })
+    //remove image from array
+    setSavedImages(savedImages.filter((savedImg) => savedImg.title !== image.title))
+    console.log('new seved images:', savedImages)
+  }
+
+  //chosen pic in store
+  function updateChosenPic(image) {
+    dispatch(setChosenPhoto(image))
+    dispatch(showChosenPhoto())
   }
 
   return (
     <div>
-      {/* <h1>Welcome to user account page!</h1> */}
-      {/* <p className="welcome">welcome to account page</p> */}
-      {auth.currentUser && <h3>{auth.currentUser.displayName}</h3>}
-      <button onClick={signoutUser}>Sign Out</button>
-      <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button>
-
-      {isformActive && (
-        <div className={styles['account-form']}>
-          <div className={styles['welcome-part']}>
-            <h3>Welcome</h3>
-            <h3>to</h3>
-            <h3>Cosmic</h3>
-            <img src="src/assets/account/images/Logo.svg" />
-            {/* <img
-              id={styles['wave-1']}
-              src="src/assets/account/images/Wave1.svg"
-            />
-            <img
-              id={styles['wave-2']}
-              src="src/assets/account/images/Wave2.svg"
-            /> */}
-          </div>
-          <div className={styles['input-part']}>
-            <ul className={styles.tabs}>
-              <li
-                className={
-                  activeTab === 'signin'
-                    ? styles['active-tab']
-                    : styles['inactive-tab']
-                }
-                onClick={() => setActiveTab('signin')}
-              >
-                Sign In
-              </li>
-              <li
-                className={
-                  activeTab === 'register'
-                    ? styles['active-tab']
-                    : styles['inactive-tab']
-                }
-                onClick={() => setActiveTab('register')}
-              >
-                Sign Up
-              </li>
-            </ul>
-            {activeTab === 'register' && (
-              <div className={styles.registerForm}>
-                <label for="name">Name</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your name"
-                  id="name"
-                />
-                <label for="email">Email</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="email"
-                  id="email"
-                  onChange={(event) => {
-                    setUserEmail(event.target.value)
-                  }}
-                />
-                <label for="password">Password</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your password"
-                  id="password"
-                  onChange={(event) => {
-                    setUserPassword(event.target.value)
-                  }}
-                />
-                <label className={styles['input-field']} for="confirm">
-                  Confirm Password
-                </label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Re-enter your password"
-                  id="confirm"
-                />
-                <button className={styles['button']} onClick={registerUser}>
-                  Register
-                </button>
+      {/* <button onClick={signoutUser}>Sign Out</button> */}
+      {/* <button onClick={() => setFormActive(!isformActive)}>Toggle Form</button> */}
+      {userLoggedIn ? (
+        <div className={styles['profile-tile']}>
+          <p className={styles['profile-header']}>Your Profile</p>
+          <img src={auth.currentUser.photoURL} alt="placeholder image" />
+          <p>{auth.currentUser.displayName}</p>
+          <p>{auth.currentUser.email}</p>
+        </div>
+      ) : (
+        <h1>Sign in to your exsisting account or create new one</h1>
+      )}
+      {userLoggedIn ? (
+        <div className={styles['saved-images']}>
+          <p className={styles['images-header']}>Saved Images</p>
+          <div className={styles['cards']}>
+            {savedImages.map((image, index) => (
+              <div className={styles['image-card']}>
+                <div className={styles['card-visuals']}>
+                  <img
+                    onClick={() => updateChosenPic(image)}
+                    src={image.url}
+                    alt={image.title}
+                    className={styles['fetched-photo']}
+                  />
+                  <p className={styles['image-title']}>{image.title}</p>
+                  <button id={styles['remove-btn']} onClick={() => removeImage(image)}>
+                    <BsFillTrashFill />
+                  </button>
+                </div>
+                <p className={styles['image-desc']}>{image.explanation}</p>
               </div>
-            )}
-            {activeTab === 'signin' && (
-              <div className={styles.loginForm}>
-                <label for="email">Email</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="email"
-                  id="login-email"
-                />
-                <label for="password">Password</label>
-                <input
-                  className={styles['input-field']}
-                  placeholder="Enter your password"
-                  id="login-password"
-                />
-                <button className={styles.button} onClick={loginUser}>
-                  Sign In
-                </button>
-              </div>
-            )}
-            <button
-              className={styles.button}
-              id={styles['google-button']}
-              onClick={signInGoogle}
-            >
-              <img height={16} src="src/assets/google-logo.png" />
-              Sign In with Google
-            </button>
+            ))}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   )
 }
+
+// async function loginUser() {
+//   try {
+//     const user = await signInWithEmailAndPassword(
+//       auth,
+//       loginEmail,
+//       loginPassword
+//     )
+//     console.log('user: ', user.user)
+//   } catch (error) {
+//     console.log(error.message)
+//   }
+// }
+
+// async function signInGoogle() {
+//   try {
+//     const result = await signInWithPopup(auth, googleProvider)
+//     const credential = GoogleAuthProvider.credentialFromResult(result)
+//     const token = credential.accessToken
+//     //info about signd in user
+//     const user = result.user
+//     const newUserRef = await setDoc(doc(usersRef, user.uid), {
+//       name: user.displayName,
+//       email: user.email,
+//     })
+//     console.log(newUserRef)
+//   } catch (error) {
+//     const errorCode = error.code
+//     const errorMessage = error.message
+//     // The email of the user's account used.
+//     const email = error.customData.email
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error)
+//     console.log(
+//       'code: ',
+//       errorCode,
+//       'message: ',
+//       errorMessage,
+//       'email: ',
+//       email,
+//       'credential used: ',
+//       credential
+//     )
+//   }
+// }
+
+//async function registerUser() {
+//   try {
+//     const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
+//     console.log(user.user.uid)
+//     try {
+//       const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
+//         name: 'Testy',
+//         surname: 'Smith',
+//         email: userEmail,
+//       })
+//       console.log('New document with user info: ', newUserRef)
+//     } catch (error) {
+//       console.log('Problem when creating user:', error)
+//     }
+//   } catch (error) {
+//     console.log('OOh no,', error.message)
+//   }
+// }

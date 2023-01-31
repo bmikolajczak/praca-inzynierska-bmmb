@@ -1,0 +1,60 @@
+@import 'src/assets/variables.scss';
+@import 'src/index.scss';
+
+.container {
+  background-color: $dark-grey-bg;
+  border: 3px solid $font-white;
+  padding: 2rem 5rem;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 100px;
+  border-radius: 30px;
+}
+#close {
+  background-color: rgb(229, 74, 74);
+  font-size: 1.5rem;
+  padding: 5px 5px 0;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+.content-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .img-box {
+    img {
+      max-width: 500px;
+    }
+  }
+  .info {
+    align-self: flex-start;
+    h1 {
+      color: white;
+    }
+    flex-grow: 1;
+    color: $black-100;
+    .add-btn {
+      margin-top: 30px;
+      background-color: rgb(48, 170, 88);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .explanation {
+      font-size: 1.125rem;
+      max-height: 300px;
+      overflow-y: scroll;
+      padding: 0.25rem 0.5rem;
+      @include scrollbar();
+    }
+  }
+}

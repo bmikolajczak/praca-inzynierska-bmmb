@@ -1,0 +1,115 @@
+@import 'src/assets/variables.scss';
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', 'sans-serif';
+  padding: 40px 109px;
+  h1 {
+    color: $font-white;
+    font-weight: 100;
+    font-size: 30;
+  }
+}
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h4 {
+    font-weight: 100;
+    font-size: 30px;
+    background-color: $dark-grey-bg;
+    padding: 26px 100px;
+    border-radius: 30px;
+    border-width: 4px;
+    border-color: $black-100;
+    border-style: solid;
+  }
+  .correct {
+    background-color: rgb(31, 143, 117);
+  }
+  .incorrect {
+    background-color: rgb(154, 50, 50);
+  }
+}
+
+.question-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    font-weight: 100;
+    font-size: 30px;
+    background-color: $dark-grey-bg;
+    border-width: 0.125rem;
+    border-color: $light-grey-bg;
+    padding: 26px 100px;
+    border-radius: 30px;
+    border-width: 4px;
+    border-style: solid;
+  }
+  .answer-buttons {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 72px;
+    margin-top: 24px;
+    button {
+      font-weight: 300;
+      font-size: 30px;
+      color: $black-100;
+      background-color: $dark-grey-bg;
+      border-color: $accent-blue;
+      border-width: 0.25rem;
+      padding: 18px 47px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s linear;
+    }
+    button:hover {
+      background-color: $font-white;
+      color: $dark-grey-bg;
+    }
+  }
+}
+.next-question-btn {
+  font-size: 30px;
+  border-radius: 30px;
+  border-style: solid;
+  border-width: 4px;
+  color: $black-100;
+  cursor: pointer;
+  border-color: $accent-blue;
+  background-color: $dark-grey-bg;
+  padding: 18px 47px;
+}
+
+.quiz-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+.choice-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+.choice-button {
+  font-weight: 300;
+  font-size: 30px;
+  color: $black-100;
+  background-color: $dark-grey-bg;
+  border-color: $accent-blue;
+  border-width: 0.125rem;
+  padding: 18px 47px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s linear;
+  &:hover {
+    background-color: $light-grey-bg;
+    color: $font-white;
+  }
+}

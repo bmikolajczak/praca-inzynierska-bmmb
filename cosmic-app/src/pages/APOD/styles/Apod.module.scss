@@ -18,6 +18,13 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: $dark-grey-bg;
+  border-color: $light-grey-bg;
+  border-style: solid;
+  border-width: 0.25rem;
+  margin: 0 5.8rem;
+  padding: 2rem;
+  border-radius: 30px;
 }
 .apodImageContainer {
   display: flex;
@@ -42,7 +49,10 @@ p {
 
 .apodButtons {
   button {
-    background-color: $primary-grey;
+    background-color: $dark-grey-bg;
+    border: solid;
+    border-color: $accent-blue;
+    cursor: pointer;
     color: white;
     font-size: 1rem;
     font-weight: bold;
@@ -51,4 +61,55 @@ p {
     border-radius: 6px;
     cursor: pointer;
   }
+}
+
+.filter-btn {
+  background-color: $light-grey-bg;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Poppins';
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 6px;
+  border-color: $accent-blue;
+  cursor: pointer;
+}
+//span
+.datesSpan {
+  color: $font-white;
+  font-family: 'Poppins';
+  font-size: 1rem;
+}
+
+//FETCHED IMAGES
+.image-div {
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.fetched-photo {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 0.625rem;
+}
+.dates-div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.date-input {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: 'Poppins';
+  border-radius: 6px;
 }
