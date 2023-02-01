@@ -19,8 +19,6 @@ export function Quizes() {
   const [answerCorrect, setAnswerCorrect] = useState(true)
   const [quizesFirestore, setQuizesFirestore] = useState({})
 
-  //user ref
-  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
   //quuestions ref
   const questionsRef = doc(db, 'quizes', 'questions')
 
@@ -41,6 +39,9 @@ export function Quizes() {
       setSummaryVisibility(true)
       setQuizVisible(false)
       try {
+        //user ref
+        const currentUserRef = doc(db, 'users', auth.currentUser.uid)
+
         if (chosenQuiz === 'marsQuestions') {
           await updateDoc(currentUserRef, { marsQuiz: `${score}/10` })
         } else if (chosenQuiz === 'solarQuestionss') {

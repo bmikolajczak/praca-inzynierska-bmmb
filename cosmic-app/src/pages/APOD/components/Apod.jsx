@@ -29,8 +29,6 @@ function CallApodApi() {
   const [apodStartDate, setStartDate] = useState('')
   const [apodEndDate, setEndDate] = useState('')
 
-  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
-
   function downloadImage() {
     window.open(image.hdurl)
   }
@@ -67,6 +65,7 @@ function CallApodApi() {
       )
   }, [])
   async function saveToProfile(image) {
+    const currentUserRef = doc(db, 'users', auth.currentUser.uid)
     await updateDoc(currentUserRef, { savedImages: arrayUnion({ ...image }) })
     console.log(`image ${image.title} successfully added`)
   }
