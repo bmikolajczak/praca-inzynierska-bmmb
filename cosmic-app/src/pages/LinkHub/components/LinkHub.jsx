@@ -14,7 +14,7 @@ export function LinkHub() {
   //   dispatch(changeModalVisible())
   // }
   return (
-    <div className="parent-cont">
+    <div className={styles['parent-cont']}>
       <div className={styles['links-container']}>
         <Link to="/mars" className="mars-li">
           Learn about Mars
