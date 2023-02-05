@@ -12,10 +12,11 @@ import { auth, db } from '../../../infrastructure/firebase/firebase'
 import styles from '../styles/Account.module.scss'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeUserLoggedIn, setActiveUser } from '../../../infrastructure/store/appState'
+import { changeUserLoggedIn, hideLoginForm, setActiveUser } from '../../../infrastructure/store/appState'
+
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export function Form() {
-  const [showForm, setShowForm] = useState(false)
   const [activeTab, setActiveTab] = useState('signin')
 
   const [userEmail, setUserEmail] = useState('')
@@ -62,9 +63,7 @@ export function Form() {
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       console.log('user: ', user.user)
       dispatch(changeUserLoggedIn())
-
-      //redirect to user page after successful registration
-      // setTimeout(() => (window.location.href = '/account'), 1000)
+      dispatch(hideLoginForm())
     } catch (error) {
       console.log('something went wrong when logging you in', error.message)
     }
@@ -83,11 +82,9 @@ export function Form() {
         name: user.displayName,
         email: user.email,
       })
-
       console.log('new google user:', newUserRef)
       console.log('user in REDUX', activeUser)
-      //redirect to another window
-      // setTimeout(() => (window.location.href = '/account'), 1000)
+      dispatch(hideLoginForm())
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
@@ -108,16 +105,11 @@ export function Form() {
           <h3>to</h3>
           <h3>Cosmic</h3>
           <img src="src/assets/account/images/Logo.svg" />
-          {/* <img
-              id={styles['wave-1']}
-              src="src/assets/account/images/Wave1.svg"
-            />
-            <img
-              id={styles['wave-2']}
-              src="src/assets/account/images/Wave2.svg"
-            /> */}
         </div>
         <div className={styles['input-part']}>
+          <button id={styles['close']} onClick={() => dispatch(hideLoginForm())}>
+            <AiOutlineCloseCircle />
+          </button>
           <ul className={styles.tabs}>
             <li
               className={activeTab === 'signin' ? styles['active-tab'] : styles['inactive-tab']}
@@ -166,9 +158,23 @@ export function Form() {
           {activeTab === 'signin' && (
             <div className={styles.loginForm}>
               <label for="email">Email</label>
-              <input className={styles['input-field']} placeholder="email" id="login-email" />
+              <input
+                className={styles['input-field']}
+                placeholder="email"
+                id="login-email"
+                onChange={(event) => {
+                  setLoginEmial(event.target.value)
+                }}
+              />
               <label for="password">Password</label>
-              <input className={styles['input-field']} placeholder="Enter your password" id="login-password" />
+              <input
+                className={styles['input-field']}
+                placeholder="Enter your password"
+                id="login-password"
+                onChange={(event) => {
+                  setloginPassword(event.target.value)
+                }}
+              />
               <button className={styles.button} onClick={loginUser}>
                 Sign In
               </button>

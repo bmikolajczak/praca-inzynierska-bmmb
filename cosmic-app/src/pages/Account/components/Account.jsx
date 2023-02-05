@@ -88,7 +88,14 @@ export function Account() {
       {userLoggedIn ? (
         <div className={styles['profile-tile']}>
           <p className={styles['profile-header']}>Your Profile</p>
-          <img src={auth.currentUser.photoURL} alt="placeholder image" />
+          <img
+            src={
+              auth.currentUser.photoURL
+                ? auth.currentUser.photoURL
+                : 'src/assets/account/images/user_placeholder_image.svg'
+            }
+            alt="placeholder image"
+          />
           <p>{auth.currentUser.displayName}</p>
           <p>{auth.currentUser.email}</p>
         </div>

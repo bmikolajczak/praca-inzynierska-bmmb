@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './headerNavigation.module.scss'
 import { auth } from '../firebase/firebase'
-import { changeModalVisible, changeSideMenuVisible, showLoginForm } from '../store/appState'
+import { changeModalVisible, changeSideMenuVisible, setUserIn, setUserOut, showLoginForm } from '../store/appState'
 import { AiOutlineMenu } from 'react-icons/ai'
+// import { onAuthStateChanged } from 'firebase/auth'
 
 export const HeaderNavigation = () => {
   const user = auth.currentUser
@@ -50,9 +51,11 @@ export const HeaderNavigation = () => {
         <li>
           <Link to="/menu">Menu</Link>
         </li>
-        <li>
-          <Link to="/account">Account</Link>
-        </li>
+        {userLoggedIn && (
+          <li>
+            <Link to="/account">Account</Link>
+          </li>
+        )}
         {!userLoggedIn ? (
           <li>
             <p

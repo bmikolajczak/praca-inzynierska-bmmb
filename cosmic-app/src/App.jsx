@@ -9,8 +9,9 @@ import { ApodModal } from './pages/APOD/components/Modal'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { db } from './infrastructure/firebase/firebase'
+import { db, auth } from './infrastructure/firebase/firebase'
 import { collection, setDoc, doc } from 'firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
 
 import quizes from './pages/Quizes/components/Questions.json'
 import solarInfo from './pages/Solar System/components/SolarInfo.json'
@@ -24,6 +25,14 @@ export function App() {
 
   const quizCollection = collection(db, 'quizes')
   const resourceCollection = collection(db, 'resources')
+  const dispatch = useDispatch()
+  onAuthStateChanged(auth, (potentialUser) => {
+    if (potentialUser) {
+      dispatch(setUserIn())
+    } else {
+      dispatch(setUserOut())
+    }
+  })
   useEffect(() => {
     try {
       setDoc(doc(quizCollection, 'questions'), {

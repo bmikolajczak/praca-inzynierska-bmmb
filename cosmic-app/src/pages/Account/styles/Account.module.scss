@@ -1,7 +1,8 @@
 @import 'src/assets/variables.scss';
 //MAIN FORM DIV
 .account-form {
-  position: absolute;
+  position: fixed;
+  z-index: 20;
   top: 30%;
   left: 30%;
   width: 620px;
@@ -70,6 +71,19 @@
   padding: 0.5rem 1rem;
   outline: none;
 }
+// close buttons
+#close {
+  background-color: rgb(229, 74, 74);
+  font-size: 1.5rem;
+  padding: 5px 5px 0;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  align-self: flex-end;
+  transform: translateY(-30px);
+  cursor: pointer;
+}
+
 //TABS
 .tabs {
   display: flex;
