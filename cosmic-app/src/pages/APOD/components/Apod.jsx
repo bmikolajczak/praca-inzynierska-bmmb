@@ -177,7 +177,7 @@ function CallApodApi() {
           </div>
           <div className={styles2['cards']}>
             {fetchedImages.map((image) => (
-              <div className={styles2['image-card']}>
+              <div key={image.title} className={styles2['image-card']}>
                 <div className={styles2['card-visuals']}>
                   <div className={style['image-div']}>
                     <img

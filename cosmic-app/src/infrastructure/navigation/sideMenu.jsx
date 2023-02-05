@@ -1,9 +1,11 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import style from './headerNavigation.module.scss'
 import { AiOutlineClose } from 'react-icons/ai'
-import { changeSideMenuVisible } from '../store/appState'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { changeSideMenuVisible, showLoginForm } from '../store/appState'
+import { auth } from '../firebase/firebase'
+import { signOut } from 'firebase/auth'
 
 export const SideMenu = () => {
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
@@ -11,6 +13,9 @@ export const SideMenu = () => {
   const dispatch = useDispatch()
   const toggleMenu = () => {
     dispatch(changeSideMenuVisible())
+  }
+  function showForm() {
+    dispatch(showLoginForm())
   }
   return (
     <div className={sideMenuShown ? style.sideMenu + ' ' + style.sideMenuOpen : style['sideMenu']}>
@@ -23,16 +28,18 @@ export const SideMenu = () => {
         <li>
           <Link to="/menu">Menu</Link>
         </li>
-        <li>
-          <Link to="/account">Account</Link>
-        </li>
-        {!userLoggedIn ? (
+        {userLoggedIn && (
           <li>
+            <Link to="/account">Account</Link>
+          </li>
+        )}
+        {!userLoggedIn ? (
+          <li onClick={() => showForm()}>
             <p>Sign In / Sign Up</p>
           </li>
         ) : (
-          <li>
-            <p>Sign Out</p>
+          <li onClick={async () => await signOut(auth)}>
+            <a>Sign Out</a>
           </li>
         )}
       </ul>

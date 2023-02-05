@@ -107,7 +107,7 @@ export function Account() {
           <p className={styles['images-header']}>Saved Images</p>
           <div className={styles['cards']}>
             {savedImages.map((image, index) => (
-              <div className={styles['image-card']}>
+              <div key={image.title} className={styles['image-card']}>
                 <div className={styles['card-visuals']}>
                   <img
                     onClick={() => updateChosenPic(image)}

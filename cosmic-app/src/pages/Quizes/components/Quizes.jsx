@@ -36,7 +36,7 @@ export function Quizes() {
       setQuizVisible(true)
     } else {
       setExplanationVisibility(true)
-      setSummaryVisibility(true)
+      // setSummaryVisibility(true)
       setQuizVisible(false)
       try {
         //user ref
@@ -52,6 +52,10 @@ export function Quizes() {
       } catch (error) {
         console.log('Error when upadting quiz score', error)
       }
+    }
+    if (currentQuestionIndex + 1 === 10) {
+      setExplanationVisibility(false)
+      setSummaryVisibility(true)
     }
   }
   function retryQuiz() {
@@ -114,7 +118,9 @@ export function Quizes() {
               <h3>{quizesFirestore[chosenQuiz][currentQuestionIndex].question}</h3>
               <div className={styles['answer-buttons']}>
                 {quizesFirestore[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
-                  <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
+                  <button key={elem.answer} onClick={() => answerChosen(elem.isTrue)}>
+                    {elem.answer}
+                  </button>
                 ))}
               </div>
             </div>
@@ -133,7 +139,7 @@ export function Quizes() {
               toggleNextQuestion()
             }}
           >
-            Next question
+            {currentQuestionIndex + 1 === 10 ? 'Show score' : 'Next question'}
           </button>{' '}
         </div>
       )}
