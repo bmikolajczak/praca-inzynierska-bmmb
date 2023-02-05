@@ -45,8 +45,8 @@ export function Form() {
       console.log(user.user.uid)
       try {
         const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
-          name: 'Testy',
-          surname: 'Smith',
+          name: 'John',
+          surname: 'Doe',
           email: userEmail,
         })
         console.log('New document with user info: ', newUserRef)
@@ -76,7 +76,7 @@ export function Form() {
       const token = credential.accessToken
       //info about signd in user
       const user = result.user
-      dispatch(setActiveUser(user))
+      // dispatch(setActiveUser(user))
 
       const newUserRef = await setDoc(doc(usersRef, user.uid), {
         name: user.displayName,
