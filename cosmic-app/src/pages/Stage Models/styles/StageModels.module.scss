@@ -39,7 +39,7 @@
       padding: 4px 6px;
       font-size: 24px;
       cursor: pointer;
-      background-color: #2a2a2a;
+      background-color: #000000;
       color: white;
 
       &:hover {
@@ -62,7 +62,7 @@
       padding: 4px 6px;
       font-size: 18px;
       cursor: pointer;
-      background-color: #2a2a2a;
+      background-color: #000000;
       color: white;
       margin: 4px 0;
 
@@ -81,13 +81,13 @@
       }
 
       .linksTopBox {
-        background-color: #2a2a2a;
+        background-color: #000000;
         padding: 4px 12px;
         border-radius: 8px 8px 0 0;
       }
 
       .linksCol {
-        background-color: #2a2a2a;
+        background-color: #000000;
         border-radius: 0 16px 16px 0;
         display: flex;
         flex-direction: column;
@@ -102,10 +102,10 @@
           color: white;
           padding: 4px 8px;
           border-radius: 8px;
-          border: 2px solid #00ddff;
+          border: 2px solid #0088ff;
 
           &:hover {
-            background-color: #00ddff;
+            background-color: #0088ff;
           }
         }
       }
@@ -122,11 +122,11 @@
     border-radius: 1px 75% 75% 75%;
     width: 16px;
     height: 16px;
-    border: #00ddff 2px solid;
-    background-color: rgba($color: #00ddff, $alpha: 0.2);
+    border: #0088ff 2px solid;
+    background-color: rgba($color: #0088ff, $alpha: 0.2);
 
     &:hover {
-      background-color: #00ddff;
+      background-color: #0088ff;
       transition: all 0.5s ease-out;
     }
   }
