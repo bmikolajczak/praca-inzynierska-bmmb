@@ -140,6 +140,7 @@ export function Form() {
               <label for="password">Password</label>
               <input
                 className={styles['input-field']}
+                type="password"
                 placeholder="Enter your password"
                 id="password"
                 onChange={(event) => {

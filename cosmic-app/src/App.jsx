@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { db, auth } from './infrastructure/firebase/firebase'
 import { collection, setDoc, doc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
+import { setUserIn, setUserOut } from './infrastructure/store/appState'
 
 import quizes from './pages/Quizes/components/Questions.json'
 import solarInfo from './pages/Solar System/components/SolarInfo.json'
