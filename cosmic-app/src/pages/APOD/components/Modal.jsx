@@ -16,8 +16,8 @@ export function ApodModal() {
   const chosenPhoto = useSelector((state) => state.app.chosenPhoto)
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
-  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
   async function saveToProfile() {
+    const currentUserRef = doc(db, 'users', auth.currentUser.uid)
     await updateDoc(currentUserRef, { savedImages: arrayUnion({ ...chosenPhoto }) })
     alert('You saved an image.')
   }
