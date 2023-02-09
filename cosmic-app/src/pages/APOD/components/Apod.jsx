@@ -28,6 +28,7 @@ function CallApodApi() {
   const [fetchedImages, setFetchedImages] = useState([])
   const [apodStartDate, setStartDate] = useState('')
   const [apodEndDate, setEndDate] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
 
   //checking user status
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
@@ -99,7 +100,9 @@ function CallApodApi() {
       .then((res) => res.json())
       .then(
         (result) => {
-          setFetchedImages(result)
+          if (result.code === 400) {
+            console.log('what was retrieved: ', result)
+          } else setFetchedImages(result)
         },
         (error) => console.log('Error appeared: ', error)
       )
