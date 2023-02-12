@@ -16,9 +16,9 @@ export const HeaderNavigation = () => {
 
   //ref to user login status in redux
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
-  console.log('logged in?', userLoggedIn)
+  // console.log('logged in?', userLoggedIn)
 
-  console.log('userinio', user)
+  // console.log('user info', user)
   useEffect(() => {}, [user])
   async function signoutUser() {
     try {

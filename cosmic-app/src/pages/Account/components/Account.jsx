@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react'
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth'
-import { collection, setDoc, doc, getDoc, arrayRemove, updateDoc } from 'firebase/firestore'
+import { signOut, onAuthStateChanged } from 'firebase/auth'
+import { collection, doc, getDoc, arrayRemove, updateDoc, deleteField } from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,6 +14,9 @@ import { BsFillTrashFill } from 'react-icons/bs'
 export function Account() {
   //Saved images
   const [savedImages, setSavedImages] = useState([])
+  const [marsScore, setMarsScore] = useState('NOT TAKEN')
+  const [vehicleScore, setVehicleScore] = useState('NOT TAKEN')
+  const [solarsScore, setSolarScore] = useState('NOT TAKEN')
 
   //user object retrieved from auth
   const user = auth.currentUser
@@ -34,6 +30,28 @@ export function Account() {
   const dispatch = useDispatch()
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
+  async function deleteScore(score) {
+    const userRef = doc(db, 'users', auth.currentUser.uid)
+    if (score === 'marsScore') {
+      await updateDoc(userRef, {
+        marsQuiz: deleteField(),
+      })
+      setMarsScore('NOT TAKEN')
+    }
+    if (score === 'solarScore') {
+      await updateDoc(userRef, {
+        solarQuiz: deleteField(),
+      })
+      setSolarScore('NOT TAKEN')
+    }
+    if (score === 'vehicleScore') {
+      await updateDoc(userRef, {
+        vehicleQuiz: deleteField(),
+      })
+      setVehicleScore('NOT TAKEN')
+    }
+  }
+
   async function GetSavedImages() {
     const userDocSnapshot = await getDoc(userDocRef)
     if (userDocSnapshot.exists()) {
@@ -41,6 +59,15 @@ export function Account() {
         setSavedImages(userDocSnapshot.data().savedImages)
       } else {
         return
+      }
+      if (userDocSnapshot.data().marsQuiz) {
+        setMarsScore(userDocSnapshot.data().marsQuiz)
+      }
+      if (userDocSnapshot.data().solarQuiz) {
+        setSolarScore(userDocSnapshot.data().solarQuiz)
+      }
+      if (userDocSnapshot.data().vehicleQuiz) {
+        setVehicleScore(userDocSnapshot.data().vehicleQuiz)
       }
     }
   }
@@ -103,6 +130,38 @@ export function Account() {
       ) : (
         <h1>Sign in to your exsisting account or create new one</h1>
       )}
+      <div className={styles['saved-images']}>
+        <p className={styles['images-header']}>Quiz Scores</p>
+        <div className={styles['cards']}>
+          <div className={styles['image-card']}>
+            <div className={styles['card-visuals']}>
+              <h3>Mars Quiz</h3>
+              <p className={styles['quiz-score']}>{marsScore}</p>
+              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('marsScore')}>
+                <BsFillTrashFill />
+              </button>
+            </div>
+          </div>
+          <div className={styles['image-card']}>
+            <div className={styles['card-visuals']}>
+              <h3>Solar Quiz</h3>
+              <p className={styles['quiz-score']}>{solarsScore}</p>
+              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('solarScore')}>
+                <BsFillTrashFill />
+              </button>
+            </div>
+          </div>
+          <div className={styles['image-card']}>
+            <div className={styles['card-visuals']}>
+              <h3>NASA Missions Quiz</h3>
+              <p className={styles['quiz-score']}>{vehicleScore}</p>
+              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('vehicleScore')}>
+                <BsFillTrashFill />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       {userLoggedIn ? (
         <div className={styles['saved-images']}>
           <p className={styles['images-header']}>Saved Images</p>

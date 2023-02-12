@@ -238,12 +238,18 @@
     padding: 0.25rem 0.5rem;
     cursor: pointer;
   }
+  h3 {
+    font-size: 1.625rem;
+    margin-bottom: 24px;
+  }
   &:hover {
     transform: translateY(-30px);
     background-color: $font-white;
     box-shadow: -2px 6px 29px 0px $accent-blue;
   }
-  &:hover .image-title {
+  &:hover .image-title,
+  &:hover .quiz-score,
+  &:hover h3 {
     color: $light-grey-bg;
   }
 }
@@ -274,6 +280,17 @@
 
 #remove-btn {
   background-color: rgb(229, 74, 74);
+}
+
+//QUIZ SCORES
+
+.quiz-score {
+  text-align: center;
+  width: 100%;
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 614px) {

@@ -43,10 +43,10 @@ export function Quizes() {
         if (userLoggedIn) {
           //user ref
           const currentUserRef = doc(db, 'users', auth.currentUser.uid)
-
+          console.log('saving score', currentUserRef)
           if (chosenQuiz === 'marsQuestions') {
             await updateDoc(currentUserRef, { marsQuiz: `${score}/10` })
-          } else if (chosenQuiz === 'solarQuestionss') {
+          } else if (chosenQuiz === 'solarQuestions') {
             await updateDoc(currentUserRef, { solarQuiz: `${score}/10` })
           } else if (chosenQuiz === 'vehicleQuestions') {
             await updateDoc(currentUserRef, { vehicleQuiz: `${score}/10` })
