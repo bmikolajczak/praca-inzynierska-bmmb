@@ -76,14 +76,17 @@ export function Form() {
       const token = credential.accessToken
       //info about signd in user
       const user = result.user
-      // dispatch(setActiveUser(user))
 
-      const newUserRef = await setDoc(doc(usersRef, user.uid), {
-        name: user.displayName,
-        email: user.email,
-      })
-      console.log('new google user:', newUserRef)
-      console.log('user in REDUX', activeUser)
+      const userDocSnap = getDoc(doc(usersRef, user.uid))
+      if (userDocSnap.exists()) {
+        console.log('Google user exists')
+      } else {
+        const newUserRef = await setDoc(doc(usersRef, user.uid), {
+          name: user.displayName,
+          email: user.email,
+        })
+      }
+
       dispatch(hideLoginForm())
     } catch (error) {
       const errorCode = error.code
