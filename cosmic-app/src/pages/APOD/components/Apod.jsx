@@ -104,7 +104,7 @@ function CallApodApi() {
           if (result.code === 400) {
             setApodErr(true)
             setErrorMsg(result.msg)
-            // console.log(result)
+            console.log(result)
           } else {
             setApodErr(false)
             console.log(result)
