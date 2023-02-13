@@ -44,10 +44,10 @@ export const HeaderNavigation = () => {
       <Link to="/menu" className={style.logoLink}>
         <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
-      <button id={style['hamburger-icon']} onClick={toggleMenu}>
+      {/* <button id={style['hamburger-icon']} onClick={toggleMenu}>
         {' '}
         <AiOutlineMenu />
-      </button>
+      </button> */}
       <ul className={style.links}>
         <li>
           <Link to="/menu">Menu</Link>

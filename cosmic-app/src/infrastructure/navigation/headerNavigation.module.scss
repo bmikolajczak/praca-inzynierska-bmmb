@@ -101,10 +101,13 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .links {
-    display: none !important;
+  .logo {
+    max-width: 90% !important;
   }
-  #hamburger-icon {
-    display: block;
-  }
+  // .links {
+  //   display: none !important;
+  // }
+  // #hamburger-icon {
+  //   display: block;
+  // }
 }

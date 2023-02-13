@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom'
 
 import { LinkHub } from './pages/LinkHub/components/LinkHub'
 import { HeaderNavigation } from './infrastructure/navigation/headerNavigation'
-import { SideMenu } from './infrastructure/navigation/sideMenu'
 import { Form } from './pages/Account/components/Form'
 import { ApodModal } from './pages/APOD/components/Modal'
 
@@ -53,7 +52,6 @@ export function App() {
   return (
     <div>
       <HeaderNavigation />
-      <SideMenu />
       {modal && <LinkHub />}
       <Outlet />
       {chosenPhotoShown && <ApodModal />}
