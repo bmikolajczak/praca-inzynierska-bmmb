@@ -59,13 +59,13 @@ export const HeaderNavigation = () => {
         )}
         {!userLoggedIn ? (
           <li>
-            <p
+            <a
               onClick={() => {
                 showForm()
               }}
             >
               Sign In / Sign Up
-            </p>
+            </a>
           </li>
         ) : (
           <li onClick={signoutUser}>

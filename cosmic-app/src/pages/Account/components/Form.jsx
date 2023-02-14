@@ -5,14 +5,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth'
-import { collection, setDoc, doc } from 'firebase/firestore'
+import { collection, setDoc, doc, getDoc } from 'firebase/firestore'
 
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 
 import styles from '../styles/Account.module.scss'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeUserLoggedIn, hideLoginForm, setActiveUser } from '../../../infrastructure/store/appState'
+import { changeUserLoggedIn, hideLoginForm } from '../../../infrastructure/store/appState'
 
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
@@ -77,25 +77,25 @@ export function Form() {
       //info about signd in user
       const user = result.user
 
-      const userDocSnap = getDoc(doc(usersRef, user.uid))
+      const userDocSnap = getDoc(doc(usersRef, auth.currentUser.uid))
       if (userDocSnap.exists()) {
         console.log('Google user exists')
+        dispatch(hideLoginForm())
       } else {
         const newUserRef = await setDoc(doc(usersRef, user.uid), {
           name: user.displayName,
           email: user.email,
         })
+        dispatch(hideLoginForm())
       }
-
-      dispatch(hideLoginForm())
     } catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
       // The email of the user's account used.
-      const email = error.customData.email
+      // const email = error.customData.email
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error)
-      console.log('code: ', errorCode, 'message: ', errorMessage, 'email: ', email, 'credential used: ', credential)
+      // console.log('code: ', errorCode, 'message: ', errorMessage, 'credential used: ', credential)
     }
   }
 
@@ -129,9 +129,9 @@ export function Form() {
           </ul>
           {activeTab === 'register' && (
             <div className={styles.registerForm}>
-              <label for="name">Name</label>
+              <label htmlfor="name">Name</label>
               <input className={styles['input-field']} placeholder="Enter your name" id="name" />
-              <label for="email">Email</label>
+              <label html="email">Email</label>
               <input
                 className={styles['input-field']}
                 placeholder="email"
@@ -140,7 +140,7 @@ export function Form() {
                   setUserEmail(event.target.value)
                 }}
               />
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 className={styles['input-field']}
                 type="password"
@@ -150,10 +150,15 @@ export function Form() {
                   setUserPassword(event.target.value)
                 }}
               />
-              <label className={styles['input-field']} for="confirm">
+              <label className={styles['input-field']} htmlFor="confirm">
                 Confirm Password
               </label>
-              <input className={styles['input-field']} placeholder="Re-enter your password" id="confirm" />
+              <input
+                type="password"
+                className={styles['input-field']}
+                placeholder="Re-enter your password"
+                id="confirm"
+              />
               <button className={styles['button']} onClick={registerUser}>
                 Register
               </button>
@@ -161,7 +166,7 @@ export function Form() {
           )}
           {activeTab === 'signin' && (
             <div className={styles.loginForm}>
-              <label for="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 className={styles['input-field']}
                 placeholder="email"
@@ -170,8 +175,9 @@ export function Form() {
                   setLoginEmial(event.target.value)
                 }}
               />
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
+                type="password"
                 className={styles['input-field']}
                 placeholder="Enter your password"
                 id="login-password"
