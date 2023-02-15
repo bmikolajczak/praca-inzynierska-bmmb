@@ -20,19 +20,18 @@
   flex-direction: column;
   align-items: center;
   h4 {
+    font-weight: 100;
     font-size: 30px;
     background-color: $dark-grey-bg;
     padding: 26px 100px;
     border-radius: 30px;
-    border-width: 4px;
-    border-color: $black-100;
-    border-style: solid;
+    border: none;
   }
   .correct {
-    background-color: rgb(31, 143, 117);
+    background-color: $green;
   }
   .incorrect {
-    background-color: rgb(154, 50, 50);
+    background-color: $red;
   }
 }
 
@@ -44,12 +43,10 @@
     font-weight: 100;
     font-size: 30px;
     background-color: $dark-grey-bg;
-    border-width: 0.125rem;
-    border-color: $light-grey-bg;
+    border: none;
     padding: 26px 100px;
     border-radius: 30px;
     border-width: 4px;
-    border-style: solid;
   }
   .answer-buttons {
     display: flex;
@@ -61,29 +58,35 @@
       font-size: 30px;
       color: $black-100;
       background-color: $dark-grey-bg;
-      border-color: $accent-blue;
-      border-width: 0.25rem;
+      border: 2px solid $accent-blue;
       padding: 18px 47px;
       border-radius: 30px;
       cursor: pointer;
-      transition: 0.3s linear;
+      transition: all 0.2s ease;
     }
     button:hover {
+      border-color: $font-white;
+      box-shadow: 0px 2px 20px 2px #0088ff;
       background-color: $font-white;
-      color: $dark-grey-bg;
+      color: $black-1000;
     }
   }
 }
 .next-question-btn {
   font-size: 30px;
   border-radius: 30px;
-  border-style: solid;
-  border-width: 4px;
+  border: 2px solid $accent-blue;
   color: $black-100;
   cursor: pointer;
-  border-color: $accent-blue;
   background-color: $dark-grey-bg;
   padding: 18px 47px;
+  transition: all 0.2s ease;
+  &:hover {
+    border-color: $font-white;
+    box-shadow: 0px 2px 20px 2px #0088ff;
+    background-color: $font-white;
+    color: $black-1000;
+  }
 }
 
 .quiz-choice {
