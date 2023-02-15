@@ -155,7 +155,7 @@ export function Quizes() {
               retryQuiz()
             }}
           >
-            Retry?
+            Retry
           </button>
         </div>
       )}
