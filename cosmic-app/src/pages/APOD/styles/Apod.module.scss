@@ -50,16 +50,19 @@ p {
 .apodButtons {
   button {
     background-color: $dark-grey-bg;
-    border: solid;
-    border-color: $accent-blue;
+    border: 2px solid $accent-blue;
     cursor: pointer;
     color: white;
     font-size: 1rem;
     font-weight: bold;
     padding: 13px 24px;
     margin: 0.2rem;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    &:hover {
+      box-shadow: 0px 2px 16px 0px #0088ff;
+    }
   }
 }
 
@@ -70,9 +73,13 @@ p {
   font-family: 'Poppins';
   padding: 0.5rem 1rem;
   margin: 0.2rem;
-  border-radius: 6px;
-  border-color: $accent-blue;
+  border-radius: 12px;
+  border: 2px solid $accent-blue;
   cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  &:hover {
+    box-shadow: 0px 2px 16px 0px #0088ff;
+  }
 }
 //span
 .datesSpan {

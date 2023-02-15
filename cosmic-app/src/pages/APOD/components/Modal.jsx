@@ -23,9 +23,11 @@ export function ApodModal() {
   }
   return (
     <div className={styles['container']}>
-      <button id={styles['close']} onClick={() => dispatch(hideChosenPhoto())}>
-        <AiOutlineCloseCircle />
-      </button>
+      <div className={styles['container-close']}>
+        <button id={styles['close']} onClick={() => dispatch(hideChosenPhoto())}>
+          <AiOutlineCloseCircle />
+        </button>
+      </div>
       <div className={styles['content-box']}>
         <div className={styles['img-box']}>
           <img src={chosenPhoto.url} />
