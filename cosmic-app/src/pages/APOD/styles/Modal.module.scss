@@ -41,18 +41,22 @@
     }
     flex-grow: 1;
     color: $black-100;
-    .add-btn {
-      margin-top: 30px;
-      border: none;
-      background-color: $green;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 1.2rem;
+    .add-btn-container {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
+      justify-content: center;
+      .add-btn {
+        margin-top: 30px;
+        border: none;
+        background-color: $green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
     }
     .explanation {
       font-size: 1.125rem;

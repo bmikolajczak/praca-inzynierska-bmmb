@@ -36,9 +36,11 @@ export function ApodModal() {
           <h1>{chosenPhoto.title}</h1>
           <p className={styles['explanation']}>{chosenPhoto.explanation}</p>
           {userLoggedIn && (
-            <button className={styles['add-btn']} onClick={saveToProfile}>
-              <BsFillPlusCircleFill /> Save to Your Gallery
-            </button>
+            <div className={styles['add-btn-container']}>
+              <button className={styles['add-btn']} onClick={saveToProfile}>
+                <BsFillPlusCircleFill /> Save to Your Gallery
+              </button>
+            </div>
           )}
         </div>
       </div>
