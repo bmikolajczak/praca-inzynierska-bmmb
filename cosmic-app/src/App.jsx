@@ -3,14 +3,15 @@ import { Outlet } from 'react-router-dom'
 
 import { LinkHub } from './pages/LinkHub/components/LinkHub'
 import { HeaderNavigation } from './infrastructure/navigation/headerNavigation'
-import { SideMenu } from './infrastructure/navigation/sideMenu'
 import { Form } from './pages/Account/components/Form'
 import { ApodModal } from './pages/APOD/components/Modal'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { db } from './infrastructure/firebase/firebase'
+import { db, auth } from './infrastructure/firebase/firebase'
 import { collection, setDoc, doc } from 'firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
+import { setUserIn, setUserOut } from './infrastructure/store/appState'
 
 import quizes from './pages/Quizes/components/Questions.json'
 import solarInfo from './pages/Solar System/components/SolarInfo.json'
@@ -24,6 +25,14 @@ export function App() {
 
   const quizCollection = collection(db, 'quizes')
   const resourceCollection = collection(db, 'resources')
+  const dispatch = useDispatch()
+  onAuthStateChanged(auth, (potentialUser) => {
+    if (potentialUser) {
+      dispatch(setUserIn())
+    } else {
+      dispatch(setUserOut())
+    }
+  })
   useEffect(() => {
     try {
       setDoc(doc(quizCollection, 'questions'), {
@@ -43,7 +52,6 @@ export function App() {
   return (
     <div>
       <HeaderNavigation />
-      <SideMenu />
       {modal && <LinkHub />}
       <Outlet />
       {chosenPhotoShown && <ApodModal />}

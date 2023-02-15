@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setChosenPhoto, showChosenPhoto } from '../../../infrastructure/store/appState'
 
 import { BsFillPlusCircleFill } from 'react-icons/bs'
@@ -28,8 +28,11 @@ function CallApodApi() {
   const [fetchedImages, setFetchedImages] = useState([])
   const [apodStartDate, setStartDate] = useState('')
   const [apodEndDate, setEndDate] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [apodErr, setApodErr] = useState(false)
 
-  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
+  //checking user status
+  const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
   function downloadImage() {
     window.open(image.hdurl)
@@ -67,6 +70,7 @@ function CallApodApi() {
       )
   }, [])
   async function saveToProfile(image) {
+    const currentUserRef = doc(db, 'users', auth.currentUser.uid)
     await updateDoc(currentUserRef, { savedImages: arrayUnion({ ...image }) })
     console.log(`image ${image.title} successfully added`)
   }
@@ -97,7 +101,15 @@ function CallApodApi() {
       .then((res) => res.json())
       .then(
         (result) => {
-          setFetchedImages(result)
+          if (result.code === 400) {
+            setApodErr(true)
+            setErrorMsg(result.msg)
+            console.log(result)
+          } else {
+            setApodErr(false)
+            console.log(result)
+            setFetchedImages(result)
+          }
         },
         (error) => console.log('Error appeared: ', error)
       )
@@ -130,7 +142,7 @@ function CallApodApi() {
           </div>
           <div className={style.apodButtons}>
             <button onClick={downloadImage}>Open</button>
-            <button onClick={() => saveToProfile(image)}>Save</button>
+            {userLoggedIn && <button onClick={() => saveToProfile(image)}>Save</button>}
           </div>
         </div>
         <div className={styles2['saved-images']}>
@@ -174,25 +186,31 @@ function CallApodApi() {
             </div>
           </div>
           <div className={styles2['cards']}>
-            {fetchedImages.map((image) => (
-              <div className={styles2['image-card']}>
-                <div className={styles2['card-visuals']}>
-                  <div className={style['image-div']}>
-                    <img
-                      onClick={() => updateChosenPic(image)}
-                      src={image.url}
-                      alt={image.title}
-                      className={style['fetched-photo']}
-                    />
+            {!apodErr ? (
+              fetchedImages.map((image) => (
+                <div key={image.title} className={styles2['image-card']}>
+                  <div className={styles2['card-visuals']}>
+                    <div className={style['image-div']}>
+                      <img
+                        onClick={() => updateChosenPic(image)}
+                        src={image.url ? image.url : 'src/assets/video.png'}
+                        alt={image.title}
+                        className={style['fetched-photo']}
+                      />
+                    </div>
+                    <p className={styles2['image-title']}>{image.title}</p>
+                    {userLoggedIn && (
+                      <button title="Save image to profile" onClick={() => saveToProfile(image)}>
+                        <BsFillPlusCircleFill />
+                      </button>
+                    )}
                   </div>
-                  <p className={styles2['image-title']}>{image.title}</p>
-                  <button title="Save image to profile" onClick={() => saveToProfile(image)}>
-                    <BsFillPlusCircleFill />
-                  </button>
+                  <p className={styles2['image-desc']}>{image.explanation}</p>
                 </div>
-                <p className={styles2['image-desc']}>{image.explanation}</p>
-              </div>
-            ))}
+              ))
+            ) : (
+              <h2>{errorMsg}</h2>
+            )}
           </div>
         </div>
       </div>

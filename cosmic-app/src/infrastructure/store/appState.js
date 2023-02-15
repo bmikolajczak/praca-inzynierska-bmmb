@@ -5,7 +5,7 @@ const initialState = {
   modalShown: false,
   sideMenuShown: false,
   loginFormShown: false,
-  userLoggedIn: true,
+  userLoggedIn: false,
   currentUser: null,
   chosenPhotoShown: false,
   chosenPhoto: {
@@ -28,6 +28,12 @@ const appSlice = createSlice({
     },
     changeUserLoggedIn: (state) => {
       state.userLoggedIn = !state.userLoggedIn
+    },
+    setUserIn: (state) => {
+      state.userLoggedIn = true
+    },
+    setUserOut: (state) => {
+      state.userLoggedIn = false
     },
     setActiveUser: (state, actions) => {
       state.currentUser = actions.payload
@@ -57,6 +63,8 @@ const appSlice = createSlice({
 export const {
   changeModalVisible,
   changeUserLoggedIn,
+  setUserIn,
+  setUserOut,
   showLoginForm,
   hideLoginForm,
   setActiveUser,

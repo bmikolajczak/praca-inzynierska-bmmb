@@ -53,7 +53,7 @@
       input[type='submit'] {
         font-size: inherit;
         margin: 1rem 0;
-        border-radius: 4px;
+        border-radius: 20px;
         background-color: #1e1e1e;
         color: white;
         padding: 8px;
@@ -61,7 +61,7 @@
         cursor: pointer;
         transition: box-shadow 0.2s ease;
         &:hover {
-          box-shadow: 0 0 2px 1px #0088ff;
+          box-shadow: 0px 2px 16px 0px #0088ff;;
         }
       }
     }

@@ -11,8 +11,12 @@
   margin: 0 100px;
   border-radius: 30px;
 }
+.container-close {
+  display: flex;
+  justify-content: end;
+}
 #close {
-  background-color: rgb(229, 74, 74);
+  background-color: $red;
   font-size: 1.5rem;
   padding: 5px 5px 0;
   border-radius: 10px;
@@ -37,17 +41,22 @@
     }
     flex-grow: 1;
     color: $black-100;
-    .add-btn {
-      margin-top: 30px;
-      background-color: rgb(48, 170, 88);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 1.2rem;
+    .add-btn-container {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
+      justify-content: center;
+      .add-btn {
+        margin-top: 30px;
+        border: none;
+        background-color: $green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
     }
     .explanation {
       font-size: 1.125rem;

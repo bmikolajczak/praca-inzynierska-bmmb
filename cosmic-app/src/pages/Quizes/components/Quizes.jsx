@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import { updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../../infrastructure/firebase/firebase'
@@ -19,16 +19,16 @@ export function Quizes() {
   const [answerCorrect, setAnswerCorrect] = useState(true)
   const [quizesFirestore, setQuizesFirestore] = useState({})
 
-  //user ref
-  const currentUserRef = doc(db, 'users', auth.currentUser.uid)
   //quuestions ref
   const questionsRef = doc(db, 'quizes', 'questions')
+
+  //getting user login state
+  const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
   function choseQuiz(quiz) {
     setChosenQuiz(quiz)
     setShowQuizSelection(false)
     setQuizVisible(true)
-    // console.log(chosenQuiz)
   }
 
   async function toggleNextQuestion() {
@@ -38,19 +38,27 @@ export function Quizes() {
       setQuizVisible(true)
     } else {
       setExplanationVisibility(true)
-      setSummaryVisibility(true)
       setQuizVisible(false)
       try {
-        if (chosenQuiz === 'marsQuestions') {
-          await updateDoc(currentUserRef, { marsQuiz: `${score}/10` })
-        } else if (chosenQuiz === 'solarQuestionss') {
-          await updateDoc(currentUserRef, { solarQuiz: `${score}/10` })
-        } else if (chosenQuiz === 'vehicleQuestions') {
-          await updateDoc(currentUserRef, { vehicleQuiz: `${score}/10` })
+        if (userLoggedIn) {
+          //user ref
+          const currentUserRef = doc(db, 'users', auth.currentUser.uid)
+          console.log('saving score', currentUserRef)
+          if (chosenQuiz === 'marsQuestions') {
+            await updateDoc(currentUserRef, { marsQuiz: `${score}/10` })
+          } else if (chosenQuiz === 'solarQuestions') {
+            await updateDoc(currentUserRef, { solarQuiz: `${score}/10` })
+          } else if (chosenQuiz === 'vehicleQuestions') {
+            await updateDoc(currentUserRef, { vehicleQuiz: `${score}/10` })
+          }
         }
       } catch (error) {
         console.log('Error when upadting quiz score', error)
       }
+    }
+    if (currentQuestionIndex + 1 === 10) {
+      setExplanationVisibility(false)
+      setSummaryVisibility(true)
     }
   }
   function retryQuiz() {
@@ -73,7 +81,6 @@ export function Quizes() {
       setAnswerCorrect(false)
       setQuizVisible(false)
     }
-    // console.log('quizes', quizesFirestore)
   }
   async function getQuestions() {
     const questionsSnapshot = await getDoc(questionsRef)
@@ -86,7 +93,7 @@ export function Quizes() {
     getQuestions()
   }, [])
 
-  useEffect(() => console.log(currentQuestionIndex), [currentQuestionIndex])
+  useEffect(() => {}, [currentQuestionIndex])
   return (
     <div className={styles['main-container']}>
       {showQuizSelection && (
@@ -113,7 +120,9 @@ export function Quizes() {
               <h3>{quizesFirestore[chosenQuiz][currentQuestionIndex].question}</h3>
               <div className={styles['answer-buttons']}>
                 {quizesFirestore[chosenQuiz][currentQuestionIndex].answers.map((elem) => (
-                  <button onClick={() => answerChosen(elem.isTrue)}>{elem.answer}</button>
+                  <button key={elem.answer} onClick={() => answerChosen(elem.isTrue)}>
+                    {elem.answer}
+                  </button>
                 ))}
               </div>
             </div>
@@ -132,7 +141,7 @@ export function Quizes() {
               toggleNextQuestion()
             }}
           >
-            Next question
+            {currentQuestionIndex + 1 === 10 ? 'Show score' : 'Next question'}
           </button>{' '}
         </div>
       )}
@@ -146,7 +155,7 @@ export function Quizes() {
               retryQuiz()
             }}
           >
-            Retry?
+            Retry
           </button>
         </div>
       )}

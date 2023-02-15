@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './headerNavigation.module.scss'
 import { auth } from '../firebase/firebase'
-import { changeModalVisible, changeSideMenuVisible, showLoginForm } from '../store/appState'
+import { signOut } from 'firebase/auth'
+import { changeModalVisible, changeSideMenuVisible, setUserIn, setUserOut, showLoginForm } from '../store/appState'
 import { AiOutlineMenu } from 'react-icons/ai'
+// import { onAuthStateChanged } from 'firebase/auth'
 
 export const HeaderNavigation = () => {
   const user = auth.currentUser
@@ -14,9 +16,9 @@ export const HeaderNavigation = () => {
 
   //ref to user login status in redux
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
-  console.log('logged in?', userLoggedIn)
+  // console.log('logged in?', userLoggedIn)
 
-  console.log('userinio', user)
+  // console.log('user info', user)
   useEffect(() => {}, [user])
   async function signoutUser() {
     try {
@@ -42,26 +44,28 @@ export const HeaderNavigation = () => {
       <Link to="/menu" className={style.logoLink}>
         <img src="src/assets/cosmic-logo.svg" alt="cosmic logo" className={style.logo} />
       </Link>
-      <button id={style['hamburger-icon']} onClick={toggleMenu}>
+      {/* <button id={style['hamburger-icon']} onClick={toggleMenu}>
         {' '}
         <AiOutlineMenu />
-      </button>
+      </button> */}
       <ul className={style.links}>
         <li>
           <Link to="/menu">Menu</Link>
         </li>
-        <li>
-          <Link to="/account">Account</Link>
-        </li>
+        {userLoggedIn && (
+          <li>
+            <Link to="/account">Account</Link>
+          </li>
+        )}
         {!userLoggedIn ? (
           <li>
-            <p
+            <a
               onClick={() => {
                 showForm()
               }}
             >
               Sign In / Sign Up
-            </p>
+            </a>
           </li>
         ) : (
           <li onClick={signoutUser}>
