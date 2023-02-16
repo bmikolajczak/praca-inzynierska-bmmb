@@ -21,10 +21,20 @@ export function Form() {
 
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
 
   //LOGIN
   const [loginEmail, setLoginEmial] = useState('')
   const [loginPassword, setloginPassword] = useState('')
+
+  const [loginErr, setLoginErr] = useState(false)
+  const [passErr, setPassErr] = useState(false)
+  const [emailErr, setEmailErr] = useState(false)
+  const [confirmErr, setConfirmErr] = useState(false)
+
+  //email regex
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const user = auth.currentUser
 
@@ -60,11 +70,13 @@ export function Form() {
 
   async function loginUser() {
     try {
+      setLoginErr(false)
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       console.log('user: ', user.user)
       dispatch(changeUserLoggedIn())
       dispatch(hideLoginForm())
     } catch (error) {
+      setLoginErr(true)
       console.log('something went wrong when logging you in', error.message)
     }
   }
@@ -80,7 +92,7 @@ export function Form() {
       const userDocSnap = getDoc(doc(usersRef, auth.currentUser.uid))
       if (userDocSnap.exists()) {
         console.log('Google user exists')
-        dispatch(hideLoginForm())
+        dispatch(hideLoginForm)
       } else {
         const newUserRef = await setDoc(doc(usersRef, user.uid), {
           name: user.displayName,
@@ -137,9 +149,15 @@ export function Form() {
                 placeholder="email"
                 id="email"
                 onChange={(event) => {
+                  if (emailRegex.test(event.target.value) || event.target.value === '') {
+                    setEmailErr(false)
+                  } else {
+                    setEmailErr(true)
+                  }
                   setUserEmail(event.target.value)
                 }}
               />
+              {emailErr ? <p style={{ color: 'red', fontSize: 14 }}>Enter correct email!</p> : null}
               <label htmlFor="password">Password</label>
               <input
                 className={styles['input-field']}
@@ -147,9 +165,13 @@ export function Form() {
                 placeholder="Enter your password"
                 id="password"
                 onChange={(event) => {
+                  if (event.target.value.length < 6 || event.target.value === '') {
+                    setPassErr(true)
+                  } else setPassErr(false)
                   setUserPassword(event.target.value)
                 }}
               />
+              {passErr ? <p style={{ color: 'red', fontSize: 14 }}>Password is too short!</p> : null}
               <label className={styles['input-field']} htmlFor="confirm">
                 Confirm Password
               </label>
@@ -158,7 +180,14 @@ export function Form() {
                 className={styles['input-field']}
                 placeholder="Re-enter your password"
                 id="confirm"
+                onChange={(event) => {
+                  if (event.target.value !== userPassword || event.target.value === '') {
+                    setConfirmErr(true)
+                  } else setConfirmErr(false)
+                  setConfirm(event.target.value)
+                }}
               />
+              {confirmErr ? <p style={{ color: 'red', fontSize: 14 }}>Passwords do not match!</p> : null}
               <button className={styles['button']} onClick={registerUser}>
                 Register
               </button>
@@ -185,6 +214,7 @@ export function Form() {
                   setloginPassword(event.target.value)
                 }}
               />
+              {loginErr ? <p style={{ color: 'red', fontSize: 14 }}>Email or password is/are incorrect!</p> : null}
               <button className={styles.button} onClick={loginUser}>
                 Sign In
               </button>
