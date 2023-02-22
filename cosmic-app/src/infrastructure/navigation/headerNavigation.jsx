@@ -64,7 +64,7 @@ export const HeaderNavigation = () => {
                 showForm()
               }}
             >
-              Sign In / Sign Up
+              Sign In
             </a>
           </li>
         ) : (

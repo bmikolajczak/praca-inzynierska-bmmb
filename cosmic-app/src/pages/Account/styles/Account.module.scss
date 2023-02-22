@@ -3,15 +3,15 @@
 .account-form {
   position: fixed;
   z-index: 20;
-  top: 10%;
-  left: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 620px;
   margin: 0 auto;
   background-color: $font-white;
   display: flex;
   // align-items: center;
   gap: 2rem;
-  max-width: 40rem;
   border-radius: 24px;
   overflow: hidden;
 }
@@ -86,9 +86,11 @@
 
 //TABS
 .tabs {
+  justify-content: center;
+  padding: 0;
   display: flex;
   margin: 0 auto 1.5rem;
-  width: fit-content;
+  width: auto;
   list-style: none;
   gap: 3rem;
 }
@@ -301,5 +303,18 @@
   .cards {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .account-form {
+    width: 90%;
+    justify-content: center;
+  }
+  .welcome-part {
+    display: none;
+  }
+  .tabs {
+    gap: 1rem;
   }
 }
