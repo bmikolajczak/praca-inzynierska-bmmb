@@ -19,6 +19,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 export function Form() {
   const [activeTab, setActiveTab] = useState('signin')
 
+  const [name, setName] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -31,6 +32,7 @@ export function Form() {
   const [passErr, setPassErr] = useState(false)
   const [emailErr, setEmailErr] = useState(false)
   const [confirmErr, setConfirmErr] = useState(false)
+  const [signupErr, setSignupErr] = useState(false)
 
   //email regex
   const emailRegex =
@@ -51,17 +53,21 @@ export function Form() {
 
   async function registerUser() {
     try {
-      const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
-      console.log(user.user.uid)
-      try {
-        const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
-          name: 'John',
-          surname: 'Doe',
-          email: userEmail,
-        })
-        console.log('New document with user info: ', newUserRef)
-      } catch (error) {
-        console.log('Problem when creating user:', error)
+      if (signupErr) {
+        console.log('incorretly filled up fields')
+        return
+      } else {
+        const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
+        console.log(user.user.uid)
+        try {
+          const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
+            name: name,
+            email: userEmail,
+          })
+          dispatch(hideLoginForm())
+        } catch (error) {
+          console.log('Problem when creating user:', error)
+        }
       }
     } catch (error) {
       console.log('OOh no,', error.message)
@@ -142,7 +148,14 @@ export function Form() {
           {activeTab === 'register' && (
             <div className={styles.registerForm}>
               <label htmlfor="name">Name</label>
-              <input className={styles['input-field']} placeholder="Enter your name" id="name" />
+              <input
+                className={styles['input-field']}
+                placeholder="Enter your name"
+                id="name"
+                onChange={(event) => {
+                  setName(event.target.value)
+                }}
+              />
               <label html="email">Email</label>
               <input
                 className={styles['input-field']}
@@ -151,8 +164,10 @@ export function Form() {
                 onChange={(event) => {
                   if (emailRegex.test(event.target.value) || event.target.value === '') {
                     setEmailErr(false)
+                    setSignupErr(false)
                   } else {
                     setEmailErr(true)
+                    setSignupErr(true)
                   }
                   setUserEmail(event.target.value)
                 }}
@@ -167,7 +182,11 @@ export function Form() {
                 onChange={(event) => {
                   if (event.target.value.length < 6 || event.target.value === '') {
                     setPassErr(true)
-                  } else setPassErr(false)
+                    setSignupErr(true)
+                  } else {
+                    setPassErr(false)
+                    setSignupErr(false)
+                  }
                   setUserPassword(event.target.value)
                 }}
               />
@@ -183,7 +202,11 @@ export function Form() {
                 onChange={(event) => {
                   if (event.target.value !== userPassword || event.target.value === '') {
                     setConfirmErr(true)
-                  } else setConfirmErr(false)
+                    setSignupErr(true)
+                  } else {
+                    setConfirmErr(false)
+                    setSignupErr(false)
+                  }
                   setConfirm(event.target.value)
                 }}
               />
