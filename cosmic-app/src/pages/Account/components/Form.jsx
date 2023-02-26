@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from 'firebase/auth'
 import { collection, setDoc, doc, getDoc } from 'firebase/firestore'
 
@@ -39,7 +40,6 @@ export function Form() {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const user = auth.currentUser
-
   //user colelction ref
   const usersRef = collection(db, 'users')
 
@@ -77,8 +77,6 @@ export function Form() {
     try {
       setLoginErr(false)
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-      const snapshot = await getDoc(doc(usersRef, user.user.uid))
-      dispatch(changeUserLoggedIn())
       dispatch(hideLoginForm())
     } catch (error) {
       setLoginErr(true)
@@ -145,7 +143,7 @@ export function Form() {
           </ul>
           {activeTab === 'register' && (
             <div className={styles.registerForm}>
-              <label htmlfor="name">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 className={styles['input-field']}
                 placeholder="Enter your name"
@@ -154,7 +152,7 @@ export function Form() {
                   setName(event.target.value)
                 }}
               />
-              <label html="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 className={styles['input-field']}
                 placeholder="email"
