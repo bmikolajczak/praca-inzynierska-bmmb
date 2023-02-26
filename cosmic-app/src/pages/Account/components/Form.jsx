@@ -58,7 +58,6 @@ export function Form() {
         return
       } else {
         const user = await createUserWithEmailAndPassword(auth, userEmail, userPassword)
-        console.log(user.user.uid)
         try {
           const newUserRef = await setDoc(doc(usersRef, user.user.uid), {
             name: name,
@@ -78,7 +77,7 @@ export function Form() {
     try {
       setLoginErr(false)
       const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-      console.log('user: ', user.user)
+      const snapshot = await getDoc(doc(usersRef, user.user.uid))
       dispatch(changeUserLoggedIn())
       dispatch(hideLoginForm())
     } catch (error) {
@@ -96,15 +95,14 @@ export function Form() {
       const user = result.user
 
       const userDocSnap = getDoc(doc(usersRef, auth.currentUser.uid))
+      dispatch(hideLoginForm())
       if (userDocSnap.exists()) {
         console.log('Google user exists')
-        dispatch(hideLoginForm)
       } else {
         const newUserRef = await setDoc(doc(usersRef, user.uid), {
           name: user.displayName,
           email: user.email,
         })
-        dispatch(hideLoginForm())
       }
     } catch (error) {
       const errorCode = error.code
