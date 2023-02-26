@@ -16,6 +16,9 @@ export function ApodModal() {
   const chosenPhoto = useSelector((state) => state.app.chosenPhoto)
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
 
+  const location = window.location.pathname
+  console.log(location)
+
   async function saveToProfile() {
     const currentUserRef = doc(db, 'users', auth.currentUser.uid)
     await updateDoc(currentUserRef, { savedImages: arrayUnion({ ...chosenPhoto }) })
@@ -37,9 +40,11 @@ export function ApodModal() {
           <p className={styles['explanation']}>{chosenPhoto.explanation}</p>
           {userLoggedIn && (
             <div className={styles['add-btn-container']}>
-              <button className={styles['add-btn']} onClick={saveToProfile}>
-                <BsFillPlusCircleFill /> Save to Your Gallery
-              </button>
+              {location !== '/account' && (
+                <button className={styles['add-btn']} onClick={saveToProfile}>
+                  <BsFillPlusCircleFill /> Save to Your Gallery
+                </button>
+              )}
             </div>
           )}
         </div>

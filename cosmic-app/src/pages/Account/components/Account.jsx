@@ -137,27 +137,33 @@ export function Account() {
             <div className={styles['card-visuals']}>
               <h3>Mars Quiz</h3>
               <p className={styles['quiz-score']}>{marsScore}</p>
-              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('marsScore')}>
-                <BsFillTrashFill />
-              </button>
+              {marsScore !== 'NOT TAKEN' && (
+                <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('marsScore')}>
+                  <BsFillTrashFill />
+                </button>
+              )}
             </div>
           </div>
           <div className={styles['image-card']}>
             <div className={styles['card-visuals']}>
               <h3>Solar Quiz</h3>
               <p className={styles['quiz-score']}>{solarsScore}</p>
-              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('solarScore')}>
-                <BsFillTrashFill />
-              </button>
+              {solarsScore !== 'NOT TAKEN' && (
+                <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('solarScore')}>
+                  <BsFillTrashFill />
+                </button>
+              )}
             </div>
           </div>
           <div className={styles['image-card']}>
             <div className={styles['card-visuals']}>
               <h3>NASA Missions Quiz</h3>
               <p className={styles['quiz-score']}>{vehicleScore}</p>
-              <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('vehicleScore')}>
-                <BsFillTrashFill />
-              </button>
+              {vehicleScore !== 'NOT TAKEN' && (
+                <button title="Clear Score" id={styles['remove-btn']} onClick={() => deleteScore('vehicleScore')}>
+                  <BsFillTrashFill />
+                </button>
+              )}
             </div>
           </div>
         </div>
