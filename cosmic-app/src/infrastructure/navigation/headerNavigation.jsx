@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './headerNavigation.module.scss'
 import { auth } from '../firebase/firebase'
 import { signOut } from 'firebase/auth'
 import { changeModalVisible, changeSideMenuVisible, setUserIn, setUserOut, showLoginForm } from '../store/appState'
-import { AiOutlineMenu } from 'react-icons/ai'
 // import { onAuthStateChanged } from 'firebase/auth'
 
 export const HeaderNavigation = () => {
@@ -13,6 +12,7 @@ export const HeaderNavigation = () => {
 
   //creating ref to redux dispatch object
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   //ref to user login status in redux
   const userLoggedIn = useSelector((state) => state.app.userLoggedIn)
@@ -22,6 +22,7 @@ export const HeaderNavigation = () => {
   useEffect(() => {}, [user])
   async function signoutUser() {
     try {
+      navigate('/menu')
       await signOut(auth)
       console.log('user is signed out', userLoggedIn)
       setTimeout(() => (window.location.href = '/about'), 1000)
