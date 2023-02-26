@@ -5,7 +5,6 @@ import { collection, doc, getDoc, arrayRemove, updateDoc, deleteField } from 'fi
 import { auth, db } from '../../../infrastructure/firebase/firebase'
 import { useDispatch, useSelector } from 'react-redux'
 
-import '../styles/Account.scss'
 import styles from '../styles/Account.module.scss'
 import { changeUserLoggedIn, showChosenPhoto, setChosenPhoto } from '../../../infrastructure/store/appState'
 
