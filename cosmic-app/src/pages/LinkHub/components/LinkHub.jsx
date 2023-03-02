@@ -1,18 +1,8 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from '../styles/LinkHub.module.scss'
-import { useDispatch } from 'react-redux'
-import { changeModalVisible } from '../../../infrastructure/store/appState'
-// import { HeaderNavigation } from '../../../infrastructure/navigation/headerNavigation'
-// import { Form } from '../../Account/components/Form'
 
 export function LinkHub() {
-  //creating ref to dispatch
-  const dispatch = useDispatch()
-
-  // function closeLinkHub() {
-  //   dispatch(changeModalVisible())
-  // }
   return (
     <div className={styles['parent-cont']}>
       <div className={styles['links-container']}>

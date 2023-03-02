@@ -176,8 +176,8 @@ function CallApodApi() {
                 type="date"
                 name="end-date"
                 onChange={(event) => {
-                  setStartDate(event.target.value)
-                  console.log(apodEndDate)
+                  setEndDate(event.target.value)
+                  console.log('end', apodEndDate)
                 }}
               />
               <button className={style['filter-btn']} onClick={() => getImagesByDates()}>
