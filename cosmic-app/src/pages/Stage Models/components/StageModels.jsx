@@ -4,7 +4,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Environment, ContactShadows, Html, OrbitControls, Loader } from '@react-three/drei'
 import style from '../styles/StageModels.module.scss'
 import modelsJson from './StageModels.json'
-import { AiFillCaretLeft, AiFillCaretRight, AiFillEye, AiFillEyeInvisible, AiOutlinePause, AiOutlineMenu } from 'react-icons/ai'
+import {
+  AiFillCaretLeft,
+  AiFillCaretRight,
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiOutlinePause,
+  AiOutlineMenu,
+} from 'react-icons/ai'
 import LoaderCustom from '../../../infrastructure/loader/LoaderCustom'
 
 function Model(props) {
@@ -20,12 +27,11 @@ function Model(props) {
   function clickMarker(markerName) {
     if (markerName === activeMarker) {
       setActiveMarker('')
-    }
-    else {
+    } else {
       setActiveMarker(markerName)
     }
   }
-  // Markers muszą być dodane manualnie w Blenderze w formie Empties
+  // Markers need to be added manualy in Blender in the form of Empties
   if (gltf.nodes['Markers']) {
     markers = gltf.nodes['Markers'].children.map((mark) => (
       <Html
@@ -38,19 +44,20 @@ function Model(props) {
         zIndexRange={[2, 0]}
       >
         <div className={style.markerContainer}>
-          <div className={style.circleIcon} onClick={() => clickMarker(mark.userData.name)}>&nbsp;</div>
-          {activeMarker === mark.userData.name &&
-            <p className={style.markerName}>{mark.userData.name}</p>
-          }
+          <div className={style.circleIcon} onClick={() => clickMarker(mark.userData.name)}>
+            &nbsp;
+          </div>
+          {activeMarker === mark.userData.name && <p className={style.markerName}>{mark.userData.name}</p>}
         </div>
       </Html>
     ))
-  } else { // Kiedy nie zostaną dodane markery w Blenderze lub mają błędną nazwę
+  } else {
+    // when markers were not defined or they have invalid name
     markers = null
   }
 
   return (
-    // zwracany jest model z markerami oraz info panelem
+    // return model with markers and info panel
     <group>
       <primitive object={gltf.scene} scale={1} position={[0, 0, 0]} />
       <Html
@@ -133,7 +140,9 @@ export default function StageModels(props) {
             ))}
           </div>
         </div>
-        <button className={style.toggle} onClick={() => setLinks(!linksVisibility)}><AiOutlineMenu /></button>
+        <button className={style.toggle} onClick={() => setLinks(!linksVisibility)}>
+          <AiOutlineMenu />
+        </button>
       </section>
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1.5, 4], fov: 60 }}>
         <Suspense fallback={null}>
